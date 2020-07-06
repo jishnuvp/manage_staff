@@ -11,7 +11,7 @@ namespace Staff
 
         public SupportStaff()
         {
-
+             
         }
         public SupportStaff(string name, string department, string contact_number, string date_of_join) : base(name, contact_number, date_of_join)
         {
