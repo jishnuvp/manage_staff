@@ -13,7 +13,7 @@ namespace Staff
         {
              
         }
-        public SupportStaff(string name, string department, string contact_number, string date_of_join) : base(name, contact_number, date_of_join)
+        public SupportStaff(string name, string department, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
         {
             this.Name = name;
             this.Department = department;
@@ -37,7 +37,7 @@ namespace Staff
             Console.WriteLine("Enter Contact Number");
             ContactNumber = Console.ReadLine();
             Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
-            DateOfJoin = Console.ReadLine();
+            DateOfJoin = DateTime.Parse(Console.ReadLine());
         }
         public void viewStaff(int index, int slNum = 0)
         {
@@ -77,7 +77,7 @@ namespace Staff
                     break;
                 case 4:
                     Console.WriteLine("Enter Joined Date: ");
-                    DateOfJoin = Console.ReadLine();
+                    DateOfJoin = DateTime.Parse(Console.ReadLine());
                     Console.WriteLine("Joined date updated succesfully");
                     break;
                 case 5:

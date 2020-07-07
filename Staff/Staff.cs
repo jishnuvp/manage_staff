@@ -8,9 +8,9 @@ namespace Staff
     {
         private string name;
         private string contact_number;
-        protected string date_of_join;
+        //protected string date_of_join;
 
-        //private DateTime date_of_join;
+        private DateTime date_of_join;
 
         //constructor
         public Staff()
@@ -18,7 +18,7 @@ namespace Staff
 
         }
 
-        public Staff(string name, string contact_number, string date_of_join)
+        public Staff(string name, string contact_number, DateTime date_of_join)
         {
             this.name = name;
             this.contact_number = contact_number;
@@ -35,7 +35,7 @@ namespace Staff
             get { return contact_number; }
             set { contact_number = value; }
         }
-        public string DateOfJoin
+        public DateTime DateOfJoin
         {
             get { return date_of_join; }
             set { date_of_join = value; }

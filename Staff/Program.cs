@@ -16,28 +16,28 @@ namespace Staff
             List<TeachingStaff> TeachingStaffList = new List<TeachingStaff>();
 
             //adding values to teaching staff object list
-            TeachingStaffList.Add(new TeachingStaff("Jishnu", "Malayalam", "9999999999", "04-05-2020"));
-            TeachingStaffList.Add(new TeachingStaff("Surya dev", "Hindi", "8888888888", "24-03-2020"));
-            TeachingStaffList.Add(new TeachingStaff("Vishnu", "Mathematics", "7777777777", "07-05-2020"));
-            TeachingStaffList.Add(new TeachingStaff("Vijay", "English", "9898989898", "06-05-2020"));
+            //TeachingStaffList.Add(new TeachingStaff("Jishnu", "Malayalam", "9999999999", "04-05-2020"));
+            //TeachingStaffList.Add(new TeachingStaff("Surya dev", "Hindi", "8888888888", "24-03-2020"));
+            //TeachingStaffList.Add(new TeachingStaff("Vishnu", "Mathematics", "7777777777", "07-05-2020"));
+            //TeachingStaffList.Add(new TeachingStaff("Vijay", "English", "9898989898", "06-05-2020"));
 
             //list of administrative staff
             AdministrativeStaff administrativeStaff = new AdministrativeStaff();
             List<AdministrativeStaff> AdministrativeStaffList = new List<AdministrativeStaff>();
 
             //adding values to administrative staff object list
-            AdministrativeStaffList.Add(new AdministrativeStaff("Jishnu", "Manager", "9999999999", "04-05-2020"));
-            AdministrativeStaffList.Add(new AdministrativeStaff("James", "Principal", "8888888888", "06-05-2020"));
-            AdministrativeStaffList.Add(new AdministrativeStaff("John", "Super visor", "9898989898", "05-05-2020"));
+            //AdministrativeStaffList.Add(new AdministrativeStaff("Jishnu", "Manager", "9999999999", "04-05-2020"));
+            //AdministrativeStaffList.Add(new AdministrativeStaff("James", "Principal", "8888888888", "06-05-2020"));
+            //AdministrativeStaffList.Add(new AdministrativeStaff("John", "Super visor", "9898989898", "05-05-2020"));
 
             //list of support staff
             SupportStaff supportStaff = new SupportStaff();
             List<SupportStaff> SupportStaffList = new List<SupportStaff>();
 
             //adding values to support staff object list
-            SupportStaffList.Add(new SupportStaff("Jishnu", "Principal office", "9999999999", "04-05-2020"));
-            SupportStaffList.Add(new SupportStaff("James", "Staff Room", "8888888888", "06-05-2020"));
-            SupportStaffList.Add(new SupportStaff("John", "Store", "9898989898", "05-05-2020"));
+            //SupportStaffList.Add(new SupportStaff("Jishnu", "Principal office", "9999999999", "04-05-2020"));
+            //SupportStaffList.Add(new SupportStaff("James", "Staff Room", "8888888888", "06-05-2020"));
+            //SupportStaffList.Add(new SupportStaff("John", "Store", "9898989898", "05-05-2020"));
 
             void mainMenu()
             {
