@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Staff
 {
@@ -350,7 +351,7 @@ namespace Staff
                 do
                 {
                     teachingStaff.addStaff();
-                    TeachingStaffList.Add(new TeachingStaff(teachingStaff.Name, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin));
+                    TeachingStaffList.Add(teachingStaff);
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                     check = Console.ReadLine();
                 } while (check == "Y" || check == "y");
@@ -363,7 +364,7 @@ namespace Staff
                 do
                 {
                     administrativeStaff.addStaff();
-                    AdministrativeStaffList.Add(new AdministrativeStaff(administrativeStaff.Name, administrativeStaff.Role, administrativeStaff.ContactNumber, administrativeStaff.DateOfJoin));
+                    AdministrativeStaffList.Add(administrativeStaff);
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                     check = Console.ReadLine();
                 } while (check == "Y" || check == "y");
@@ -376,7 +377,7 @@ namespace Staff
                 do
                 {
                     supportStaff.addStaff();
-                    SupportStaffList.Add(new SupportStaff(supportStaff.Name, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin));
+                    SupportStaffList.Add(supportStaff);
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                     check = Console.ReadLine();
                 } while (check == "Y" || check == "y");
