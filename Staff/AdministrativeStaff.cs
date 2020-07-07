@@ -46,13 +46,18 @@ namespace Staff
         }
         public void updateStaff()
         {
+            int choice;
             Console.WriteLine("\nSelect the field that you want to update");
             Console.WriteLine("1. Name");
             Console.WriteLine("2. Role");
             Console.WriteLine("3. Contact Number");
             Console.WriteLine("4. Joined Date");
             Console.WriteLine("5. Back to Home\n");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            if (!Int32.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Enter a valid Sl Number");
+                this.updateStaff();
+            }
             switch (choice)
             {
                 case 1:
@@ -77,6 +82,9 @@ namespace Staff
                     break;
                 case 5:
                     break;
+                default:
+                    Console.WriteLine("Enter a valid choice");
+                    this.updateStaff(); break;
             }
         }
     }
