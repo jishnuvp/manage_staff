@@ -59,7 +59,7 @@ namespace Staff
             if (!Int32.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                this.updateStaff();
+                return;
             }
             switch (choice)
             {
@@ -87,7 +87,8 @@ namespace Staff
                     break;
                 default:
                     Console.WriteLine("Enter a valid choice");
-                    this.updateStaff(); break;
+                    this.updateStaff();
+                    break;
             }
         }
     }

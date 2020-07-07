@@ -56,7 +56,7 @@ namespace Staff
             if (!Int32.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                this.updateStaff();
+                return;
             }
             switch (choice)
             {
