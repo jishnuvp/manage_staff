@@ -16,10 +16,10 @@ namespace Staff
         }
         public TeachingStaff(string name, string subject, string contact_number, string date_of_join) : base(name, contact_number, date_of_join)
         {
-            this.name = name;
-            this.subject = subject;
-            this.contact_number = contact_number;
-            this.date_of_join = date_of_join;
+            this.Name = name;
+            this.Subject = subject;
+            this.ContactNumber = contact_number;
+            this.DateOfJoin = date_of_join;
         }
         //properties
         public string Subject
@@ -32,13 +32,13 @@ namespace Staff
         {
             Console.WriteLine("----------------------- Add Teaching Staff -----------------------");
             Console.WriteLine("Enter Name: ");
-            name = Console.ReadLine();
+            Name = Console.ReadLine();
             Console.WriteLine("Enter Subject");
             subject = Console.ReadLine();
             Console.WriteLine("Enter Contact Number");
-            contact_number = Console.ReadLine();
+            ContactNumber = Console.ReadLine();
             Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
-            date_of_join = Console.ReadLine();
+            DateOfJoin = Console.ReadLine();
             //TeachingStaffList.Add(new TeachingStaff(name, subject, contact_num, date_of_join));
         }
 
@@ -65,22 +65,22 @@ namespace Staff
             {
                 case 1:
                     Console.WriteLine("Enter Name: ");
-                    name = Console.ReadLine();
+                    Name = Console.ReadLine();
                     Console.WriteLine("Name updated succesfully");
                     break;
                 case 2:
                     Console.WriteLine("Enter Subject: ");
-                    subject = Console.ReadLine();
+                    Subject = Console.ReadLine();
                     Console.WriteLine("Subject updated succesfully");
                     break;
                 case 3:
                     Console.WriteLine("Enter Contact Number: ");
-                    contact_number = Console.ReadLine();
+                    ContactNumber = Console.ReadLine();
                     Console.WriteLine("Contact number updated succesfully");
                     break;
                 case 4:
                     Console.WriteLine("Enter Joined Date: ");
-                    date_of_join = Console.ReadLine();
+                    DateOfJoin = Console.ReadLine();
                     Console.WriteLine("Joined date updated succesfully");
                     break;
                 case 5:

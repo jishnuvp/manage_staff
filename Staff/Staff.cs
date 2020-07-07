@@ -6,8 +6,8 @@ namespace Staff
 {
     abstract class Staff
     {
-        protected string name;
-        protected string contact_number;
+        private string name;
+        private string contact_number;
         protected string date_of_join;
 
         //private DateTime date_of_join;
