@@ -52,7 +52,7 @@ namespace Staff
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Name: ");
+                    Console.WriteLine("\nEnter Name: ");
                     Name = Console.ReadLine();
                     succeed = true;
                 }
@@ -67,7 +67,7 @@ namespace Staff
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Role");
+                    Console.WriteLine("\nEnter Role");
                     Role = Console.ReadLine();
                     succeed = true;
                 }
@@ -82,7 +82,7 @@ namespace Staff
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Contact Number");
+                    Console.WriteLine("\nEnter Contact Number");
                     ContactNumber = Console.ReadLine();
                     succeed = true;
                 }
@@ -97,7 +97,7 @@ namespace Staff
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
+                    Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
                     DateOfJoin = DateTime.Parse(Console.ReadLine());
                     succeed = true;
 
@@ -136,7 +136,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Name: ");
+                            Console.WriteLine("\nEnter Name: ");
                             Name = Console.ReadLine();
                             succeed = true;
                         }
@@ -153,7 +153,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Role: ");
+                            Console.WriteLine("\nEnter Role: ");
                             Role = Console.ReadLine();
                             succeed = true;
                         }
@@ -170,7 +170,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Contact Number");
+                            Console.WriteLine("\nEnter Contact Number");
                             ContactNumber = Console.ReadLine();
                             succeed = true;
                         }
@@ -187,7 +187,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
+                            Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
                             DateOfJoin = DateTime.Parse(Console.ReadLine());
                             succeed = true;
 
