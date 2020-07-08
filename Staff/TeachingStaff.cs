@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
+public enum SubjectEnum { malayalam, english, maths, social, science, hindi };
 namespace Staff
 {
     class TeachingStaff : Staff
     {
-        private string subject;
-        //private enum subject { malayalam, english, maths, social, science, hindi };
+        private SubjectEnum subject;
+        
         //constructor
 
         public TeachingStaff()
         {
 
         }
-        public TeachingStaff(string name, string subject, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
+        public TeachingStaff(string name, SubjectEnum subject, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
         {
             this.Name = name;
             this.Subject = subject;
@@ -23,18 +24,18 @@ namespace Staff
             this.DateOfJoin = date_of_join;
         }
         //properties
-        public string Subject
+        public SubjectEnum Subject
         {
             get { return subject; }
             set {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Subject is required");
-                }
-                if (!Regex.Match(value, "^[a-zA-Z]*$").Success)
-                {
-                    throw new Exception("Subject must contain characters only");
-                }
+                //if (string.IsNullOrEmpty(value))
+                //{
+                //    throw new Exception("Subject is required");
+                //}
+                //if (!Regex.Match(value, "^[a-zA-Z]*$").Success)
+                //{
+                //    throw new Exception("Subject must contain characters only");
+                //}
                 subject = value; 
             }
         }
@@ -43,13 +44,14 @@ namespace Staff
         {
 
             bool succeed;
+            int index = 1, choice;
             Console.WriteLine("----------------------- Add Teaching Staff -----------------------");
             do
             {
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Name: ");
+                    Console.WriteLine("\nEnter Name: ");
                     Name = Console.ReadLine();
                     succeed = true;
                 }
@@ -62,11 +64,33 @@ namespace Staff
             do
             {
                 succeed = false;
+                index = 1;
                 try
                 {
-                    Console.WriteLine("Enter Subject");
-                    Subject = Console.ReadLine();
-                    succeed = true;
+                    Console.WriteLine("\nSelect your choice");
+                    foreach (string str in Enum.GetNames(typeof(SubjectEnum)))
+                    {
+                        Console.WriteLine($"{index}. {str}");
+                        index++;
+                    }
+                    if (!Int32.TryParse(Console.ReadLine(), out choice))
+                    {
+                        succeed = false;
+                        Console.WriteLine("Enter a valid choice");
+                    }
+                    else
+                    {
+                        if(choice <= Enum.GetNames(typeof(SubjectEnum)).Length && choice > 0)
+                        {
+                            Subject = (SubjectEnum)(choice-1);
+                            succeed = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a valid choice");
+                            succeed = false;
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
@@ -79,7 +103,7 @@ namespace Staff
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Contact Number");
+                    Console.WriteLine("\nEnter Contact Number");
                     ContactNumber = Console.ReadLine();
                     succeed = true;
                 }
@@ -94,7 +118,7 @@ namespace Staff
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
+                    Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
                     DateOfJoin = DateTime.Parse(Console.ReadLine());
                     succeed = true;
                     
@@ -115,7 +139,7 @@ namespace Staff
         public void updateStaff()
         {
             bool succeed;
-            int choice;
+            int choice, index;
             Console.WriteLine("\nSelect the field that you want to update");
             Console.WriteLine("1. Name");
             Console.WriteLine("2. Subject");
@@ -135,7 +159,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Name: ");
+                            Console.WriteLine("\nEnter Name: ");
                             Name = Console.ReadLine();
                             succeed = true;
                         }
@@ -149,12 +173,34 @@ namespace Staff
                 case 2:
                     do
                     {
+                        index = 1;
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Subject");
-                            Subject = Console.ReadLine();
-                            succeed = true;
+                            Console.WriteLine("\nSelect your subject");
+                            foreach (string str in Enum.GetNames(typeof(SubjectEnum)))
+                            {
+                                Console.WriteLine($"{index}. {str}");
+                                index++;
+                            }
+                            if (!Int32.TryParse(Console.ReadLine(), out choice))
+                            {
+                                succeed = false;
+                                Console.WriteLine("Enter a valid choice");
+                            }
+                            else
+                            {
+                                if (choice <= Enum.GetNames(typeof(SubjectEnum)).Length && choice > 0)
+                                {
+                                    Subject = (SubjectEnum)(choice - 1);
+                                    succeed = true;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Enter a valid choice");
+                                    succeed = false;
+                                }
+                            }
                         }
                         catch (Exception e)
                         {
@@ -169,7 +215,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Contact Number");
+                            Console.WriteLine("\nEnter Contact Number");
                             ContactNumber = Console.ReadLine();
                             succeed = true;
                         }
@@ -186,7 +232,7 @@ namespace Staff
                         succeed = false;
                         try
                         {
-                            Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
+                            Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
                             DateOfJoin = DateTime.Parse(Console.ReadLine());
                             succeed = true;
 
@@ -201,7 +247,7 @@ namespace Staff
                 case 5:
                     break;
                 default:
-                    Console.WriteLine("Enter a valid choice");
+                    Console.WriteLine("\nEnter a valid choice");
                     this.updateStaff();
                     break;
             }
