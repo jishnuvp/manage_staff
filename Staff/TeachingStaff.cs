@@ -30,14 +30,6 @@ namespace Staff
         {
             get { return subject; }
             set {
-                //if (string.IsNullOrEmpty(value))
-                //{
-                //    throw new Exception("Subject is required");
-                //}
-                //if (!Regex.Match(value, "^[a-zA-Z]*$").Success)
-                //{
-                //    throw new Exception("Subject must contain characters only");
-                //}
                 subject = value; 
             }
         }

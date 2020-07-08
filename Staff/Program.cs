@@ -152,19 +152,13 @@ namespace Staff
                 switch (staffType)
                 {
                     case 1:
-                        //viewTeachingStaff(flag);
                         deleteTeachingStaff();
-                        //viewTeachingStaff(flag);
                         break;
                     case 2:
-                        //viewAdministrativeStaff(flag);
                         deleteAdministrativeStaff();
-                        //viewAdministrativeStaff(flag);
                         break;
                     case 3:
-                        //viewSupportStaff(flag);
                         deleteSupportStaff();
-                        //viewSupportStaff(flag);
                         break;
                 }
                 mainMenu();
@@ -334,14 +328,6 @@ namespace Staff
                     TeachingStaff teachingStaff = new TeachingStaff();
                     teachingStaff.addStaff();
                     TeachingStaffList.Add(teachingStaff);
-
-                    //var context = new ValidationContext(teachingStaff, null, null);
-                    //var result = new List<ValidationResult>();
-                    //var isValid = Validator.TryValidateObject(teachingStaff, context, result, true);
-                    //foreach (var str in result)
-                    //{
-                    //    Console.WriteLine(str.ErrorMessage.ToString());
-                    //}
 
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                     check = Console.ReadLine();
