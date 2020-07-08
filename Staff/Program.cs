@@ -55,6 +55,7 @@ namespace Staff
                         case 5:
                             System.Environment.Exit(0);
                             break;
+                        default: mainMenu(); break;
                     }
                 }
             }
