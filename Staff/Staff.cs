@@ -78,10 +78,9 @@ namespace Staff
             get { return date_of_join; }
             set {
                 if (value != null) {
-                    int y = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["startYear"]);
-                    int m = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["startMonth"]);
-                    int d = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["startDate"]);
-                    DateTime startDate = new DateTime(y,m,d);
+                    string startDateInfo = System.Configuration.ConfigurationManager.AppSettings["startDate"];
+                    int[] startDateArray = Array.ConvertAll(startDateInfo.Split(','), int.Parse);
+                    DateTime startDate = new DateTime(startDateArray[0], startDateArray[1], startDateArray[2]);
                     DateTime endDate = DateTime.Now;
                     if (value >= startDate && value <= endDate)
                     {

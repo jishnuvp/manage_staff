@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-public enum SubjectEnum { malayalam, english, maths, social, science, hindi };
+//public enum SubjectEnum { malayalam, english, maths, social, science, hindi };
+
+
 namespace Staff
 {
     class TeachingStaff : Staff
     {
-        private SubjectEnum subject;
+        private string subject;
         
         //constructor
 
@@ -16,7 +18,7 @@ namespace Staff
         {
 
         }
-        public TeachingStaff(string name, SubjectEnum subject, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
+        public TeachingStaff(string name, string subject, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
         {
             this.Name = name;
             this.Subject = subject;
@@ -24,7 +26,7 @@ namespace Staff
             this.DateOfJoin = date_of_join;
         }
         //properties
-        public SubjectEnum Subject
+        public string Subject
         {
             get { return subject; }
             set {
@@ -42,7 +44,8 @@ namespace Staff
 
         public void addStaff()
         {
-
+            string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
+            string[] subjects = subject.Split(',');
             bool succeed;
             int index = 1, choice;
             Console.WriteLine("----------------------- Add Teaching Staff -----------------------");
@@ -68,9 +71,9 @@ namespace Staff
                 try
                 {
                     Console.WriteLine("\nSelect your choice");
-                    foreach (string str in Enum.GetNames(typeof(SubjectEnum)))
+                    foreach (string item in subjects)
                     {
-                        Console.WriteLine($"{index}. {str}");
+                        Console.WriteLine($"{index}. {item}");
                         index++;
                     }
                     if (!Int32.TryParse(Console.ReadLine(), out choice))
@@ -80,9 +83,9 @@ namespace Staff
                     }
                     else
                     {
-                        if(choice <= Enum.GetNames(typeof(SubjectEnum)).Length && choice > 0)
+                        if(choice <= subjects.Length && choice > 0)
                         {
-                            Subject = (SubjectEnum)(choice-1);
+                            Subject = subjects[choice-1];
                             succeed = true;
                         }
                         else
@@ -138,6 +141,8 @@ namespace Staff
 
         public void updateStaff()
         {
+            string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
+            string[] subjects = subject.Split(',');
             bool succeed;
             int choice, index;
             Console.WriteLine("\nSelect the field that you want to update");
@@ -173,14 +178,14 @@ namespace Staff
                 case 2:
                     do
                     {
-                        index = 1;
                         succeed = false;
+                        index = 1;
                         try
                         {
-                            Console.WriteLine("\nSelect your subject");
-                            foreach (string str in Enum.GetNames(typeof(SubjectEnum)))
+                            Console.WriteLine("\nSelect your choice");
+                            foreach (string item in subjects)
                             {
-                                Console.WriteLine($"{index}. {str}");
+                                Console.WriteLine($"{index}. {item}");
                                 index++;
                             }
                             if (!Int32.TryParse(Console.ReadLine(), out choice))
@@ -190,9 +195,9 @@ namespace Staff
                             }
                             else
                             {
-                                if (choice <= Enum.GetNames(typeof(SubjectEnum)).Length && choice > 0)
+                                if (choice <= subjects.Length && choice > 0)
                                 {
-                                    Subject = (SubjectEnum)(choice - 1);
+                                    Subject = subjects[choice - 1];
                                     succeed = true;
                                 }
                                 else
