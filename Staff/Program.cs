@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Staff
 {
@@ -12,7 +13,6 @@ namespace Staff
             int staffType;
 
             //list of teaching staff
-            TeachingStaff teachingStaff = new TeachingStaff();
             List<TeachingStaff> TeachingStaffList = new List<TeachingStaff>();
 
             //adding values to teaching staff object list
@@ -22,7 +22,6 @@ namespace Staff
             //TeachingStaffList.Add(new TeachingStaff("Vijay", "English", "9898989898", "06-05-2020"));
 
             //list of administrative staff
-            AdministrativeStaff administrativeStaff = new AdministrativeStaff();
             List<AdministrativeStaff> AdministrativeStaffList = new List<AdministrativeStaff>();
 
             //adding values to administrative staff object list
@@ -31,7 +30,6 @@ namespace Staff
             //AdministrativeStaffList.Add(new AdministrativeStaff("John", "Super visor", "9898989898", "05-05-2020"));
 
             //list of support staff
-            SupportStaff supportStaff = new SupportStaff();
             List<SupportStaff> SupportStaffList = new List<SupportStaff>();
 
             //adding values to support staff object list
@@ -350,8 +348,18 @@ namespace Staff
             {
                 do
                 {
+                    TeachingStaff teachingStaff = new TeachingStaff();
                     teachingStaff.addStaff();
                     TeachingStaffList.Add(teachingStaff);
+
+                    //var context = new ValidationContext(teachingStaff, null, null);
+                    //var result = new List<ValidationResult>();
+                    //var isValid = Validator.TryValidateObject(teachingStaff, context, result, true);
+                    //foreach (var str in result)
+                    //{
+                    //    Console.WriteLine(str.ErrorMessage.ToString());
+                    //}
+
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                     check = Console.ReadLine();
                 } while (check == "Y" || check == "y");
@@ -363,6 +371,7 @@ namespace Staff
                 Console.WriteLine("\n\n----------------------- Add Administrative Staff -----------------------\n");
                 do
                 {
+                    AdministrativeStaff administrativeStaff = new AdministrativeStaff();
                     administrativeStaff.addStaff();
                     AdministrativeStaffList.Add(administrativeStaff);
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
@@ -376,6 +385,7 @@ namespace Staff
                 Console.WriteLine("\n\n----------------------- Add Support Staff -----------------------\n");
                 do
                 {
+                    SupportStaff supportStaff = new SupportStaff();
                     supportStaff.addStaff();
                     SupportStaffList.Add(supportStaff);
                     Console.WriteLine("\nDo you want to add more staff (Y/N) ?");

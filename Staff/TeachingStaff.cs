@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Staff
 {
     class TeachingStaff : Staff
     {
         private string subject;
-
+        //private enum subject { malayalam, english, maths, social, science, hindi };
         //constructor
 
         public TeachingStaff()
@@ -25,21 +26,85 @@ namespace Staff
         public string Subject
         {
             get { return subject; }
-            set { subject = value; }
+            set {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Subject is required");
+                }
+                if (!Regex.Match(value, "^[a-zA-Z]*$").Success)
+                {
+                    throw new Exception("Subject must contain characters only");
+                }
+                subject = value; 
+            }
         }
 
         public void addStaff()
         {
+
+            bool succeed;
             Console.WriteLine("----------------------- Add Teaching Staff -----------------------");
-            Console.WriteLine("Enter Name: ");
-            Name = Console.ReadLine();
-            Console.WriteLine("Enter Subject");
-            subject = Console.ReadLine();
-            Console.WriteLine("Enter Contact Number");
-            ContactNumber = Console.ReadLine();
-            Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
-            DateOfJoin = DateTime.Parse(Console.ReadLine());
-            //TeachingStaffList.Add(new TeachingStaff(name, subject, contact_num, date_of_join));
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("Enter Name: ");
+                    Name = Console.ReadLine();
+                    succeed = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("Enter Subject");
+                    Subject = Console.ReadLine();
+                    succeed = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("Enter Contact Number");
+                    ContactNumber = Console.ReadLine();
+                    succeed = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
+                    DateOfJoin = DateTime.Parse(Console.ReadLine());
+                    succeed = true;
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
         }
 
         public void viewStaff(int index, int slNum = 0)
@@ -49,6 +114,7 @@ namespace Staff
 
         public void updateStaff()
         {
+            bool succeed;
             int choice;
             Console.WriteLine("\nSelect the field that you want to update");
             Console.WriteLine("1. Name");
@@ -64,23 +130,72 @@ namespace Staff
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine("Enter Name: ");
-                    Name = Console.ReadLine();
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("Enter Name: ");
+                            Name = Console.ReadLine();
+                            succeed = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
                     Console.WriteLine("Name updated succesfully");
                     break;
                 case 2:
-                    Console.WriteLine("Enter Subject: ");
-                    Subject = Console.ReadLine();
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("Enter Subject");
+                            Subject = Console.ReadLine();
+                            succeed = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
                     Console.WriteLine("Subject updated succesfully");
                     break;
                 case 3:
-                    Console.WriteLine("Enter Contact Number: ");
-                    ContactNumber = Console.ReadLine();
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("Enter Contact Number");
+                            ContactNumber = Console.ReadLine();
+                            succeed = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
                     Console.WriteLine("Contact number updated succesfully");
                     break;
                 case 4:
-                    Console.WriteLine("Enter Joined Date: ");
-                    DateOfJoin = DateTime.Parse(Console.ReadLine());
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("Enter Date of Join (dd-mm-yyyy)");
+                            DateOfJoin = DateTime.Parse(Console.ReadLine());
+                            succeed = true;
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
                     Console.WriteLine("Joined date updated succesfully");
                     break;
                 case 5:
