@@ -6,23 +6,6 @@ using System.Text.RegularExpressions;
 namespace Staff
 {
 
-    //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    //public class NotABananaAttribute : ValidationAttribute
-    //{
-    //    public override bool IsValid(object value)
-    //    {
-    //        var inputValue = value as string;
-    //        var isValid = true;
-
-    //        if (!string.IsNullOrEmpty(inputValue))
-    //        {
-    //            isValid = inputValue.ToUpperInvariant() != "BANANA";
-    //        }
-
-    //        return isValid;
-    //    }
-    //}
-
     abstract class Staff
     {
         private string name;
@@ -94,8 +77,11 @@ namespace Staff
         {
             get { return date_of_join; }
             set {
-                if (value != null) { 
-                    DateTime startDate = new DateTime(2020, 07, 01);
+                if (value != null) {
+                    int y = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["startYear"]);
+                    int m = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["startMonth"]);
+                    int d = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["startDate"]);
+                    DateTime startDate = new DateTime(y,m,d);
                     DateTime endDate = DateTime.Now;
                     if (value >= startDate && value <= endDate)
                     {
