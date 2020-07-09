@@ -21,7 +21,7 @@ namespace Staff
             }
         }
 
-        public void addStaff()
+        public void AddStaff()
         {
             string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
             string[] subjects = subject.Split(',');
@@ -113,12 +113,12 @@ namespace Staff
 
         }
 
-        public void viewStaff(int index, int slNum = 0)
+        public void ViewStaff(int index, int slNum = 0)
         {
             Console.WriteLine("{0}   Name: {1},  Subject: {2},   Contact Number: {3},   Joining Date: {4}", index, Name, Subject, ContactNumber, DateOfJoin);
         }
 
-        public void updateStaff()
+        public void UpdateStaff()
         {
             string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
             string[] subjects = subject.Split(',');
@@ -232,7 +232,7 @@ namespace Staff
                     break;
                 default:
                     Console.WriteLine("\nEnter a valid choice");
-                    this.updateStaff();
+                    this.UpdateStaff();
                     break;
             }
         }

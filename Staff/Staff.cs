@@ -9,10 +9,10 @@ namespace Staff
     abstract class Staff
     {
         private string name;
-        private string contact_number;
+        private string contactNumber;
         //protected string date_of_join;
 
-        private DateTime date_of_join;
+        private DateTime dateOfJoin;
 
         //properties
         public string Name
@@ -38,7 +38,7 @@ namespace Staff
         //[Required, StringLength(10), RegularExpression("/^[0-9]+$/")]
         public string ContactNumber
         {
-            get { return contact_number; }
+            get { return contactNumber; }
             set {
                 if(value.Length == 0)
                 {
@@ -52,14 +52,14 @@ namespace Staff
                 {
                     throw new Exception("Phone number must be numbers");
                 }
-                contact_number = value; 
+                contactNumber = value; 
             }
         }
 
         //[Range(typeof(DateTime), "1/1/1966", "1/1/2020")]
         public DateTime DateOfJoin
         {
-            get { return date_of_join; }
+            get { return dateOfJoin; }
             set {
                 if (value != null) {
                     string startDateInfo = System.Configuration.ConfigurationManager.AppSettings["startDate"];
@@ -68,7 +68,7 @@ namespace Staff
                     DateTime endDate = DateTime.Now;
                     if (value >= startDate && value <= endDate)
                     {
-                        date_of_join = value;
+                        dateOfJoin = value;
                     }
                     else
                     {
@@ -77,5 +77,6 @@ namespace Staff
                 }
             }
         }
+
     }
 }

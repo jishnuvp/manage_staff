@@ -30,16 +30,16 @@ namespace Staff
                 switch (choice)
                 {
                     case 1:
-                        manageStaff.addStaff();
+                        manageStaff.AddStaff();
                         break;
                     case 2:
-                        manageStaff.viewStaff();
+                        manageStaff.ViewStaff();
                         break;
                     case 3:
-                        manageStaff.updateStaff();
+                        manageStaff.UpdateStaff();
                         break;
                     case 4:
-                        manageStaff.deleteStaff();
+                        manageStaff.DeleteStaff();
                         break;
                     case 5:
                         System.Environment.Exit(0);

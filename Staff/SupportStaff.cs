@@ -31,7 +31,7 @@ namespace Staff
             }
         }
 
-        public void addStaff()
+        public void AddStaff()
         {
             bool succeed;
 
@@ -96,12 +96,12 @@ namespace Staff
                 }
             } while (succeed == false);
         }
-        public void viewStaff(int index, int slNum = 0)
+        public void ViewStaff(int index, int slNum = 0)
         {
             Console.WriteLine("{0}   Name: {1},  Department: {2},   Contact Number: {3},   Joining Date: {4}", index, Name, Department, ContactNumber, DateOfJoin);
         }
 
-        public void updateStaff()
+        public void UpdateStaff()
         {
             int choice;
             bool succeed;
@@ -191,7 +191,7 @@ namespace Staff
                     break;
                 default:
                     Console.WriteLine("Enter a valid choice");
-                    this.updateStaff(); break;
+                    this.UpdateStaff(); break;
             }
         }
     }

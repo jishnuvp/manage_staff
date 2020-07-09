@@ -16,7 +16,7 @@ namespace Staff
         public static List<SupportStaff> SupportStaffList = new List<SupportStaff>();
 
         // function to get the user choice
-        public static int getStaffType()
+        public static int GetStaffType()
         {
             Console.WriteLine("\n\n1. Teaching Staff");
             Console.WriteLine("2. Administrative Staff");
@@ -26,15 +26,15 @@ namespace Staff
             if (!Int32.TryParse(Console.ReadLine(), out staffType))
             {
                 Console.WriteLine("Enter a valid number");
-                staffType = getStaffType();
+                staffType = GetStaffType();
             }
             return staffType;
         }
 
         // function for add staff
-        public void addStaff()
+        public void AddStaff()
         {
-            staffType = getStaffType();
+            staffType = GetStaffType();
             switch (staffType)
             {
                 case 1:
@@ -58,19 +58,19 @@ namespace Staff
 
         // function for view staff
 
-        public void viewStaff()
+        public void ViewStaff()
         {
-            staffType = getStaffType();
+            staffType = GetStaffType();
             switch (staffType)
             {
                 case 1:
-                    viewTeachingStaff();
+                    ViewTeachingStaff();
                     break;
                 case 2:
-                    viewAdministrativeStaff();
+                    ViewAdministrativeStaff();
                     break;
                 case 3:
-                    viewSupportStaff();
+                    ViewSupportStaff();
                     break;
             }
             Program.mainMenu();
@@ -78,44 +78,44 @@ namespace Staff
         }
 
         // function for update staff details
-        public void updateStaff()
+        public void UpdateStaff()
         {
-            staffType = getStaffType();
+            staffType = GetStaffType();
             switch (staffType)
             {
                 case 1:
-                    updateTeachingStaff();
+                    UpdateTeachingStaff();
                     break;
                 case 2:
-                    updateAdministrativeStaff();
+                    UpdateAdministrativeStaff();
                     break;
                 case 3:
-                    updateSupportStaff();
+                    UpdateSupportStaff();
                     break;
             }
             Program.mainMenu();
         }
 
         // function for delete a staff
-        public void deleteStaff()
+        public void DeleteStaff()
         {
-            staffType = getStaffType();
+            staffType = GetStaffType();
             switch (staffType)
             {
                 case 1:
-                    deleteTeachingStaff();
+                    DeleteTeachingStaff();
                     break;
                 case 2:
-                    deleteAdministrativeStaff();
+                    DeleteAdministrativeStaff();
                     break;
                 case 3:
-                    deleteSupportStaff();
+                    DeleteSupportStaff();
                     break;
             }
             Program.mainMenu();
         }
 
-        public static int viewType()
+        public static int ViewType()
         {
             int choice;
             Console.WriteLine("1. View All");
@@ -123,23 +123,23 @@ namespace Staff
             if (!Int32.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine("Enter a valid number");
-                choice = getStaffType();
+                choice = GetStaffType();
             }
             return choice;
         }
         // function to display teaching staff info
-        public static void viewTeachingStaff()
+        public static void ViewTeachingStaff()
         {
             int index = 1, slNum;
             //display teaching staff list
             Console.WriteLine("\n\n----------------------- Teaching Staff -----------------------\n");
-            int choice = viewType();
+            int choice = ViewType();
             switch (choice)
             {
                 case 1:
                     foreach (var staff in TeachingStaffList)
                     {
-                        staff.viewStaff(index);
+                        staff.ViewStaff(index);
                         index++;
                     }
                     break;
@@ -148,7 +148,7 @@ namespace Staff
                     if (!Int32.TryParse(Console.ReadLine(), out slNum))
                     {
                         Console.WriteLine("Enter a valid Sl number");
-                        viewTeachingStaff();
+                        ViewTeachingStaff();
                     }
                     else
                     {
@@ -159,7 +159,7 @@ namespace Staff
                             {
                                 if (slNum == index)
                                 {
-                                    staff.viewStaff(slNum);
+                                    staff.ViewStaff(slNum);
                                 }
                                 index++;
                             }
@@ -168,7 +168,7 @@ namespace Staff
                         else
                         {
                             Console.WriteLine("Sl number must be less than or equal to " + TeachingStaffList.Count);
-                            viewTeachingStaff();
+                            ViewTeachingStaff();
                         }
                     }
                     break;
@@ -176,18 +176,18 @@ namespace Staff
         }
 
         // function to display administrative staff info
-        public static void viewAdministrativeStaff()
+        public static void ViewAdministrativeStaff()
         {
             //display administrative staff list
             Console.WriteLine("\n\n----------------------- Administrative Staff -----------------------\n");
             int index = 1, slNum;
-            int choice = viewType();
+            int choice = ViewType();
             switch (choice)
             {
                 case 1:
                     foreach (var staff in AdministrativeStaffList)
                     {
-                        staff.viewStaff(index);
+                        staff.ViewStaff(index);
                         index++;
                     }
                     break;
@@ -197,7 +197,7 @@ namespace Staff
                     if (!Int32.TryParse(Console.ReadLine(), out slNum))
                     {
                         Console.WriteLine("Enter a valid Sl number");
-                        viewAdministrativeStaff();
+                        ViewAdministrativeStaff();
                     }
                     else
                     {
@@ -208,7 +208,7 @@ namespace Staff
                             {
                                 if (slNum == index)
                                 {
-                                    staff.viewStaff(slNum);
+                                    staff.ViewStaff(slNum);
                                 }
                                 index++;
                             }
@@ -216,7 +216,7 @@ namespace Staff
                         else
                         {
                             Console.WriteLine("Sl number must be less than or equal to " + AdministrativeStaffList.Count);
-                            viewAdministrativeStaff();
+                            ViewAdministrativeStaff();
                         }
                     }
                     break;
@@ -224,18 +224,18 @@ namespace Staff
             }
         }
         // function to display support staff info
-        public static void viewSupportStaff()
+        public static void ViewSupportStaff()
         {
             //display support staff list
             Console.WriteLine("\n\n----------------------- Support Staff -----------------------\n");
             int index = 1, slNum;
-            int choice = viewType();
+            int choice = ViewType();
             switch (choice)
             {
                 case 1:
                     foreach (var staff in SupportStaffList)
                     {
-                        staff.viewStaff(index);
+                        staff.ViewStaff(index);
                         index++;
                     }
                     break;
@@ -245,7 +245,7 @@ namespace Staff
                     if (!Int32.TryParse(Console.ReadLine(), out slNum))
                     {
                         Console.WriteLine("Enter a valid Sl number");
-                        viewSupportStaff();
+                        ViewSupportStaff();
                     }
                     else
                     {
@@ -256,7 +256,7 @@ namespace Staff
                             {
                                 if (slNum == index)
                                 {
-                                    staff.viewStaff(slNum);
+                                    staff.ViewStaff(slNum);
                                 }
                                 index++;
                             }
@@ -264,7 +264,7 @@ namespace Staff
                         else
                         {
                             Console.WriteLine("Sl number must be less than or equal to " + SupportStaffList.Count);
-                            viewSupportStaff();
+                            ViewSupportStaff();
                         }
                     }
                     break;
@@ -277,7 +277,7 @@ namespace Staff
             do
             {
                 TeachingStaff teachingStaff = new TeachingStaff();
-                teachingStaff.addStaff();
+                teachingStaff.AddStaff();
                 TeachingStaffList.Add(teachingStaff);
 
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
@@ -292,7 +292,7 @@ namespace Staff
             do
             {
                 AdministrativeStaff administrativeStaff = new AdministrativeStaff();
-                administrativeStaff.addStaff();
+                administrativeStaff.AddStaff();
                 AdministrativeStaffList.Add(administrativeStaff);
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
@@ -306,7 +306,7 @@ namespace Staff
             do
             {
                 SupportStaff supportStaff = new SupportStaff();
-                supportStaff.addStaff();
+                supportStaff.AddStaff();
                 SupportStaffList.Add(supportStaff);
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
@@ -314,14 +314,14 @@ namespace Staff
         }
 
         // function to delete teaching staff
-        public static void deleteTeachingStaff()
+        public static void DeleteTeachingStaff()
         {
             int trashedStaff;
             Console.WriteLine("\nEnter the Sl number of the staff that you want to delete");
             if (!Int32.TryParse(Console.ReadLine(), out trashedStaff))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                deleteTeachingStaff();
+                DeleteTeachingStaff();
             }
             else
             {
@@ -334,20 +334,20 @@ namespace Staff
                 else
                 {
                     Console.WriteLine("\nSl number must be less than or equal to " + TeachingStaffList.Count);
-                    deleteTeachingStaff();
+                    DeleteTeachingStaff();
                 }
             }
         }
 
         // function to delete administrative staff
-        public static void deleteAdministrativeStaff()
+        public static void DeleteAdministrativeStaff()
         {
             int trashedStaff;
             Console.WriteLine("\nEnter the Sl number of the staff that you want to delete");
             if (!Int32.TryParse(Console.ReadLine(), out trashedStaff))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                deleteAdministrativeStaff();
+                DeleteAdministrativeStaff();
             }
             else
             {
@@ -359,20 +359,20 @@ namespace Staff
                 else
                 {
                     Console.WriteLine("\nSl number must be less than or equal to " + AdministrativeStaffList.Count);
-                    deleteAdministrativeStaff();
+                    DeleteAdministrativeStaff();
                 }
             }
         }
 
         // function to delete support staff
-        public static void deleteSupportStaff()
+        public static void DeleteSupportStaff()
         {
             int trashedStaff;
             Console.WriteLine("\nEnter the Sl number of the staff that you want to delete");
             if (!Int32.TryParse(Console.ReadLine(), out trashedStaff))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                deleteSupportStaff();
+                DeleteSupportStaff();
             }
             else
             {
@@ -384,21 +384,21 @@ namespace Staff
                 else
                 {
                     Console.WriteLine("\nSl number must be less than or equal to " + SupportStaffList.Count);
-                    deleteSupportStaff();
+                    DeleteSupportStaff();
                 }
 
             }
         }
 
         // function for update a teaching staff
-        public static void updateTeachingStaff()
+        public static void UpdateTeachingStaff()
         {
             int slNum, index = 1;
             Console.WriteLine("\nEnter the Sl Number of the staff that you want to update");
             if (!Int32.TryParse(Console.ReadLine(), out slNum))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                updateTeachingStaff();
+                UpdateTeachingStaff();
             }
             else
             {
@@ -408,8 +408,8 @@ namespace Staff
                     {
                         if (slNum == index)
                         {
-                            staff.viewStaff(slNum);
-                            staff.updateStaff();
+                            staff.ViewStaff(slNum);
+                            staff.UpdateStaff();
                         }
                         index++;
                     }
@@ -417,21 +417,21 @@ namespace Staff
                 else
                 {
                     Console.WriteLine("\nSl number must be less than or equal to" + TeachingStaffList.Count);
-                    updateTeachingStaff();
+                    UpdateTeachingStaff();
                 }
             }
 
         }
 
         // function for update a administrative staff
-        public static void updateAdministrativeStaff()
+        public static void UpdateAdministrativeStaff()
         {
             int slNum, index = 1;
             Console.WriteLine("\nEnter the Sl Number of the staff");
             if (!Int32.TryParse(Console.ReadLine(), out slNum))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                updateAdministrativeStaff();
+                UpdateAdministrativeStaff();
             }
             else
             {
@@ -441,8 +441,8 @@ namespace Staff
                     {
                         if (slNum == index)
                         {
-                            staff.viewStaff(slNum);
-                            staff.updateStaff();
+                            staff.ViewStaff(slNum);
+                            staff.UpdateStaff();
                         }
                         index++;
                     }
@@ -451,19 +451,19 @@ namespace Staff
                 else
                 {
                     Console.WriteLine("\nSl number must be less than or equal to" + AdministrativeStaffList.Count);
-                    updateAdministrativeStaff();
+                    UpdateAdministrativeStaff();
                 }
             }
         }
         // function for update a support staff
-        public static void updateSupportStaff()
+        public static void UpdateSupportStaff()
         {
             int slNum, index = 1;
             Console.WriteLine("\nEnter the Sl Number of the staff");
             if (!Int32.TryParse(Console.ReadLine(), out slNum))
             {
                 Console.WriteLine("Enter a valid Sl Number");
-                updateSupportStaff();
+                UpdateSupportStaff();
             }
             else
             {
@@ -473,8 +473,8 @@ namespace Staff
                     {
                         if (slNum == index)
                         {
-                            staff.viewStaff(slNum);
-                            staff.updateStaff();
+                            staff.ViewStaff(slNum);
+                            staff.UpdateStaff();
                         }
                         index++;
                     }
@@ -483,7 +483,7 @@ namespace Staff
                 else
                 {
                     Console.WriteLine("\nSl number must be less than or equal to" + SupportStaffList.Count);
-                    updateSupportStaff();
+                    UpdateSupportStaff();
                 }
             }
         }
