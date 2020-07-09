@@ -14,23 +14,7 @@ namespace Staff
 
         private DateTime date_of_join;
 
-        //constructor
-        public Staff()
-        {
-
-        }
-
-        public Staff(string name, string contact_number, DateTime date_of_join)
-        {
-            this.name = name;
-            this.contact_number = contact_number;
-            this.date_of_join = date_of_join;
-        }
         //properties
-
-
-        //[Required, StringLength(10), RegularExpression("/^[A-Za-z]+$/")]
-        //[NotABanana(ErrorMessage = "Bananas are not allowed.")]
         public string Name
         {
             get { return name; }

@@ -11,20 +11,7 @@ namespace Staff
     class TeachingStaff : Staff
     {
         private string subject;
-        
-        //constructor
 
-        public TeachingStaff()
-        {
-
-        }
-        public TeachingStaff(string name, string subject, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
-        {
-            this.Name = name;
-            this.Subject = subject;
-            this.ContactNumber = contact_number;
-            this.DateOfJoin = date_of_join;
-        }
         //properties
         public string Subject
         {

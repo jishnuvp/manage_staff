@@ -9,19 +9,6 @@ namespace Staff
     class SupportStaff : Staff
     {
         private string department;
-        //constructor
-
-        public SupportStaff()
-        {
-             
-        }
-        public SupportStaff(string name, string department, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
-        {
-            this.Name = name;
-            this.Department = department;
-            this.ContactNumber = contact_number;
-            this.DateOfJoin = date_of_join;
-        }
 
         //properties
         public string Department

@@ -9,19 +9,6 @@ namespace Staff
     class AdministrativeStaff : Staff
     {
         private string role;
-        //constructor
-
-        public AdministrativeStaff()
-        {
-
-        }
-        public AdministrativeStaff(string name, string role, string contact_number, DateTime date_of_join) : base(name, contact_number, date_of_join)
-        {
-            this.Name = name;
-            this.Role = role;
-            this.ContactNumber = contact_number;
-            this.DateOfJoin = date_of_join;
-        }
 
         //properties
         public string Role
