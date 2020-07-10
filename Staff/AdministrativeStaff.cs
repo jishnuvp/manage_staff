@@ -31,24 +31,10 @@ namespace Staff
             }
         }
 
-        public void AddStaff()
+        public override void AddStaff()
         {
             bool succeed;
-            do
-            {
-                succeed = false;
-                try
-                {
-                    Console.WriteLine("\nEnter Name: ");
-                    Name = Console.ReadLine();
-                    succeed = true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            } while (succeed == false);
-
+            base.AddStaff();
             do
             {
                 succeed = false;
@@ -63,135 +49,41 @@ namespace Staff
                     Console.WriteLine(e.Message);
                 }
             } while (succeed == false);
-
-            do
-            {
-                succeed = false;
-                try
-                {
-                    Console.WriteLine("\nEnter Contact Number");
-                    ContactNumber = Console.ReadLine();
-                    succeed = true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            } while (succeed == false);
-
-            do
-            {
-                succeed = false;
-                try
-                {
-                    Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
-                    DateOfJoin = DateTime.Parse(Console.ReadLine());
-                    succeed = true;
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            } while (succeed == false);
         }
-        public void ViewStaff(int index, int slNum = 0)
+        public override void ViewStaff(int index, int slNum = 0)
         {
             Console.WriteLine("{0}   Name: {1},  Role: {2},   Contact Number: {3},   Joining Date: {4}", index, Name, Role, ContactNumber, DateOfJoin);
 
         }
-        public void UpdateStaff()
+        public override void UpdateStaff()
         {
+            base.UpdateStaff();
+        }
+        public override void UpdateUniqueField() {
             bool succeed;
-            int choice;
-            Console.WriteLine("\nSelect the field that you want to update");
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("\nEnter Role: ");
+                    Role = Console.ReadLine();
+                    succeed = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+            Console.WriteLine("Subject updated succesfully");
+        }
+        public override void EditMenu()
+        {
             Console.WriteLine("1. Name");
             Console.WriteLine("2. Role");
             Console.WriteLine("3. Contact Number");
             Console.WriteLine("4. Joined Date");
             Console.WriteLine("5. Back to Home\n");
-            if (!Int32.TryParse(Console.ReadLine(), out choice))
-            {
-                Console.WriteLine("Enter a valid Sl Number");
-                return;
-            }
-            switch (choice)
-            {
-                case 1:
-                    do
-                    {
-                        succeed = false;
-                        try
-                        {
-                            Console.WriteLine("\nEnter Name: ");
-                            Name = Console.ReadLine();
-                            succeed = true;
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-                    Console.WriteLine("Name updated succesfully");
-                    break;
-                case 2:
-                    do
-                    {
-                        succeed = false;
-                        try
-                        {
-                            Console.WriteLine("\nEnter Role: ");
-                            Role = Console.ReadLine();
-                            succeed = true;
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-                    Console.WriteLine("Subject updated succesfully");
-                    break;
-                case 3:
-                    do
-                    {
-                        succeed = false;
-                        try
-                        {
-                            Console.WriteLine("\nEnter Contact Number");
-                            ContactNumber = Console.ReadLine();
-                            succeed = true;
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-                    Console.WriteLine("Contact number updated succesfully");
-                    break;
-                case 4:
-                    do
-                    {
-                        succeed = false;
-                        try
-                        {
-                            Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
-                            DateOfJoin = DateTime.Parse(Console.ReadLine());
-                            succeed = true;
-
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-                    Console.WriteLine("Joined date updated succesfully");
-                    break;
-                case 5:
-                    break;
-                default:
-                    Console.WriteLine("Enter a valid choice");
-                    this.UpdateStaff(); break;
-            }
         }
     }
 }

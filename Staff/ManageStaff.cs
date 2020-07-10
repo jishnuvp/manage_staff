@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace Staff
 {
@@ -274,12 +274,12 @@ namespace Staff
         // function to add teaching staff
         public static void addTeachingStaff()
         {
+            Console.WriteLine("\n\n----------------------- Add Teaching Staff -----------------------\n");
             do
             {
                 TeachingStaff teachingStaff = new TeachingStaff();
                 teachingStaff.AddStaff();
                 TeachingStaffList.Add(teachingStaff);
-
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
             } while (check == "Y" || check == "y");

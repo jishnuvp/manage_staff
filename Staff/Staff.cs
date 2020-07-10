@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+
 namespace Staff
 {
 
-    abstract class Staff
+    public abstract class Staff : IStaff
     {
+
         private string name;
+
         private string contactNumber;
-        //protected string date_of_join;
 
         private DateTime dateOfJoin;
 
@@ -35,7 +37,6 @@ namespace Staff
             }
         }
 
-        //[Required, StringLength(10), RegularExpression("/^[0-9]+$/")]
         public string ContactNumber
         {
             get { return contactNumber; }
@@ -56,7 +57,6 @@ namespace Staff
             }
         }
 
-        //[Range(typeof(DateTime), "1/1/1966", "1/1/2020")]
         public DateTime DateOfJoin
         {
             get { return dateOfJoin; }
@@ -78,5 +78,138 @@ namespace Staff
             }
         }
 
+        //methods
+
+        public virtual void AddStaff()
+        {
+            bool succeed;
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("\nEnter Name: ");
+                    Name = Console.ReadLine();
+                    succeed = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
+
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("\nEnter Contact Number");
+                    ContactNumber = Console.ReadLine();
+                    succeed = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
+            do
+            {
+                succeed = false;
+                try
+                {
+                    Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
+                    DateOfJoin = DateTime.Parse(Console.ReadLine());
+                    succeed = true;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+        }
+        public abstract void ViewStaff(int index, int slNum = 0);
+        public virtual void UpdateStaff()
+        {
+            string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
+            string[] subjects = subject.Split(',');
+            bool succeed;
+            int choice;
+            EditMenu();
+            if (!Int32.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Enter a valid Sl Number");
+                return;
+            }
+            switch (choice)
+            {
+                case 1:
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("\nEnter Name: ");
+                            Name = Console.ReadLine();
+                            succeed = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
+                    Console.WriteLine("Name updated succesfully");
+                    break;
+                case 2:
+                    UpdateUniqueField();
+                    break;
+                case 3:
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("\nEnter Contact Number");
+                            ContactNumber = Console.ReadLine();
+                            succeed = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
+                    Console.WriteLine("Contact number updated succesfully");
+                    break;
+                case 4:
+                    do
+                    {
+                        succeed = false;
+                        try
+                        {
+                            Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
+                            DateOfJoin = DateTime.Parse(Console.ReadLine());
+                            succeed = true;
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    } while (succeed == false);
+                    Console.WriteLine("Joined date updated succesfully");
+                    break;
+                case 5:
+                    break;
+                default:
+                    Console.WriteLine("\nEnter a valid choice");
+                    this.UpdateStaff();
+                    break;
+            }
+        }
+
+        public abstract void UpdateUniqueField();
+        public abstract void EditMenu();
     }
 }
