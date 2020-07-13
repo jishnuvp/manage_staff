@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Staff
 {
@@ -58,34 +59,57 @@ namespace Staff
 
         public override void UpdateStaff()
         {
-            base.UpdateStaff();
-        }
-        public override void UpdateUniqueField() {
             bool succeed;
+            string input;
+            base.UpdateStaff();
             do
             {
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("\nEnter Department: ");
-                    Department = Console.ReadLine();
+                    Console.WriteLine($"\nEnter Department ({this.Department}) ");
+                    input = Console.ReadLine();
+                    if (string.IsNullOrEmpty(input))
+                    {
+                        Department = this.Department;
+
+                    }
+                    else
+                    {
+                        Department = input;
+                    }
                     succeed = true;
+                    Console.WriteLine("Role updated succesfully");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
             } while (succeed == false);
-            Console.WriteLine("Department updated succesfully");
         }
 
-        public override void EditMenu()
+
+        //public override void EditMenu()
+        //{
+        //    Console.WriteLine("1. Name");
+        //    Console.WriteLine("2. Department");
+        //    Console.WriteLine("3. Contact Number");
+        //    Console.WriteLine("4. Joined Date");
+        //    Console.WriteLine("5. Back to Home\n");
+        //}
+
+        public override void SerializeData(TextWriter writer)
         {
-            Console.WriteLine("1. Name");
-            Console.WriteLine("2. Department");
-            Console.WriteLine("3. Contact Number");
-            Console.WriteLine("4. Joined Date");
-            Console.WriteLine("5. Back to Home\n");
+
+            //XmlSerializer serializer = new XmlSerializer(this.GetType());
+            //TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+            //serializer.Serialize(writer, this);
+            //writer.Close();
+        }
+
+        public override void DeserializeData()
+        {
+
         }
     }
 }

@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 
 namespace Staff
 {
     class ManageStaff
     {
+
+        public static TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+
         public static string check;
         public static int staffType;
         //list of teaching staff
@@ -279,10 +285,12 @@ namespace Staff
             {
                 TeachingStaff teachingStaff = new TeachingStaff();
                 teachingStaff.AddStaff();
+                teachingStaff.SerializeData(writer);
                 TeachingStaffList.Add(teachingStaff);
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
             } while (check == "Y" || check == "y");
+            writer.Close();
         }
 
         // function to add administrative staff

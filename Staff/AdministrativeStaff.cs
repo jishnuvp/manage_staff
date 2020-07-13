@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Staff
 {
@@ -57,33 +58,56 @@ namespace Staff
         }
         public override void UpdateStaff()
         {
+            string input;
             base.UpdateStaff();
-        }
-        public override void UpdateUniqueField() {
             bool succeed;
             do
             {
                 succeed = false;
                 try
                 {
-                    Console.WriteLine("\nEnter Role: ");
-                    Role = Console.ReadLine();
+                    Console.WriteLine($"\nEnter Role ({this.Role}) ");
+                    input = Console.ReadLine();
+                    if (string.IsNullOrEmpty(input))
+                    {
+                        Role = this.Role;
+
+                    }
+                    else
+                    {
+                        Role = input;
+                    }
                     succeed = true;
+                    Console.WriteLine("Role updated succesfully");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
             } while (succeed == false);
-            Console.WriteLine("Subject updated succesfully");
         }
-        public override void EditMenu()
+
+        //public override void EditMenu()
+        //{
+        //    Console.WriteLine("1. Name");
+        //    Console.WriteLine("2. Role");
+        //    Console.WriteLine("3. Contact Number");
+        //    Console.WriteLine("4. Joined Date");
+        //    Console.WriteLine("5. Back to Home\n");
+        //}
+
+        public override void SerializeData(TextWriter writer)
         {
-            Console.WriteLine("1. Name");
-            Console.WriteLine("2. Role");
-            Console.WriteLine("3. Contact Number");
-            Console.WriteLine("4. Joined Date");
-            Console.WriteLine("5. Back to Home\n");
+
+            //XmlSerializer serializer = new XmlSerializer(this.GetType());
+            //TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+            //serializer.Serialize(writer, this);
+            //writer.Close();
+        }
+
+        public override void DeserializeData()
+        {
+
         }
     }
 }
