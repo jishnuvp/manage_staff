@@ -3,6 +3,7 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 //public enum SubjectEnum { malayalam, english, maths, social, science, hindi };
 
@@ -24,7 +25,7 @@ namespace Staff
             }
         }
 
-        public override void AddStaff(Enum type)
+        public override void AddStaff(Enum type, List<Staff> list)
         {
 
             string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
@@ -32,7 +33,7 @@ namespace Staff
             bool succeed;
             int index = 1, choice;
 
-            base.AddStaff(type);
+            base.AddStaff(type, list);
             do
             {
                 succeed = false;
@@ -72,9 +73,9 @@ namespace Staff
 
         }
 
-        public override void ViewStaff(int index, int slNum = 0)
+        public override void ViewStaff()
         {
-            Console.WriteLine("{0}   Name: {1}, Type: {2},  Subject: {3},   Contact Number: {4},   Joining Date: {5}", index, Name, staffType, Subject, ContactNumber, DateOfJoin);
+            Console.WriteLine("{0}   Name: {1}, Type: {2},  Subject: {3},   Contact Number: {4},   Joining Date: {5}", EmpCode, Name, StaffType, Subject, ContactNumber, DateOfJoin);
         }
 
         public override void UpdateStaff()

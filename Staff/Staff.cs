@@ -21,7 +21,8 @@ namespace Staff
 
         //properties
 
-        public StaffTypes staffType { get; set; }
+        public StaffTypes StaffType { get; set; }
+        public string EmpCode { get; set; }
         public string Name
         {
             get { return name; }
@@ -85,10 +86,11 @@ namespace Staff
 
         //methods
 
-        public virtual void AddStaff(Enum type)
+        public virtual void AddStaff(Enum type, List<Staff> list)
         {
             bool succeed;
-            staffType = (StaffTypes)type;
+            string code;
+            StaffType = (StaffTypes)type;
             do
             {
                 succeed = false;
@@ -101,6 +103,21 @@ namespace Staff
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                }
+            } while (succeed == false);
+
+            do
+            {
+                succeed = false;
+                Console.WriteLine("\nEnter Employee code :");
+                code = Console.ReadLine();
+                if (list.Exists(x => x.EmpCode == code)){
+                    succeed = false;   
+                }
+                else
+                {
+                    EmpCode = code;
+                    succeed = true;
                 }
             } while (succeed == false);
 
@@ -136,7 +153,7 @@ namespace Staff
                 }
             } while (succeed == false);
         }
-        public abstract void ViewStaff(int index, int slNum = 0);
+        public abstract void ViewStaff();
         public virtual void UpdateStaff()
         {
             DateTime dateInput;

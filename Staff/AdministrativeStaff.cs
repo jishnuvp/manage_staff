@@ -4,6 +4,8 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Collections.Generic;
+
 
 namespace Staff
 {
@@ -32,10 +34,10 @@ namespace Staff
             }
         }
 
-        public override void AddStaff(Enum type)
+        public override void AddStaff(Enum type, List<Staff> list)
         {
             bool succeed;
-            base.AddStaff(type);
+            base.AddStaff(type, list);
             do
             {
                 succeed = false;
@@ -51,9 +53,9 @@ namespace Staff
                 }
             } while (succeed == false);
         }
-        public override void ViewStaff(int index, int slNum = 0)
+        public override void ViewStaff()
         {
-            Console.WriteLine("{0}   Name: {1}, Type: {2}  ,Role: {3},   Contact Number: {4},   Joining Date: {5}", index, Name, staffType, Role, ContactNumber, DateOfJoin);
+            Console.WriteLine("{0}   Name: {1}, Type: {2}  ,Role: {3},   Contact Number: {4},   Joining Date: {5}", EmpCode, Name, StaffType, Role, ContactNumber, DateOfJoin);
 
         }
         public override void UpdateStaff()
