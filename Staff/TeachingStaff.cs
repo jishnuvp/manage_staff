@@ -24,7 +24,7 @@ namespace Staff
             }
         }
 
-        public override void AddStaff()
+        public override void AddStaff(Enum type)
         {
 
             string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
@@ -32,7 +32,7 @@ namespace Staff
             bool succeed;
             int index = 1, choice;
 
-            base.AddStaff();
+            base.AddStaff(type);
             do
             {
                 succeed = false;
@@ -74,7 +74,7 @@ namespace Staff
 
         public override void ViewStaff(int index, int slNum = 0)
         {
-            Console.WriteLine("{0}   Name: {1},  Subject: {2},   Contact Number: {3},   Joining Date: {4}", index, Name, Subject, ContactNumber, DateOfJoin);
+            Console.WriteLine("{0}   Name: {1}, Type: {2},  Subject: {3},   Contact Number: {4},   Joining Date: {5}", index, Name, staffType, Subject, ContactNumber, DateOfJoin);
         }
 
         public override void UpdateStaff()

@@ -32,10 +32,10 @@ namespace Staff
             }
         }
 
-        public override void AddStaff()
+        public override void AddStaff(Enum type)
         {
             bool succeed;
-            base.AddStaff();
+            base.AddStaff(type);
             do
             {
                 succeed = false;
@@ -54,7 +54,7 @@ namespace Staff
         }
         public override void ViewStaff(int index, int slNum = 0)
         {
-            Console.WriteLine("{0}   Name: {1},  Department: {2},   Contact Number: {3},   Joining Date: {4}", index, Name, Department, ContactNumber, DateOfJoin);
+            Console.WriteLine("{0}   Name: {1},  Type: {2},  Department: {3},   Contact Number: {4},   Joining Date: {5}", index, Name, staffType, Department, ContactNumber, DateOfJoin);
         }
 
         public override void UpdateStaff()

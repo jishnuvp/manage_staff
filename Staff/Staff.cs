@@ -8,8 +8,8 @@ using System.Xml.Serialization;
 
 namespace Staff
 {
-
-    public abstract class Staff : IStaff
+    public enum StaffTypes { Teaching, Administrative, Support };
+    public abstract class Staff
     {
         private string name;
 
@@ -17,8 +17,11 @@ namespace Staff
 
         private DateTime dateOfJoin;
 
+
+
         //properties
-        [XmlElement]
+
+        public StaffTypes staffType { get; set; }
         public string Name
         {
             get { return name; }
@@ -82,9 +85,10 @@ namespace Staff
 
         //methods
 
-        public virtual void AddStaff()
+        public virtual void AddStaff(Enum type)
         {
             bool succeed;
+            staffType = (StaffTypes)type;
             do
             {
                 succeed = false;

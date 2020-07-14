@@ -12,22 +12,23 @@ namespace Staff
 
         public static TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
 
-        public static string check;
         public static int staffType;
-        //list of teaching staff
         public static List<TeachingStaff> TeachingStaffList = new List<TeachingStaff>();
-        //list of administrative staff
         public static List<AdministrativeStaff> AdministrativeStaffList = new List<AdministrativeStaff>();
-        //list of support staff
         public static List<SupportStaff> SupportStaffList = new List<SupportStaff>();
+
+
 
         // function to get the user choice
         public static int GetStaffType()
         {
-            Console.WriteLine("\n\n1. Teaching Staff");
-            Console.WriteLine("2. Administrative Staff");
-            Console.WriteLine("3. Support Staff");
-            Console.WriteLine("4. Back Home");
+            int index = 1;
+            foreach (string str in Enum.GetNames(typeof(StaffTypes)))
+            {
+                Console.WriteLine($"{index}. {str}");
+                index++;
+            }
+            Console.WriteLine($"{index}. Back To Main Menu");
             Console.WriteLine("Enter your choice again");
             if (!Int32.TryParse(Console.ReadLine(), out staffType))
             {
@@ -41,25 +42,31 @@ namespace Staff
         public void AddStaff()
         {
             staffType = GetStaffType();
+            var empType = (StaffTypes)staffType-1;
             switch (staffType)
             {
                 case 1:
-                    // add teaching staff
-                    addTeachingStaff();
+                    Console.WriteLine("\n\n----------------------- Teaching Staff -----------------------\n");
+                    TeachingStaff teachingStaff = new TeachingStaff();
+                    teachingStaff.AddStaff(empType);
+                    TeachingStaffList.Add(teachingStaff);
                     break;
                 case 2:
-                    // add administrative staff
-                    addAdministrativeStaff();
+                    Console.WriteLine("\n\n----------------------- Administrative Staff -----------------------\n");
+                    AdministrativeStaff administrativeStaff = new AdministrativeStaff();
+                    administrativeStaff.AddStaff(empType);
+                    AdministrativeStaffList.Add(administrativeStaff);
                     break;
                 case 3:
-                    // add support staff
-                    addSupportStaff();
+                    Console.WriteLine("\n\n----------------------- Support Staff -----------------------\n");
+                    SupportStaff supportStaff = new SupportStaff();
+                    supportStaff.AddStaff(empType);
+                    SupportStaffList.Add(supportStaff);
                     break;
                 case 4:
                     // back to main menu
                     break;
             }
-            Program.mainMenu();
         }
 
         // function for view staff
@@ -79,7 +86,6 @@ namespace Staff
                     ViewSupportStaff();
                     break;
             }
-            Program.mainMenu();
 
         }
 
@@ -99,7 +105,6 @@ namespace Staff
                     UpdateSupportStaff();
                     break;
             }
-            Program.mainMenu();
         }
 
         // function for delete a staff
@@ -118,7 +123,6 @@ namespace Staff
                     DeleteSupportStaff();
                     break;
             }
-            Program.mainMenu();
         }
 
         public static int ViewType()
@@ -280,58 +284,16 @@ namespace Staff
 
         public static void SerializeData <T>(List<T> list, TextWriter writer)
         {
-            XmlDocument doc = new XmlDocument();
+            //XmlDocument doc = new XmlDocument();
             //doc.Load(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+            //XmlRootAttribute root = new XmlRootAttribute("Goals");
+
+
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
             serializer.Serialize(writer, list);
         }
 
 
-
-        // function to add teaching staff
-        public static void addTeachingStaff()
-        {
-            Console.WriteLine("\n\n----------------------- Add Teaching Staff -----------------------\n");
-            do
-            {
-                TeachingStaff teachingStaff = new TeachingStaff();
-                teachingStaff.AddStaff();
-                TeachingStaffList.Add(teachingStaff);
-                Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
-                check = Console.ReadLine();
-            } while (check == "Y" || check == "y");
-            SerializeData(TeachingStaffList, writer);
-        }
-
-        // function to add administrative staff
-        public static void addAdministrativeStaff()
-        {
-            Console.WriteLine("\n\n----------------------- Add Administrative Staff -----------------------\n");
-            do
-            {
-                AdministrativeStaff administrativeStaff = new AdministrativeStaff();
-                administrativeStaff.AddStaff();
-                AdministrativeStaffList.Add(administrativeStaff);
-                Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
-                check = Console.ReadLine();
-            } while (check == "Y" || check == "y");
-            SerializeData(AdministrativeStaffList, writer);
-        }
-
-        // function to add support staff
-        public static void addSupportStaff()
-        {
-            Console.WriteLine("\n\n----------------------- Add Support Staff -----------------------\n");
-            do
-            {
-                SupportStaff supportStaff = new SupportStaff();
-                supportStaff.AddStaff();
-                SupportStaffList.Add(supportStaff);
-                Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
-                check = Console.ReadLine();
-            } while (check == "Y" || check == "y");
-            SerializeData(SupportStaffList, writer);
-        }
 
         // function to delete teaching staff
         public static void DeleteTeachingStaff()

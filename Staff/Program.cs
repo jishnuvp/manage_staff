@@ -46,14 +46,14 @@ namespace Staff
                         break;
                     default: mainMenu(); break;
                 }
+                mainMenu();
             }
         }
         static void Main(string[] args)
         {
             Program program = new Program();
             mainMenu();     //invoke main menu
-            Console.WriteLine("\nEnter any key to exit");
-            Console.ReadKey();
+
         }
     }
 }
