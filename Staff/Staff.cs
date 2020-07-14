@@ -4,13 +4,13 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Staff
 {
 
     public abstract class Staff : IStaff
     {
-
         private string name;
 
         private string contactNumber;
@@ -18,6 +18,7 @@ namespace Staff
         private DateTime dateOfJoin;
 
         //properties
+        [XmlElement]
         public string Name
         {
             get { return name; }
@@ -210,18 +211,7 @@ namespace Staff
                     {
                         DateOfJoin = dateInput;
                     }
-                    //dateInput = DateTime.Parse(Console.ReadLine());
-                    //if (dateInput == null)
-                    //{
-                    //    Console.WriteLine("test1");
-                    //    DateOfJoin = this.DateOfJoin;
-
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("test2");
-                    //    DateOfJoin = dateInput;
-                    //}
+                    
                     succeed = true;
                     Console.WriteLine("Date of Join updated succesfully");
                 }
@@ -232,75 +222,9 @@ namespace Staff
             } while (succeed == false);
 
 
-            //switch (choice)
-            //{
-            //    case 1:
-            //        do
-            //        {
-            //            succeed = false;
-            //            try
-            //            {
-            //                Console.WriteLine("\nEnter Name: ");
-            //                Name = Console.ReadLine();
-            //                succeed = true;
-            //            }
-            //            catch (Exception e)
-            //            {
-            //                Console.WriteLine(e.Message);
-            //            }
-            //        } while (succeed == false);
-            //        Console.WriteLine("Name updated succesfully");
-            //        break;
-            //    case 2:
-            //        UpdateUniqueField();
-            //        break;
-            //    case 3:
-            //        do
-            //        {
-            //            succeed = false;
-            //            try
-            //            {
-            //                Console.WriteLine("\nEnter Contact Number");
-            //                ContactNumber = Console.ReadLine();
-            //                succeed = true;
-            //            }
-            //            catch (Exception e)
-            //            {
-            //                Console.WriteLine(e.Message);
-            //            }
-            //        } while (succeed == false);
-            //        Console.WriteLine("Contact number updated succesfully");
-            //        break;
-            //    case 4:
-            //        do
-            //        {
-            //            succeed = false;
-            //            try
-            //            {
-            //                Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
-            //                DateOfJoin = DateTime.Parse(Console.ReadLine());
-            //                succeed = true;
-
-            //            }
-            //            catch (Exception e)
-            //            {
-            //                Console.WriteLine(e.Message);
-            //            }
-            //        } while (succeed == false);
-            //        Console.WriteLine("Joined date updated succesfully");
-            //        break;
-            //    case 5:
-            //        break;
-            //    default:
-            //        Console.WriteLine("\nEnter a valid choice");
-            //        this.UpdateStaff();
-            //        break;
-            //}
+            
         }
-        //public abstract void EditMenu();
 
-        // for serialization
-        public abstract void SerializeData(TextWriter writer);
-        public abstract void DeserializeData();
+
     }
 }

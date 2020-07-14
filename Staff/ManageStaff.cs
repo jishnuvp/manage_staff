@@ -277,6 +277,17 @@ namespace Staff
             }
         }
 
+
+        public static void SerializeData <T>(List<T> list, TextWriter writer)
+        {
+            XmlDocument doc = new XmlDocument();
+            //doc.Load(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+            serializer.Serialize(writer, list);
+        }
+
+
+
         // function to add teaching staff
         public static void addTeachingStaff()
         {
@@ -285,12 +296,11 @@ namespace Staff
             {
                 TeachingStaff teachingStaff = new TeachingStaff();
                 teachingStaff.AddStaff();
-                teachingStaff.SerializeData(writer);
                 TeachingStaffList.Add(teachingStaff);
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
             } while (check == "Y" || check == "y");
-            writer.Close();
+            SerializeData(TeachingStaffList, writer);
         }
 
         // function to add administrative staff
@@ -305,6 +315,7 @@ namespace Staff
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
             } while (check == "Y" || check == "y");
+            SerializeData(AdministrativeStaffList, writer);
         }
 
         // function to add support staff
@@ -319,6 +330,7 @@ namespace Staff
                 Console.WriteLine("\nDo you want to add more staff (Y/N) ?");
                 check = Console.ReadLine();
             } while (check == "Y" || check == "y");
+            SerializeData(SupportStaffList, writer);
         }
 
         // function to delete teaching staff

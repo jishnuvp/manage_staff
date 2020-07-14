@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Staff
 {
-    class AdministrativeStaff : Staff
+    public class AdministrativeStaff : Staff
     {
         private string role;
 
@@ -85,29 +85,6 @@ namespace Staff
                     Console.WriteLine(e.Message);
                 }
             } while (succeed == false);
-        }
-
-        //public override void EditMenu()
-        //{
-        //    Console.WriteLine("1. Name");
-        //    Console.WriteLine("2. Role");
-        //    Console.WriteLine("3. Contact Number");
-        //    Console.WriteLine("4. Joined Date");
-        //    Console.WriteLine("5. Back to Home\n");
-        //}
-
-        public override void SerializeData(TextWriter writer)
-        {
-
-            //XmlSerializer serializer = new XmlSerializer(this.GetType());
-            //TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
-            //serializer.Serialize(writer, this);
-            //writer.Close();
-        }
-
-        public override void DeserializeData()
-        {
-
         }
     }
 }
