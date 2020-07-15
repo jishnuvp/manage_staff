@@ -43,7 +43,8 @@ namespace Staff
         public void AddStaff()
         {
             staffTypeChoice = GetStaffType();
-            var empType = (StaffTypes)staffTypeChoice - 1;
+            var empType = (StaffTypes)staffTypeChoice;
+            Console.WriteLine(empType);
             if(staffTypeChoice == index)
             {
                 return;
@@ -84,7 +85,7 @@ namespace Staff
                 return;
             }
             var filteredList = GetFilteredList(staffTypeChoice);
-            Console.WriteLine($"\n\n----------------------- View {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
+            Console.WriteLine($"\n\n----------------------- View {(StaffTypes)staffTypeChoice} Staff -----------------------\n");
             int choice = ViewType();
             switch (choice)
             {
@@ -120,20 +121,14 @@ namespace Staff
 
         // function for update staff details
         public void UpdateStaff()
-        {
-            staffTypeChoice = GetStaffType();
-            if (staffTypeChoice == index)
-            {
-                return;
-            }
-            var filteredList = GetFilteredList(staffTypeChoice);
-            Console.WriteLine($"\n\n----------------------- Update {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
+        {            
+            Console.WriteLine($"\n\n----------------------- Update {(StaffTypes)staffTypeChoice} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to update");
             string code = Console.ReadLine();
             code = code.ToUpper();
-            if (filteredList.Exists(x => x.EmpCode == code))
+            if (StaffList.Exists(x => x.EmpCode == code))
             {
-                foreach (var staff in filteredList)
+                foreach (var staff in StaffList)
                 {
                     if (staff.EmpCode == code)
                     {
@@ -152,26 +147,14 @@ namespace Staff
         // function for delete a staff
         public void DeleteStaff()
         {
-            staffTypeChoice = GetStaffType();
-            if (staffTypeChoice == index)
-            {
-                return;
-            }
-            var filteredList = GetFilteredList(staffTypeChoice);
-            Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
+            Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffTypeChoice} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
             string code = Console.ReadLine();
             code = code.ToUpper();
-            if (filteredList.Exists(x => x.EmpCode == code))
+            if (StaffList.Exists(x => x.EmpCode == code))
             {
-                foreach (var staff in filteredList)
-                {
-                    if (staff.EmpCode == code)
-                    {
-                        StaffList.Remove(staff);
-                        Console.WriteLine($"\nStaff with Emp Code {code} removed succesfully");
-                    }
-                }
+                StaffList.RemoveAll(x => x.EmpCode == code);
+                Console.WriteLine($"\nStaff with Emp Code {code} removed succesfully");
             }
             else
             {
@@ -195,7 +178,7 @@ namespace Staff
         public static List<Staff> GetFilteredList(int staffTypeChoice)
         {
             var filteredList = new List<Staff>();
-            var empType = (StaffTypes)staffTypeChoice - 1;
+            var empType = (StaffTypes)staffTypeChoice;
             foreach (var staff in StaffList)
             {
                 if (staff.StaffType == empType)

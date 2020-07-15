@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Staff
 {
-    public enum StaffTypes { Teaching, Administrative, Support };
+    public enum StaffTypes { Teaching = 1, Administrative = 2, Support = 3 };
     public abstract class Staff
     {
         private string name;
