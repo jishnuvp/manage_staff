@@ -111,6 +111,7 @@ namespace Staff
                 succeed = false;
                 Console.WriteLine("\nEnter Employee code :");
                 code = Console.ReadLine();
+                code = code.ToUpper();
                 if (list.Exists(x => x.EmpCode == code)){
                     succeed = false;   
                 }

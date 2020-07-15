@@ -97,6 +97,7 @@ namespace Staff
                 case 2:
                     Console.WriteLine("\nEnter Emp code of the staff to view");
                     string code = Console.ReadLine();
+                    code = code.ToUpper();
                     if (filteredList.Exists(x => x.EmpCode == code))
                     {
                         foreach (var staff in filteredList)
@@ -129,6 +130,7 @@ namespace Staff
             Console.WriteLine($"\n\n----------------------- Update {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to update");
             string code = Console.ReadLine();
+            code = code.ToUpper();
             if (filteredList.Exists(x => x.EmpCode == code))
             {
                 foreach (var staff in filteredList)
@@ -159,6 +161,7 @@ namespace Staff
             Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
             string code = Console.ReadLine();
+            code = code.ToUpper();
             if (filteredList.Exists(x => x.EmpCode == code))
             {
                 foreach (var staff in filteredList)
