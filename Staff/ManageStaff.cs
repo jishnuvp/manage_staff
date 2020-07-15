@@ -12,35 +12,43 @@ namespace Staff
 
         public static TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
 
-        public static int staffType;
+        public static int staffTypeChoice, index;
 
         public static List<Staff> StaffList = new List<Staff>();
 
         // function to get the user choice
         public static int GetStaffType()
         {
-            int index = 1;
+            index = 1;
             foreach (string str in Enum.GetNames(typeof(StaffTypes)))
             {
                 Console.WriteLine($"{index}. {str}");
                 index++;
             }
             Console.WriteLine($"{index}. Back To Main Menu");
-            Console.WriteLine("Enter your choice again");
-            if (!Int32.TryParse(Console.ReadLine(), out staffType))
+            Console.WriteLine("\nEnter your choice again");
+            if (!Int32.TryParse(Console.ReadLine(), out staffTypeChoice))
             {
-                Console.WriteLine("Enter a valid number");
-                staffType = GetStaffType();
+                Console.WriteLine("\nEnter a valid number");
+                staffTypeChoice = GetStaffType();
+            }else if(!(staffTypeChoice <= (Enum.GetNames(typeof(StaffTypes)).Length) +1 && staffTypeChoice > 0))
+            {
+                Console.WriteLine("\nEnter a valid choice");
+                staffTypeChoice = GetStaffType();
             }
-            return staffType;
+            return staffTypeChoice;
         }
 
         // function for add staff
         public void AddStaff()
         {
-            staffType = GetStaffType();
-            var empType = (StaffTypes)staffType-1;
-            switch (staffType)
+            staffTypeChoice = GetStaffType();
+            var empType = (StaffTypes)staffTypeChoice - 1;
+            if(staffTypeChoice == index)
+            {
+                return;
+            }
+            switch (staffTypeChoice)
             {
                 case 1:
                     Console.WriteLine("\n\n----------------------- Teaching Staff -----------------------\n");
@@ -70,9 +78,13 @@ namespace Staff
 
         public void ViewStaff()
         {
-            staffType = GetStaffType();
-            var filteredList = GetFilteredList(staffType);
-            Console.WriteLine($"\n\n----------------------- View {(StaffTypes)staffType - 1} Staff -----------------------\n");
+            staffTypeChoice = GetStaffType();
+            if (staffTypeChoice == index)
+            {
+                return;
+            }
+            var filteredList = GetFilteredList(staffTypeChoice);
+            Console.WriteLine($"\n\n----------------------- View {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
             int choice = ViewType();
             switch (choice)
             {
@@ -108,9 +120,13 @@ namespace Staff
         // function for update staff details
         public void UpdateStaff()
         {
-            staffType = GetStaffType();
-            var filteredList = GetFilteredList(staffType);
-            Console.WriteLine($"\n\n----------------------- Update {(StaffTypes)staffType - 1} Staff -----------------------\n");
+            staffTypeChoice = GetStaffType();
+            if (staffTypeChoice == index)
+            {
+                return;
+            }
+            var filteredList = GetFilteredList(staffTypeChoice);
+            Console.WriteLine($"\n\n----------------------- Update {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to update");
             string code = Console.ReadLine();
             if (filteredList.Exists(x => x.EmpCode == code))
@@ -134,9 +150,13 @@ namespace Staff
         // function for delete a staff
         public void DeleteStaff()
         {
-            staffType = GetStaffType();
-            var filteredList = GetFilteredList(staffType);
-            Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffType - 1} Staff -----------------------\n");
+            staffTypeChoice = GetStaffType();
+            if (staffTypeChoice == index)
+            {
+                return;
+            }
+            var filteredList = GetFilteredList(staffTypeChoice);
+            Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffTypeChoice - 1} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
             string code = Console.ReadLine();
             if (filteredList.Exists(x => x.EmpCode == code))
@@ -160,19 +180,19 @@ namespace Staff
         public static int ViewType()
         {
             int choice;
-            Console.WriteLine("1. View All");
+            Console.WriteLine("\n1. View All");
             Console.WriteLine("2. View Single");
             if (!Int32.TryParse(Console.ReadLine(), out choice))
             {
-                Console.WriteLine("Enter a valid number");
+                Console.WriteLine("\nEnter a valid number");
                 choice = GetStaffType();
             }
             return choice;
         }
-        public static List<Staff> GetFilteredList(int staffType)
+        public static List<Staff> GetFilteredList(int staffTypeChoice)
         {
             var filteredList = new List<Staff>();
-            var empType = (StaffTypes)staffType - 1;
+            var empType = (StaffTypes)staffTypeChoice - 1;
             foreach (var staff in StaffList)
             {
                 if (staff.StaffType == empType)

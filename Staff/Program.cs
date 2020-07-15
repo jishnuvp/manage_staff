@@ -19,10 +19,10 @@ namespace Staff
             Console.WriteLine("4. Delete Staff");
             Console.WriteLine("5. Exit");
 
-            Console.WriteLine("Enter your choice(1-4)");
+            Console.WriteLine("\nEnter your choice(1-4)");
             if (!Int32.TryParse(Console.ReadLine(), out choice))
             {
-                Console.WriteLine("Enter a valid number");
+                Console.WriteLine("\nEnter a valid number");
                 mainMenu();
             }
             else
