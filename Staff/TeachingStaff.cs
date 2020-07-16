@@ -18,12 +18,7 @@ namespace Staff
         }
         public TeachingStaff(string Name, string EmpCode, StaffTypes StaffType, string Subject, string ContactNumber, DateTime DateOfJoin) : base(Name, EmpCode, StaffType, ContactNumber, DateOfJoin)
         {
-            this.Name = Name;
-            this.EmpCode = EmpCode;
-            this.StaffType = StaffType;
             this.Subject = Subject;
-            this.ContactNumber = ContactNumber;
-            this.DateOfJoin = DateOfJoin;
         }
 
 

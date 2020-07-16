@@ -182,6 +182,8 @@ namespace Staff
                             Console.WriteLine(e.Message);
                         }
                     } while (succeed == false);
+                    SupportStaff supportStaff = new SupportStaff(name, code, empType, department, number, doj);
+                    StaffList.Add(supportStaff);
                     break;
                 case 4:
                     // back to main menu
@@ -542,15 +544,15 @@ namespace Staff
             return staffTypeChoice;
         }
 
-        public static void SerializeData<T>(List<T> list, TextWriter writer)
+        public void SerializeXml()
         {
             //XmlDocument doc = new XmlDocument();
             //doc.Load(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
             //XmlRootAttribute root = new XmlRootAttribute("Goals");
 
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
-            serializer.Serialize(writer, list);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>));
+            serializer.Serialize(writer, StaffList);
         }
     }
 }

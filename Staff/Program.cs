@@ -42,6 +42,7 @@ namespace Staff
                         manageStaff.DeleteStaff();
                         break;
                     case 5:
+                        //manageStaff.SerializeXml();
                         System.Environment.Exit(0);
                         break;
                     default: mainMenu(); break;
