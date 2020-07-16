@@ -30,7 +30,6 @@ namespace Staff
 
             staffTypeChoice = GetStaffType();
             var empType = (StaffTypes)staffTypeChoice;
-            Console.WriteLine(empType);
             if(staffTypeChoice == counter)
             {
                 return;
@@ -61,6 +60,7 @@ namespace Staff
                 code = code.ToUpper();
                 if (StaffList.Exists(x => x.EmpCode == code))
                 {
+                    Console.WriteLine("\nEmp code already exists");
                     succeed = false;
                 }
                 else

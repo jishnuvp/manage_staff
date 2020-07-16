@@ -9,6 +9,9 @@ namespace Staff
     [XmlRoot("TeachingStaff")]
     public class TeachingStaff : Staff
     {
+
+        //properties
+        public string Subject { get; set; }
         public TeachingStaff()
         {
 
@@ -22,9 +25,6 @@ namespace Staff
             this.ContactNumber = ContactNumber;
             this.DateOfJoin = DateOfJoin;
         }
-
-        //properties
-        public string Subject { get; set; }
 
 
     }
