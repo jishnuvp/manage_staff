@@ -2,10 +2,26 @@
 <ArrayOfStaff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Staff xsi:type="TeachingStaff">
     <StaffType>Teaching</StaffType>
-    <EmpCode>EMP12</EmpCode>
-    <Name>test</Name>
-    <ContactNumber>789456</ContactNumber>
+    <EmpCode>EMP11</EmpCode>
+    <Name>messi</Name>
+    <ContactNumber>78945678</ContactNumber>
     <DateOfJoin>2020-04-04T00:00:00</DateOfJoin>
     <Subject>english</Subject>
+  </Staff>
+  <Staff xsi:type="AdministrativeStaff">
+    <StaffType>Administrative</StaffType>
+    <EmpCode>EMP12</EmpCode>
+    <Name>ronaldo</Name>
+    <ContactNumber>7777777</ContactNumber>
+    <DateOfJoin>2020-01-02T00:00:00</DateOfJoin>
+    <Role>Goat</Role>
+  </Staff>
+  <Staff xsi:type="TeachingStaff">
+    <StaffType>Teaching</StaffType>
+    <EmpCode>EMP13</EmpCode>
+    <Name>neymar</Name>
+    <ContactNumber>12222334</ContactNumber>
+    <DateOfJoin>2020-04-08T00:00:00</DateOfJoin>
+    <Subject>malayalam</Subject>
   </Staff>
 </ArrayOfStaff>

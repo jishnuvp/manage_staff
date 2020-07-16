@@ -7,10 +7,15 @@ namespace Staff
 {
     class Program
     {
+        public static bool flag = true;
         public static void mainMenu()
         {
             ManageStaff manageStaff = new ManageStaff();
-            manageStaff.DeSerializeXml();
+            if (flag)
+            {
+                flag = manageStaff.DeSerializeXml();
+            }
+            //manageStaff.DeSerializeXml();
             // Initial Menu
             int choice;
             Console.WriteLine("\n\n----------------------- Manage Staff -----------------------\n");
