@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 
 namespace Staff
 {
-    [XmlRoot("TeachingStaff")]
     public class TeachingStaff : Staff
     {
 

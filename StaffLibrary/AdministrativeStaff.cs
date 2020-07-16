@@ -2,6 +2,7 @@
 
 namespace Staff
 {
+    
     public class AdministrativeStaff : Staff
     {
 
@@ -11,6 +12,6 @@ namespace Staff
         {
             this.Role = Role;
         }
-
+        public AdministrativeStaff() { }
     }
 }

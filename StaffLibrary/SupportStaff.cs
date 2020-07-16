@@ -12,6 +12,7 @@ namespace Staff
         {
             this.Department = Department;
         }
+        public SupportStaff() { }
 
     }
 }

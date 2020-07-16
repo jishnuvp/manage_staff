@@ -3,7 +3,7 @@
 namespace Staff
 {
     public enum StaffTypes { Teaching = 1, Administrative = 2, Support = 3 };
-    public abstract class Staff
+    public class Staff
     {
         //properties
         public StaffTypes StaffType { get; set; }

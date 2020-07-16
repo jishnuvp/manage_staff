@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-
+using StaffLibrary;
 
 namespace Staff
 {
-    class ManageStaff
+    public class ManageStaff
     {
 
-        public static TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+        //public static TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
 
         public static int staffTypeChoice, counter;
 
@@ -546,13 +547,48 @@ namespace Staff
 
         public void SerializeXml()
         {
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
-            //XmlRootAttribute root = new XmlRootAttribute("Goals");
+            // Serialize 
+            Type[] staffTypes = { typeof(TeachingStaff), typeof(AdministrativeStaff), typeof(SupportStaff) };
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>), staffTypes);
+            FileStream fs = new FileStream(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml", FileMode.Create);
+            serializer.Serialize(fs, StaffList);
+            fs.Close();
+            StaffList = null;
+        }
+        public void DeSerializeXml()
+        {
+            //T outObject;
+            //// Deserialize 
+            //Staff staff = new Staff();
+            //Type[] staffTypes = { typeof(TeachingStaff), typeof(AdministrativeStaff), typeof(SupportStaff) };
+            //FileStream fs = new FileStream(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml", FileMode.Open);
+            //XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>), staffTypes);
+            //outObject = (T)serializer.Deserialize(fs);
+            //serializer.Serialize(Console.Out, outObject);
+            //Console.ReadLine();
+
+            //XmlDocument xml = new XmlDocument();
+            //xml.LoadXml(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
+            //string _byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+            //if (xml.StartsWith(_byteOrderMarkUtf8))
+            //{
+            //    xml = xml.Remove(0, _byteOrderMarkUtf8.Length);
+            //}
 
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>));
-            serializer.Serialize(writer, StaffList);
+            Type[] staffTypes = { typeof(TeachingStaff), typeof(AdministrativeStaff), typeof(SupportStaff) };
+
+            XmlSerializer deserializer = new XmlSerializer(typeof(List<Staff>), staffTypes);
+
+            using (StreamReader reader = new StreamReader(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml"))
+            {
+                object outObject = deserializer.Deserialize(reader);
+
+            }
+
+            //streamReader.Close();
+            //Console.WriteLine(outObject);
+
         }
     }
 }

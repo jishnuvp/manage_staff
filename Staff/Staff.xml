@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ArrayOfStaff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Staff xsi:type="TeachingStaff">
+    <StaffType>Teaching</StaffType>
+    <EmpCode>EMP12</EmpCode>
+    <Name>test</Name>
+    <ContactNumber>789456</ContactNumber>
+    <DateOfJoin>2020-04-04T00:00:00</DateOfJoin>
+    <Subject>english</Subject>
+  </Staff>
+</ArrayOfStaff>

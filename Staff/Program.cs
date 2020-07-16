@@ -10,6 +10,7 @@ namespace Staff
         public static void mainMenu()
         {
             ManageStaff manageStaff = new ManageStaff();
+            manageStaff.DeSerializeXml();
             // Initial Menu
             int choice;
             Console.WriteLine("\n\n----------------------- Manage Staff -----------------------\n");
@@ -42,7 +43,7 @@ namespace Staff
                         manageStaff.DeleteStaff();
                         break;
                     case 5:
-                        //manageStaff.SerializeXml();
+                        manageStaff.SerializeXml();
                         System.Environment.Exit(0);
                         break;
                     default: mainMenu(); break;
