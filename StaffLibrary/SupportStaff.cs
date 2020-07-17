@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Staff
+namespace StaffLibrary
 {
     public class SupportStaff : Staff
     {

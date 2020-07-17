@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 //public enum SubjectEnum { malayalam, english, maths, social, science, hindi };
 
 
-namespace Staff
+namespace StaffLibrary
 {
     public class TeachingStaff : Staff
     {

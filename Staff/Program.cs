@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using System.ComponentModel.DataAnnotations;
+using StaffLibrary;
 
-namespace Staff
+namespace StaffConsole
 {
     class Program
     {
@@ -11,9 +12,11 @@ namespace Staff
         public static void mainMenu()
         {
             ManageStaff manageStaff = new ManageStaff();
+            SerializeXml serializeXml = new SerializeXml();
             if (flag)
             {
-                flag = manageStaff.DeSerializeXml();
+                flag = serializeXml.DeSerialize(ManageStaff.StaffList);
+                //flag = manageStaff.DeSerializeXml();
             }
             //manageStaff.DeSerializeXml();
             // Initial Menu
@@ -48,7 +51,8 @@ namespace Staff
                         manageStaff.DeleteStaff();
                         break;
                     case 5:
-                        manageStaff.SerializeXml();
+                        //manageStaff.SerializeXml();
+                        serializeXml.Serialize(ManageStaff.StaffList);
                         System.Environment.Exit(0);
                         break;
                     default: mainMenu(); break;

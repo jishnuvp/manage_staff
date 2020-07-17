@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Staff
+namespace StaffLibrary
 {
     public enum StaffTypes { Teaching = 1, Administrative = 2, Support = 3 };
     public class Staff
