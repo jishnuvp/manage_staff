@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ArrayOfStaff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Staff xsi:type="TeachingStaff">
+    <StaffType>Teaching</StaffType>
+    <EmpCode>EMP11</EmpCode>
+    <Name>test</Name>
+    <ContactNumber>789456</ContactNumber>
+    <DateOfJoin>2020-04-04T00:00:00</DateOfJoin>
+    <Subject>english</Subject>
+  </Staff>
+  <Staff xsi:type="TeachingStaff">
+    <StaffType>Teaching</StaffType>
+    <EmpCode>EMP12</EmpCode>
+    <Name>messi</Name>
+    <ContactNumber>456789</ContactNumber>
+    <DateOfJoin>2020-05-05T00:00:00</DateOfJoin>
+    <Subject>english</Subject>
+  </Staff>
+  <Staff xsi:type="SupportStaff">
+    <StaffType>Support</StaffType>
+    <EmpCode>EMP13</EmpCode>
+    <Name>ronaldo</Name>
+    <ContactNumber>123456</ContactNumber>
+    <DateOfJoin>2020-04-06T00:00:00</DateOfJoin>
+    <Department>manager</Department>
+  </Staff>
+</ArrayOfStaff>

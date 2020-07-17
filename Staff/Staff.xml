@@ -8,14 +8,6 @@
     <DateOfJoin>2020-04-04T00:00:00</DateOfJoin>
     <Subject>english</Subject>
   </Staff>
-  <Staff xsi:type="AdministrativeStaff">
-    <StaffType>Administrative</StaffType>
-    <EmpCode>EMP12</EmpCode>
-    <Name>ronaldo</Name>
-    <ContactNumber>7777777</ContactNumber>
-    <DateOfJoin>2020-01-02T00:00:00</DateOfJoin>
-    <Role>Goat</Role>
-  </Staff>
   <Staff xsi:type="TeachingStaff">
     <StaffType>Teaching</StaffType>
     <EmpCode>EMP13</EmpCode>

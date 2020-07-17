@@ -550,82 +550,51 @@ namespace Staff
             // Serialize 
             Type[] staffTypes = { typeof(TeachingStaff), typeof(AdministrativeStaff), typeof(SupportStaff) };
             XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>), staffTypes);
-            FileStream fs = new FileStream(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml", FileMode.Create);
+            FileStream fs = new FileStream(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\XMLFile1.xml", FileMode.Create);
             serializer.Serialize(fs, StaffList);
             fs.Close();
             StaffList = null;
         }
         public bool DeSerializeXml()
         {
-            //bool flag = false;
-            //Type[] staffTypes = { typeof(TeachingStaff), typeof(AdministrativeStaff), typeof(SupportStaff) };
-            //T result;
-            //XmlSerializer ser = new XmlSerializer(typeof(List<Staff>), staffTypes);
-            //using (TextReader tr = new StringReader(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml"))
-
-            //{
-            //    result = (T)ser.Deserialize(tr);
-            //    foreach (var staff in (dynamic)result)
-            //    {
-            //        string staffType = staff.StaffType.ToString();
-            //        switch (staffType)
-            //        {
-            //            case "Teaching":
-            //                TeachingStaff teachingStaff = new TeachingStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Subject, staff.ContactNumber, staff.DateOfJoin);
-            //                StaffList.Add(teachingStaff);
-            //                break;
-            //            case "Administrative":
-            //                AdministrativeStaff administrativeStaff = new AdministrativeStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Role, staff.ContactNumber, staff.DateOfJoin);
-            //                StaffList.Add(administrativeStaff);
-            //                break;
-            //            case "Support":
-            //                SupportStaff supportStaff = new SupportStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Department, staff.ContactNumber, staff.DateOfJoin);
-            //                StaffList.Add(supportStaff);
-            //                break;
-            //        }
-
-            //    }
-            //    return flag;
-            //}
-
-
-
-
-
             bool flag = false;
             Type[] staffTypes = { typeof(TeachingStaff), typeof(AdministrativeStaff), typeof(SupportStaff) };
 
             XmlSerializer deserializer = new XmlSerializer(typeof(List<Staff>), staffTypes);
 
-            using (StreamReader reader = new StreamReader(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml"))
+            try
             {
-                object outObject = deserializer.Deserialize(reader);
-
-                foreach (var staff in (dynamic)outObject)
+                using (StreamReader reader = new StreamReader(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\XMLFile1.xml"))
                 {
-                    string staffType = staff.StaffType.ToString();
-                    switch (staffType)
-                    {
-                        case "Teaching":
-                            TeachingStaff teachingStaff = new TeachingStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Subject, staff.ContactNumber, staff.DateOfJoin);
-                            StaffList.Add(teachingStaff);
-                            break;
-                        case "Administrative":
-                            AdministrativeStaff administrativeStaff = new AdministrativeStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Role, staff.ContactNumber, staff.DateOfJoin);
-                            StaffList.Add(administrativeStaff);
-                            break;
-                        case "Support":
-                            SupportStaff supportStaff = new SupportStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Department, staff.ContactNumber, staff.DateOfJoin);
-                            StaffList.Add(supportStaff);
-                            break;
-                    }
+                    object outObject = deserializer.Deserialize(reader);
 
+                    foreach (var staff in (dynamic)outObject)
+                    {
+                        string staffType = staff.StaffType.ToString();
+                        switch (staffType)
+                        {
+                            case "Teaching":
+                                TeachingStaff teachingStaff = new TeachingStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Subject, staff.ContactNumber, staff.DateOfJoin);
+                                StaffList.Add(teachingStaff);
+                                break;
+                            case "Administrative":
+                                AdministrativeStaff administrativeStaff = new AdministrativeStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Role, staff.ContactNumber, staff.DateOfJoin);
+                                StaffList.Add(administrativeStaff);
+                                break;
+                            case "Support":
+                                SupportStaff supportStaff = new SupportStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Department, staff.ContactNumber, staff.DateOfJoin);
+                                StaffList.Add(supportStaff);
+                                break;
+                        }
+
+                    }
+                    return flag;
                 }
+            }
+            catch (Exception e)
+            {
                 return flag;
             }
-
-            //streamReader.Close();
-            //Console.WriteLine(outObject);
 
         }
     }
