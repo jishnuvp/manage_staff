@@ -1,8 +1,14 @@
-﻿using System;
+﻿using JsonSubTypes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 
 namespace StaffLibrary
 {
+    [JsonConverter(typeof(StringEnumConverter))]   // to serialize enum value as string
     public enum StaffTypes { Teaching = 1, Administrative = 2, Support = 3 };
+
+    [JsonConverter(typeof(JsonSubtypes), "StaffType")]
     public class Staff
     {
         //properties

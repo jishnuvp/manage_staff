@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace StaffLibrary
 {
-    public class SerializeXml
+    public class SerializeXml : ISerialize
     {
         public void Serialize(List<Staff> StaffList)
         {
