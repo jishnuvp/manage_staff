@@ -29,7 +29,6 @@ namespace StaffLibrary
                 object obj = JsonConvert.DeserializeObject(jsonString);
                 foreach (var staff in (dynamic)obj)
                 {
-                    Console.WriteLine(staff);
                     string staffType = staff.StaffType.ToString();
                     switch (staffType)
                     {
