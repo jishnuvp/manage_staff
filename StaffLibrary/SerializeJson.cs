@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace StaffLibrary
 {
-    public class SerializeJson
+    public class SerializeJson : ISerialize
     {
         public void Serialize(List<Staff> StaffList)
         {
