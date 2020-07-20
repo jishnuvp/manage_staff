@@ -5,10 +5,11 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace StaffLibrary
 {
-    public class SerializeJson : ISerialize
+    public class SerializeJson
     {
         public void Serialize(List<Staff> StaffList)
         {
@@ -24,39 +25,32 @@ namespace StaffLibrary
             bool flag = false;
             try
             {
-
                 string jsonString = File.ReadAllText(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.json");
+                object obj = JsonConvert.DeserializeObject(jsonString);
+                foreach (var staff in (dynamic)obj)
+                {
+                    Console.WriteLine(staff);
+                    string staffType = staff.StaffType.ToString();
+                    switch (staffType)
+                    {
+                        case "Teaching":
+                            TeachingStaff ts = (TeachingStaff)staff.ToObject(typeof(TeachingStaff));
+                            TeachingStaff teachingStaff = new TeachingStaff(ts.Name, ts.EmpCode, ts.StaffType, ts.Subject, ts.ContactNumber, ts.DateOfJoin);
+                            StaffList.Add(teachingStaff);
+                            break;
+                        case "Administrative":
+                            AdministrativeStaff adminStaff = (AdministrativeStaff)staff.ToObject(typeof(AdministrativeStaff));
+                            AdministrativeStaff administrativeStaff = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin);
+                            StaffList.Add(administrativeStaff);
+                            break;
+                        case "Support":
+                            SupportStaff ss = (SupportStaff)staff.ToObject(typeof(SupportStaff));
+                            SupportStaff supportStaff = new SupportStaff(ss.Name, ss.EmpCode, ss.StaffType, ss.Department, ss.ContactNumber, ss.DateOfJoin);
+                            StaffList.Add(supportStaff);
+                            break;
+                    }
 
-                //var obj = JsonConvert.DeserializeObject<List<Staff>>(jsonString);
-
-                object staff = JsonConvert.DeserializeObject<Staff>(jsonString);
-               // Assert.AreEqual("Jack Russell Terrier", (animal as Dog)?.Breed);
-
-
-
-                Console.WriteLine(staff.GetType());
-
-                //foreach (var staff  in (dynamic)obj)
-                //{
-                //    //Console.WriteLine(staff.Name);
-                //    string staffType = staff.StaffType.ToString();
-                //    switch (staffType)
-                //    {
-                //        case "Teaching":
-                //            TeachingStaff teachingStaff = new TeachingStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Subject, staff.ContactNumber, staff.DateOfJoin);
-                //            StaffList.Add(teachingStaff);
-                //            break;
-                //        case "Administrative":
-                //            AdministrativeStaff administrativeStaff = new AdministrativeStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Role, staff.ContactNumber, staff.DateOfJoin);
-                //            StaffList.Add(administrativeStaff);
-                //            break;
-                //        case "Support":
-                //            SupportStaff supportStaff = new SupportStaff(staff.Name, staff.EmpCode, staff.StaffType, staff.Department, staff.ContactNumber, staff.DateOfJoin);
-                //            StaffList.Add(supportStaff);
-                //            break;
-                //    }
-
-                //}
+                }
 
             }
             catch (Exception e)

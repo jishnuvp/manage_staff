@@ -12,12 +12,12 @@ namespace StaffConsole
         public static void mainMenu()
         {
             ManageStaff manageStaff = new ManageStaff();
-            SerializeXml serializeXml = new SerializeXml();
-            //SerializeJson serializeJson = new SerializeJson();
+            //SerializeXml serializeXml = new SerializeXml();
+            SerializeJson serializeJson = new SerializeJson();
             if (flag)
             {
-                flag = serializeXml.DeSerialize(ManageStaff.StaffList);
-                //flag = serializeJson.DeSerialize(ManageStaff.StaffList);
+                //flag = serializeXml.DeSerialize(ManageStaff.StaffList);
+                flag = serializeJson.DeSerialize(ManageStaff.StaffList);
             }
             // Initial Menu
             int choice;
@@ -52,8 +52,8 @@ namespace StaffConsole
                         break;
                     case 5:
                         //manageStaff.SerializeXml();
-                        serializeXml.Serialize(ManageStaff.StaffList);
-                        //serializeJson.Serialize(ManageStaff.StaffList);
+                        //serializeXml.Serialize(ManageStaff.StaffList);
+                        serializeJson.Serialize(ManageStaff.StaffList);
                         System.Environment.Exit(0);
                         break;
                     default: mainMenu(); break;
