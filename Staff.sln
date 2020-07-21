@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Staff", "Staff\Staff.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffLibrary", "StaffLibrary\StaffLibrary.csproj", "{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffDatabse", "StaffDatabse\StaffDatabse.csproj", "{8D40052E-D6FF-4714-A32B-D901F4F910E8}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StaffDatabase", "StaffDatabase\StaffDatabase.sqlproj", "{11D7BD24-C609-442F-9723-1C02E6F6F34B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,12 @@ Global
 		{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D7BD24-C609-442F-9723-1C02E6F6F34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D7BD24-C609-442F-9723-1C02E6F6F34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D7BD24-C609-442F-9723-1C02E6F6F34B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{11D7BD24-C609-442F-9723-1C02E6F6F34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D7BD24-C609-442F-9723-1C02E6F6F34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D7BD24-C609-442F-9723-1C02E6F6F34B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
