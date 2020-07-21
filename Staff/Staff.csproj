@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StaffDatabse\StaffDatabse.csproj" />
+    <ProjectReference Include="..\StaffDatabase\StaffDatabase.sqlproj" />
     <ProjectReference Include="..\StaffLibrary\StaffLibrary.csproj" />
   </ItemGroup>
 
