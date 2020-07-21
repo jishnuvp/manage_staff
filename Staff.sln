@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Staff", "Staff\Staff.csproj", "{695A6E07-4689-4C11-A90D-F64DD74A05D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffLibrary", "StaffLibrary\StaffLibrary.csproj", "{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffLibrary", "StaffLibrary\StaffLibrary.csproj", "{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffDatabse", "StaffDatabse\StaffDatabse.csproj", "{8D40052E-D6FF-4714-A32B-D901F4F910E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E0C5F63-0A0B-45E0-AC34-21ACCE0FE920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D40052E-D6FF-4714-A32B-D901F4F910E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
