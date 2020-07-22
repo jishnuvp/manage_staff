@@ -64,7 +64,6 @@
   <ItemGroup>
     <Build Include="dbo\table\administrative_staff.sql" />
     <Build Include="dbo\table\staffs.sql" />
-    <Build Include="SelectAllStaffs.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\support_staff.sql" />
