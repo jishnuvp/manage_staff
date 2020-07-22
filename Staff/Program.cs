@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using System.ComponentModel.DataAnnotations;
 using StaffLibrary;
+using StaffLibrary.DbManager;
 
 namespace StaffConsole
 {
@@ -11,6 +12,8 @@ namespace StaffConsole
         public static bool flag = true;
         public static void mainMenu()
         {
+            DataBaseManager dbm = new DataBaseManager();
+            dbm.ExecuteViewStoredProcedure();
             ManageStaff manageStaff = new ManageStaff();
             //SerializeXml serializeXml = new SerializeXml();
             SerializeJson serializeJson = new SerializeJson();
