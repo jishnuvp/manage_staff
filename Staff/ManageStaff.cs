@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using StaffLibrary;
+using StaffLibrary.DbManager;
 
 namespace StaffConsole
 {
@@ -27,7 +28,8 @@ namespace StaffConsole
             string[] subjects = subject.Split(',');
             bool succeed;
             int index = 1, choice;
-            
+
+            DataBaseManager dbManager = new DataBaseManager();
 
             staffTypeChoice = GetStaffType();
             var empType = (StaffTypes)staffTypeChoice;
@@ -147,6 +149,7 @@ namespace StaffConsole
 
                     TeachingStaff teachingStaff = new TeachingStaff(name, code, empType, subj, number, doj);
                     StaffList.Add(teachingStaff);
+                    dbManager.ExecuteInsertStoredProcedure<TeachingStaff>(teachingStaff);
                     break;
 
                 case 2:
