@@ -17,32 +17,6 @@ namespace StaffLibrary.DbManager
 
         public void ExecuteInsertStoredProcedure<T>(T obj) where T : Staff
         {
-
-            //var connection = new SqlConnection(ConnString);
-            //var cmd = new SqlCommand("SPInsertStaff", connection);
-
-            //cmd.Parameters.AddWithValue("@Name", obj.Name);
-            //cmd.Parameters.AddWithValue("@Code", obj.EmpCode);
-            //cmd.Parameters.AddWithValue("@Type", obj.StaffType);
-            //cmd.Parameters.AddWithValue("@PhoneNumber", obj.ContactNumber);
-            //cmd.Parameters.AddWithValue("@DateOfJoin", obj.DateOfJoin);
-            //if (obj is TeachingStaff)
-            //{
-            //    TeachingStaff staff = (TeachingStaff)Convert.ChangeType(obj, obj.GetType());
-            //    cmd.Parameters.AddWithValue("@Subject", staff.Subject);
-            //}else if(obj is AdministrativeStaff)
-            //{
-            //    AdministrativeStaff staff = (AdministrativeStaff)Convert.ChangeType(obj, obj.GetType());
-            //    cmd.Parameters.AddWithValue("@Role", staff.Role);
-            //}
-            //else
-            //{
-            //    SupportStaff staff = (SupportStaff)Convert.ChangeType(obj, obj.GetType());
-            //    cmd.Parameters.AddWithValue("@Department", staff.Department);
-            //}
-            //connection.Open();
-            //connection.ExecuteNonQuery();
-
             using (SqlConnection con = new SqlConnection(ConnString))
             {
                 using (SqlCommand cmd = new SqlCommand("SPInsertStaff", con))
@@ -50,7 +24,7 @@ namespace StaffLibrary.DbManager
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Name", obj.Name);
                     cmd.Parameters.AddWithValue("@Code", obj.EmpCode);
-                    cmd.Parameters.AddWithValue("@Type", obj.StaffType);
+                    cmd.Parameters.AddWithValue("@Type", obj.StaffType.ToString());
                     cmd.Parameters.AddWithValue("@PhoneNumber", obj.ContactNumber);
                     cmd.Parameters.AddWithValue("@DateOfJoin", obj.DateOfJoin);
                     if (obj is TeachingStaff)
