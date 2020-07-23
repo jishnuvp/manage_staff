@@ -15,8 +15,11 @@ namespace StaffLibrary.DbManager
         
 
 
-        public void ExecuteInsertStoredProcedure<T>(T obj) where T : Staff
+        public bool ExecuteInsertStoredProcedure<T>(T obj) where T : Staff
         {
+            bool flag = true;
+            int count = 0;
+            
             using (SqlConnection con = new SqlConnection(ConnString))
             {
                 using (SqlCommand cmd = new SqlCommand("SPInsertStaff", con))
@@ -27,6 +30,10 @@ namespace StaffLibrary.DbManager
                     cmd.Parameters.AddWithValue("@Type", obj.StaffType.ToString());
                     cmd.Parameters.AddWithValue("@PhoneNumber", obj.ContactNumber);
                     cmd.Parameters.AddWithValue("@DateOfJoin", obj.DateOfJoin);
+
+                    SqlParameter returnParameter = cmd.Parameters.Add("Counter", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
                     if (obj is TeachingStaff)
                     {
                         TeachingStaff staff = (TeachingStaff)Convert.ChangeType(obj, obj.GetType());
@@ -49,7 +56,18 @@ namespace StaffLibrary.DbManager
                         cmd.Parameters.AddWithValue("@Role", "");
                     }
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        count = (int)returnParameter.Value;
+                    }
+                    catch (SqlException sqlExc)
+                    {
+
+                    }
+                    if(count > 0)
+                        flag = false;
+                    return flag;
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace StaffConsole
         {
             string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
             string[] subjects = subject.Split(',');
-            bool succeed;
+            bool succeed, flag = false;
             int index = 1, choice;
 
             DataBaseManager dbManager = new DataBaseManager();
@@ -148,8 +148,17 @@ namespace StaffConsole
                     } while (succeed == false);
 
                     TeachingStaff teachingStaff = new TeachingStaff(name, code, empType, subj, number, doj);
-                    StaffList.Add(teachingStaff);
-                    dbManager.ExecuteInsertStoredProcedure<TeachingStaff>(teachingStaff);
+                    //StaffList.Add(teachingStaff);
+                    flag = dbManager.ExecuteInsertStoredProcedure<TeachingStaff>(teachingStaff);
+                    if (flag)
+                    {
+                        Console.WriteLine("\nStaff added successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\nEmpCode {code} already added with another user. Try with another code");
+                        AddStaff();
+                    }
                     break;
 
                 case 2:
@@ -168,7 +177,8 @@ namespace StaffConsole
                         }
                     } while (succeed == false);
                     AdministrativeStaff administrativeStaff = new AdministrativeStaff(name, code, empType, role, number, doj);
-                    StaffList.Add(administrativeStaff);
+                    //StaffList.Add(administrativeStaff);
+                    dbManager.ExecuteInsertStoredProcedure<AdministrativeStaff>(administrativeStaff);
                     break;
 
                 case 3:
@@ -187,7 +197,8 @@ namespace StaffConsole
                         }
                     } while (succeed == false);
                     SupportStaff supportStaff = new SupportStaff(name, code, empType, department, number, doj);
-                    StaffList.Add(supportStaff);
+                    //StaffList.Add(supportStaff);
+                    dbManager.ExecuteInsertStoredProcedure<SupportStaff>(supportStaff);
                     break;
                 case 4:
                     // back to main menu
