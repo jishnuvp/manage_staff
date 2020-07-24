@@ -184,5 +184,42 @@ namespace StaffLibrary.DbManager
             }
         }
 
+        //function to delete a staff record
+
+        public bool ExecuteDeleteStaffProcedure(string code)
+        {
+            bool status;
+            int count;
+            using (SqlConnection con = new SqlConnection(ConnString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SPDeleteStaff", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Code", code);
+                    SqlParameter returnParameter = cmd.Parameters.Add("Counter", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+                    con.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        count = (int)returnParameter.Value;
+                        if(count == 1)
+                        {
+                            status = true;
+                        }
+                        else
+                        {
+                            status = false;
+                        }
+                    }
+                    catch (SqlException sqlExc)
+                    {
+                        status = false;
+                    }
+                }
+            }
+            return status;
+        }
+
     }
 }

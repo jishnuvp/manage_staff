@@ -497,19 +497,20 @@ namespace StaffConsole
         // function for delete a staff
         public void DeleteStaff()
         {
+            DataBaseManager dataBaseManager = new DataBaseManager();
             Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffTypeChoice} Staff -----------------------\n");
             Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
             string code = Console.ReadLine();
             code = code.ToUpper();
-            if (StaffList.Exists(x => x.EmpCode == code))
+            var flag = dataBaseManager.ExecuteDeleteStaffProcedure(code);
+            if (flag)
             {
-                StaffList.RemoveAll(x => x.EmpCode == code);
                 Console.WriteLine($"\nStaff with Emp Code {code} removed succesfully");
             }
             else
             {
                 Console.WriteLine("\nStaff Not Found");
-                DeleteStaff();
+                return;
             }
         }
 
