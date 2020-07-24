@@ -234,6 +234,7 @@ namespace StaffConsole
                     Console.WriteLine("\nEnter Emp code of the staff to view");
                     string code = Console.ReadLine();
                     code = code.ToUpper();
+                    filteredList = dataBaseManager.ExecuteViewSingleStaffProcedure(code, (StaffTypes)staffTypeChoice);
                     if (filteredList.Exists(x => x.EmpCode == code))
                     {
                         foreach (var staff in filteredList)
