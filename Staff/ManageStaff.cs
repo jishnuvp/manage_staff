@@ -210,21 +210,25 @@ namespace StaffConsole
 
         public void ViewStaff()
         {
+            DataBaseManager dataBaseManager = new DataBaseManager();
             staffTypeChoice = GetStaffType();
             if (staffTypeChoice == counter)
             {
                 return;
             }
-            var filteredList = GetFilteredList(staffTypeChoice);
+            //var filteredList = GetFilteredList(staffTypeChoice);
+            List<Staff> filteredList = new List<Staff>();
             Console.WriteLine($"\n\n----------------------- View {(StaffTypes)staffTypeChoice} Staff -----------------------\n");
             int choice = ViewType();
             switch (choice)
             {
                 case 1:
-                    foreach(var staff in filteredList)
+                    filteredList = dataBaseManager.ExecuteViewStaffProcedure((StaffTypes)staffTypeChoice);
+                    foreach (var staff in filteredList)
                     {
                         ViewStaffInfo(staff);
                     }
+                    filteredList.Clear();
                     break;
                 case 2:
                     Console.WriteLine("\nEnter Emp code of the staff to view");

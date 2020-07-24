@@ -66,6 +66,7 @@
     <Build Include="dbo\table\administrative_staff.sql" />
     <Build Include="dbo\table\staffs.sql" />
     <Build Include="dbo\stored_procedure\SPInsertStaff.sql" />
+    <Build Include="dbo\stored_procedure\SPViewCategoryStaff.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\support_staff.sql" />
