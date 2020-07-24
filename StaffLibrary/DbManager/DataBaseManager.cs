@@ -13,6 +13,7 @@ namespace StaffLibrary.DbManager
         private static string ConnString = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
         private SqlConnection Conn = new SqlConnection(ConnString);
 
+        // function for add staff
         public bool ExecuteInsertStoredProcedure<T>(T obj) where T : Staff
         {
             bool flag = true;
@@ -69,6 +70,8 @@ namespace StaffLibrary.DbManager
                 }
             }
         }
+
+        // function to view staff by category
         public List<Staff> ExecuteViewStaffProcedure(StaffTypes type)
         {
             string name, code, number, subject, role, department;
