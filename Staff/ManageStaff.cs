@@ -259,7 +259,6 @@ namespace StaffConsole
                     {
                         ViewStaffInfo(staff);
                     }
-                    Console.WriteLine("test");
                     break;
                 default: return;
             }
