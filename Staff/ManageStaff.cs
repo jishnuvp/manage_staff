@@ -570,10 +570,5 @@ namespace StaffConsole
             return staffTypeChoice;
         }
 
-        //public void ViewSeniorStaff()
-        //{
-        //   string staff (StaffTypes)staffTypeChoice
-        //}
-
     }
 }
