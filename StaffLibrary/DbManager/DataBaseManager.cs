@@ -126,7 +126,7 @@ namespace StaffLibrary.DbManager
             }
         }
 
-        // function to fetch the details of single staff
+        // function to fetch the details of single staff with specified staff type
         public List<Staff> ExecuteViewSingleStaffProcedure(string empCode, StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
@@ -221,7 +221,7 @@ namespace StaffLibrary.DbManager
             return status;
         }
 
-
+        // function to update staff info
         public void ExecuteUpdateStaffProcedure<T>(T obj) where T : Staff
         {
             using (SqlConnection con = new SqlConnection(ConnString))
@@ -269,6 +269,7 @@ namespace StaffLibrary.DbManager
             }
         }
 
+        // function to fetch the details of single staff without specifying staff type
         public List<Staff> ExecuteGetStaffInfoProcedure(string empCode)
         {
             List<Staff> StaffList = new List<Staff>();
