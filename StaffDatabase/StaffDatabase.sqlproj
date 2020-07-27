@@ -69,6 +69,8 @@
     <Build Include="dbo\stored_procedure\SPViewCategoryStaff.sql" />
     <Build Include="dbo\stored_procedure\SPViewSingleStaff.sql" />
     <Build Include="dbo\stored_procedure\SPDeleteStaff.sql" />
+    <Build Include="dbo\stored_procedure\SPUpdateStaff.sql" />
+    <Build Include="dbo\stored_procedure\SPGetStaffInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\support_staff.sql" />
