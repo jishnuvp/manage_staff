@@ -251,6 +251,16 @@ namespace StaffConsole
                         ViewStaff();
                     }
                     break;
+                case 3:
+                    //ViewSeniorStaff();
+                    filteredList.Clear();
+                    filteredList = dataBaseManager.ExecuteGetSeniorStaffInfoProcedure((StaffTypes)staffTypeChoice);
+                    foreach (var staff in filteredList)
+                    {
+                        ViewStaffInfo(staff);
+                    }
+                    Console.WriteLine("test");
+                    break;
                 default: return;
             }
            
@@ -500,209 +510,6 @@ namespace StaffConsole
                 Console.WriteLine("\nStaff Not Found");
                 return;
             }
-
-
-
-
-            //if (StaffList.Exists(x => x.EmpCode == code))
-            //{
-
-            //    foreach (var staff in StaffList)
-            //    {
-
-            //        if (staff.EmpCode == code)
-            //        {
-            //            do
-            //            {
-            //                succeed = false;
-            //                try
-            //                {
-            //                    Console.WriteLine($"Enter Name ({staff.Name})");
-            //                    input = Console.ReadLine();
-            //                    if (string.IsNullOrEmpty(input))
-            //                    {
-            //                        name = staff.Name;
-
-            //                    }
-            //                    else
-            //                    {
-            //                        name = input;
-            //                        Validator.ValidateName(name);
-            //                    }
-            //                    succeed = true;
-            //                    staff.Name = name;
-            //                    Console.WriteLine("Name updated succesfully");
-            //                }
-            //                catch (Exception e)
-            //                {
-            //                    Console.WriteLine(e.Message);
-            //                }
-            //            } while (succeed == false);
-
-            //            do
-            //            {
-            //                succeed = false;
-            //                try
-            //                {
-            //                    Console.WriteLine($"\nEnter Contact Number ({staff.ContactNumber})");
-            //                    input = Console.ReadLine();
-            //                    if (string.IsNullOrEmpty(input))
-            //                    {
-            //                        number = staff.ContactNumber;
-
-            //                    }
-            //                    else
-            //                    {
-            //                        number = input;
-            //                        Validator.ValidatePhoneNumber(number);
-            //                    }
-            //                    succeed = true;
-            //                    staff.ContactNumber = number;
-            //                    Console.WriteLine("Contact Number updated succesfully");
-            //                }
-            //                catch (Exception e)
-            //                {
-            //                    Console.WriteLine(e.Message);
-            //                }
-            //            } while (succeed == false);
-
-
-            //            do
-            //            {
-            //                succeed = false;
-            //                try
-            //                {
-            //                    Console.WriteLine($"\nEnter Date of Join ({staff.DateOfJoin}) (dd-mm-yyyy) ");
-            //                    if (!(DateTime.TryParse(Console.ReadLine(), out dateInput)))
-            //                    {
-            //                        doj = staff.DateOfJoin;
-            //                    }
-            //                    else
-            //                    {
-            //                        doj = dateInput;
-            //                        Validator.ValidateDate(doj);
-            //                    }
-
-            //                    succeed = true;
-            //                    staff.DateOfJoin = doj;
-            //                    Console.WriteLine("Date of Join updated succesfully");
-            //                }
-            //                catch (Exception e)
-            //                {
-            //                    Console.WriteLine(e.Message);
-            //                }
-            //            } while (succeed == false);
-
-            //            string staffType = staff.StaffType.ToString(); 
-            //            switch (staffType)
-            //            {
-            //                case "Teaching":
-            //                    TeachingStaff teachingStaff = (TeachingStaff)staff;
-            //                    do
-            //                    {
-            //                        succeed = false;
-            //                        index = 1;
-            //                        try
-            //                        {
-            //                            Console.WriteLine($"\nSelect language from choice ({teachingStaff.Subject})");
-            //                            foreach (string item in subjects)
-            //                            {
-            //                                Console.WriteLine($"{index}. {item}");
-            //                                index++;
-            //                            }
-            //                            if (!Int32.TryParse(Console.ReadLine(), out choice))
-            //                            {
-            //                                succeed = false;
-            //                                Console.WriteLine("Enter a valid choice");
-            //                            }
-            //                            else
-            //                            {
-            //                                if (choice <= subjects.Length && choice > 0)
-            //                                {
-            //                                    subj = subjects[choice - 1];
-            //                                    succeed = true;
-            //                                    teachingStaff.Subject = subj;
-            //                                }
-            //                                else
-            //                                {
-            //                                    Console.WriteLine("Enter a valid choice");
-            //                                    succeed = false;
-            //                                }
-            //                            }
-            //                        }
-            //                        catch (Exception e)
-            //                        {
-            //                            Console.WriteLine(e.Message);
-            //                        }
-            //                    } while (succeed == false);
-            //                    break;
-            //                case "Administrative":
-            //                    AdministrativeStaff administrativeStaff = (AdministrativeStaff)staff;
-            //                    do
-            //                    {
-            //                        succeed = false;
-            //                        try
-            //                        {
-            //                            Console.WriteLine($"\nEnter Role ({administrativeStaff.Role}) ");
-            //                            input = Console.ReadLine();
-            //                            if (string.IsNullOrEmpty(input))
-            //                            {
-            //                                role = administrativeStaff.Role;
-
-            //                            }
-            //                            else
-            //                            {
-            //                                role = input;
-            //                                Validator.ValidateRole(role);
-            //                            }
-            //                            succeed = true;
-            //                            administrativeStaff.Role = role;
-            //                            Console.WriteLine("Role updated succesfully");
-            //                        }
-            //                        catch (Exception e)
-            //                        {
-            //                            Console.WriteLine(e.Message);
-            //                        }
-            //                    } while (succeed == false);
-            //                    break;
-            //                case "Support":
-            //                    SupportStaff supportStaff = (SupportStaff)staff;
-            //                    do
-            //                    {
-            //                        succeed = false;
-            //                        try
-            //                        {
-            //                            Console.WriteLine($"\nEnter Department ({supportStaff.Department}) ");
-            //                            input = Console.ReadLine();
-            //                            if (string.IsNullOrEmpty(input))
-            //                            {
-            //                                department = supportStaff.Department;
-
-            //                            }
-            //                            else
-            //                            {
-            //                                department = input;
-            //                                Validator.ValidateDepartment(department);
-            //                            }
-            //                            succeed = true;
-            //                            supportStaff.Department = department;
-            //                            Console.WriteLine("Role updated succesfully");
-            //                        }
-            //                        catch (Exception e)
-            //                        {
-            //                            Console.WriteLine(e.Message);
-            //                        }
-            //                    } while (succeed == false);
-            //                    break;
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("\nStaff Not Found");
-            //    UpdateStaff();
-            //}
         }
 
         // function for delete a staff
@@ -730,25 +537,13 @@ namespace StaffConsole
             int choice;
             Console.WriteLine("\n1. View All");
             Console.WriteLine("2. View Single");
+            Console.WriteLine("3. View Senior Staffs");
             if (!Int32.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine("\nEnter a valid number");
                 choice = ViewType();
             }
             return choice;
-        }
-        public static List<Staff> GetFilteredList(int staffTypeChoice)
-        {
-            var filteredList = new List<Staff>();
-            var empType = (StaffTypes)staffTypeChoice;
-            foreach (var staff in StaffList)
-            {
-                if (staff.StaffType == empType)
-                {
-                    filteredList.Add(staff);
-                }
-            }
-            return filteredList;
         }
 
         // function to get the user choice
@@ -775,6 +570,11 @@ namespace StaffConsole
             }
             return staffTypeChoice;
         }
+
+        //public void ViewSeniorStaff()
+        //{
+        //   string staff (StaffTypes)staffTypeChoice
+        //}
 
     }
 }

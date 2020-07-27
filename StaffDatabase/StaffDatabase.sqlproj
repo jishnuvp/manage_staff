@@ -61,6 +61,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\table" />
     <Folder Include="dbo\stored_procedure" />
+    <Folder Include="dbo\function" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\administrative_staff.sql" />
@@ -71,6 +72,8 @@
     <Build Include="dbo\stored_procedure\SPDeleteStaff.sql" />
     <Build Include="dbo\stored_procedure\SPUpdateStaff.sql" />
     <Build Include="dbo\stored_procedure\SPGetStaffInfo.sql" />
+    <Build Include="dbo\stored_procedure\SPGetAllSeniorStaffInfo.sql" />
+    <Build Include="dbo\function\get_senior_junior.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\support_staff.sql" />
