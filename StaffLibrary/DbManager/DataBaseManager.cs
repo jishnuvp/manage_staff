@@ -91,27 +91,27 @@ namespace StaffLibrary.DbManager
                         foreach (DataRow dr in dt.Rows)
                         {
                             var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["name"].ToString();
-                            code = dr["code"].ToString();
+                            name = dr["Name"].ToString();
+                            code = dr["Code"].ToString();
                             emptType = temp;
-                            number = dr["phone_number"].ToString();
-                            dateOfJoin = (DateTime)dr["date_of_join"];
+                            number = dr["PhoneNumber"].ToString();
+                            dateOfJoin = (DateTime)dr["DateOfJoin"];
 
                             if (StaffTypes.Teaching == temp)
                             {
-                                subject = dr["subject"].ToString();
+                                subject = dr["Subject"].ToString();
                                 TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Administrative == temp)
                             {
-                                role = dr["role"].ToString();
+                                role = dr["Role"].ToString();
                                 AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Support == temp)
                             {
-                                department = dr["department"].ToString();
+                                department = dr["Department"].ToString();
                                 SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
@@ -149,27 +149,27 @@ namespace StaffLibrary.DbManager
                         foreach (DataRow dr in dt.Rows)
                         {
                             var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["name"].ToString();
-                            code = dr["code"].ToString();
+                            name = dr["Name"].ToString();
+                            code = dr["Code"].ToString();
                             emptType = temp;
-                            number = dr["phone_number"].ToString();
-                            dateOfJoin = (DateTime)dr["date_of_join"];
+                            number = dr["PhoneNumber"].ToString();
+                            dateOfJoin = (DateTime)dr["DateOfJoin"];
 
                             if (StaffTypes.Teaching == temp)
                             {
-                                subject = dr["subject"].ToString();
+                                subject = dr["Subject"].ToString();
                                 TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Administrative == temp)
                             {
-                                role = dr["role"].ToString();
+                                role = dr["Role"].ToString();
                                 AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Support == temp)
                             {
-                                department = dr["department"].ToString();
+                                department = dr["Department"].ToString();
                                 SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
@@ -291,27 +291,27 @@ namespace StaffLibrary.DbManager
                         foreach (DataRow dr in dt.Rows)
                         {
                             var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["name"].ToString();
-                            code = dr["code"].ToString();
+                            name = dr["Name"].ToString();
+                            code = dr["Code"].ToString();
                             emptType = temp;
-                            number = dr["phone_number"].ToString();
-                            dateOfJoin = (DateTime)dr["date_of_join"];
+                            number = dr["PhoneNumber"].ToString();
+                            dateOfJoin = (DateTime)dr["DateOfJoin"];
 
                             if (StaffTypes.Teaching == temp)
                             {
-                                subject = dr["subject"].ToString();
+                                subject = dr["Subject"].ToString();
                                 TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Administrative == temp)
                             {
-                                role = dr["role"].ToString();
+                                role = dr["Role"].ToString();
                                 AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Support == temp)
                             {
-                                department = dr["department"].ToString();
+                                department = dr["Department"].ToString();
                                 SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
@@ -346,27 +346,27 @@ namespace StaffLibrary.DbManager
                         foreach (DataRow dr in dt.Rows)
                         {
                             var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["name"].ToString();
-                            code = dr["code"].ToString();
+                            name = dr["Name"].ToString();
+                            code = dr["Code"].ToString();
                             emptType = temp;
-                            number = dr["phone_number"].ToString();
-                            dateOfJoin = (DateTime)dr["date_of_join"];
+                            number = dr["PhoneNumber"].ToString();
+                            dateOfJoin = (DateTime)dr["DateOfJoin"];
 
                             if (StaffTypes.Teaching == temp)
                             {
-                                subject = dr["subject"].ToString();
+                                subject = dr["Subject"].ToString();
                                 TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Administrative == temp)
                             {
-                                role = dr["role"].ToString();
+                                role = dr["Role"].ToString();
                                 AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }
                             else if (StaffTypes.Support == temp)
                             {
-                                department = dr["department"].ToString();
+                                department = dr["Department"].ToString();
                                 SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
                                 StaffList.Add(obj);
                             }

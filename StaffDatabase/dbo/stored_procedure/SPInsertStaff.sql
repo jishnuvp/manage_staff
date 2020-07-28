@@ -6,33 +6,33 @@
 	@DateOfJoin datetime,
 	@Subject nvarchar(25) = NULL,
 	@Department nvarchar(25) = NULL,
-	@role nvarchar(25) = NULL,
-	@staff_id int = NULL
+	@Role nvarchar(25) = NULL,
+	@StaffId int = NULL
 AS
 BEGIN
 	DECLARE @Counter INT	
-	SET @Counter = ( SELECT COUNT(*) FROM Staffs WHERE code = @Code)
+	SET @Counter = ( SELECT COUNT(*) FROM Staffs WHERE Code = @Code)
 	IF (@Counter = 0)
 		BEGIN
-			INSERT INTO Staffs(name, code, type, phone_number, date_of_join)
+			INSERT INTO Staffs(Name, Code, Type, PhoneNumber, DateOfJoin)
 				VALUES(@Name, @Code, @Type, @PhoneNumber, @DateOfJoin)
 
-			SET @staff_id = SCOPE_IDENTITY();
+			SET @StaffId = SCOPE_IDENTITY();
 
 			IF (@Type = 'Teaching')
 				BEGIN
-					INSERT INTO TeachingStaff(subject, staff_id)
-					VALUES(@Subject, @staff_id)
+					INSERT INTO TeachingStaff(Subject, StaffId)
+					VALUES(@Subject, @StaffId)
 				END
 			IF (@Type = 'Administrative')
 				BEGIN
-					INSERT INTO AdministrativeStaff(role, staff_id)
-					VALUES(@role, @staff_id)
+					INSERT INTO AdministrativeStaff(Role, StaffId)
+					VALUES(@Role, @StaffId)
 				END
 			IF (@Type = 'Support')
 				BEGIN
-					INSERT INTO SupportStaff(department, staff_id)
-					VALUES(@Department, @staff_id)
+					INSERT INTO SupportStaff(Department, StaffId)
+					VALUES(@Department, @StaffId)
 				END
 			RETURN @Counter
 		END
