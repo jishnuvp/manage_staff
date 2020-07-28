@@ -6,7 +6,7 @@ BEGIN
 	--SET @Type =  (SELECT type FROM Staffs WHERE code = @Code)
 	--SET @Id = (SELECT Id FROM Staffs WHERE code = @Code)
 
-	SELECT p. name, p.code, p.type, p.phone_number, p.DateOfJoin, t.subject, a.role, s.department  
+	SELECT p. name, p.code, p.type, p.phone_number, p.date_of_join, t.subject, a.role, s.department  
 	FROM Staffs AS p  
 	LEFT JOIN TeachingStaff AS t  
 	ON p.Id = t.staff_id  
@@ -18,7 +18,7 @@ BEGIN
 
 	--IF(@Type = 'Teaching')
 	--	BEGIN
-	--		SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.DateOfJoin, TeachingStaff.subject
+	--		SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.date_of_join, TeachingStaff.subject
 	--		FROM Staffs
 	--		INNER JOIN TeachingStaff
 	--		ON Staffs.Id = TeachingStaff.staff_id
@@ -26,7 +26,7 @@ BEGIN
 	--	END
 	--IF(@Type = 'Administrative')
 	--	BEGIN
-	--		SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.DateOfJoin, AdministrativeStaff.role
+	--		SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.date_of_join, AdministrativeStaff.role
 	--		FROM Staffs
 	--		INNER JOIN AdministrativeStaff
 	--		ON Staffs.Id = AdministrativeStaff.staff_id
@@ -34,7 +34,7 @@ BEGIN
 	--	END
 	--IF(@Type = 'Support')
 	--		BEGIN
-	--			SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.DateOfJoin, SupportStaff.department
+	--			SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.date_of_join, SupportStaff.department
 	--			FROM Staffs
 	--			INNER JOIN SupportStaff
 	--			ON Staffs.Id = SupportStaff.staff_id

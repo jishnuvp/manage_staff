@@ -5,7 +5,7 @@
 	@Type nvarchar(25),
 	@Code nvarchar(10),
 	@Subject nvarchar(25)= null,
-	@Role nvarchar(25) = null,
+	@role nvarchar(25) = null,
 	@Department nvarchar(25) = null
 AS
 BEGIN
@@ -13,7 +13,7 @@ BEGIN
 		BEGIN
 			SET @Id = (SELECT Id FROM Staffs WHERE code = @Code)
 			UPDATE Staffs 
-			SET name = @Name, type = @Type, phone_number = @PhoneNumber, DateOfJoin = @DateOfJoin, updated_at = GETDATE()
+			SET name = @Name, type = @Type, phone_number = @PhoneNumber, date_of_join = @DateOfJoin, updated_at = GETDATE()
 			WHERE id = @Id
 			IF(@Type = 'Teaching')
 				BEGIN
@@ -24,7 +24,7 @@ BEGIN
 			IF(@Type = 'Administrative')
 				BEGIN
 					UPDATE AdministrativeStaff
-					SET role = @Role, updated_at = GETDATE()
+					SET role = @role, updated_at = GETDATE()
 					WHERE staff_id = @Id
 				END
 			IF(@Type = 'Support')
