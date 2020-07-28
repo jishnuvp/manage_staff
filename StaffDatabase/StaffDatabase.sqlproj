@@ -62,6 +62,7 @@
     <Folder Include="dbo\table" />
     <Folder Include="dbo\stored_procedure" />
     <Folder Include="dbo\function" />
+    <Folder Include="dbo\user_defined_table" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\administrative_staff.sql" />
