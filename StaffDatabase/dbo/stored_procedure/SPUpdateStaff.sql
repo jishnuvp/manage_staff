@@ -13,24 +13,24 @@ BEGIN
 		BEGIN
 			SET @Id = (SELECT Id FROM staffs WHERE code = @Code)
 			UPDATE staffs 
-			SET name = @Name, type = @Type, phone_number = @PhoneNumber, date_of_join = @DateOfJoin
+			SET name = @Name, type = @Type, phone_number = @PhoneNumber, date_of_join = @DateOfJoin, updated_at = GETDATE()
 			WHERE id = @Id
 			IF(@Type = 'Teaching')
 				BEGIN
 					UPDATE teaching_staff
-					SET subject = @Subject
+					SET subject = @Subject, updated_at = GETDATE()
 					WHERE staff_id = @Id
 				END
 			IF(@Type = 'Administrative')
 				BEGIN
 					UPDATE administrative_staff
-					SET role = @Role
+					SET role = @Role, updated_at = GETDATE()
 					WHERE staff_id = @Id
 				END
 			IF(@Type = 'Support')
 				BEGIN
 					UPDATE support_staff
-					SET department = @Department
+					SET department = @Department, updated_at = GETDATE()
 					WHERE staff_id = @Id
 				END
 		END

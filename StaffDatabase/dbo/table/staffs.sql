@@ -6,5 +6,7 @@
     [type] NVARCHAR(25) NOT NULL, 
     [phone_number] VARCHAR(15) NOT NULL, 
     [date_of_join] DATETIME NOT NULL, 
+    [created_at] DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    [updated_at] DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     CONSTRAINT [PK_staffs] PRIMARY KEY ([Id]) 
 )
