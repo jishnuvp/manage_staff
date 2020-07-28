@@ -65,8 +65,8 @@
     <Folder Include="dbo\user_defined_table" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\table\administrative_staff.sql" />
-    <Build Include="dbo\table\staffs.sql" />
+    <Build Include="dbo\table\AdministrativeStaff.sql" />
+    <Build Include="dbo\table\Staffs.sql" />
     <Build Include="dbo\stored_procedure\SPInsertStaff.sql" />
     <Build Include="dbo\stored_procedure\SPViewCategoryStaff.sql" />
     <Build Include="dbo\stored_procedure\SPViewSingleStaff.sql" />
@@ -77,8 +77,8 @@
     <Build Include="dbo\function\get_senior_junior.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\table\support_staff.sql" />
-    <Build Include="dbo\table\teaching_staff.sql" />
+    <Build Include="dbo\table\SupportStaff.sql" />
+    <Build Include="dbo\table\TeachingStaff.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="StaffDatabase.refactorlog" />

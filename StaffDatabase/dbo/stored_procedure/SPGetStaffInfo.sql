@@ -3,41 +3,41 @@
 AS
 BEGIN
 	--DECLARE @Id int, @Type nvarchar(25)	
-	--SET @Type =  (SELECT type FROM staffs WHERE code = @Code)
-	--SET @Id = (SELECT Id FROM staffs WHERE code = @Code)
+	--SET @Type =  (SELECT type FROM Staffs WHERE code = @Code)
+	--SET @Id = (SELECT Id FROM Staffs WHERE code = @Code)
 
-	SELECT p. name, p.code, p.type, p.phone_number, p.date_of_join, t.subject, a.role, s.department  
-	FROM staffs AS p  
-	LEFT JOIN teaching_staff AS t  
+	SELECT p. name, p.code, p.type, p.phone_number, p.DateOfJoin, t.subject, a.role, s.department  
+	FROM Staffs AS p  
+	LEFT JOIN TeachingStaff AS t  
 	ON p.Id = t.staff_id  
-	LEFT JOIN administrative_staff AS a  
+	LEFT JOIN AdministrativeStaff AS a  
 	ON p.Id = a.staff_id  
-	LEFT JOIN support_staff AS s  
+	LEFT JOIN SupportStaff AS s  
 	ON p.Id = s.staff_id  
 	WHERE p.code = @Code
 
 	--IF(@Type = 'Teaching')
 	--	BEGIN
-	--		SELECT staffs.name, staffs.code, staffs.type, staffs.phone_number, staffs.date_of_join, teaching_staff.subject
-	--		FROM staffs
-	--		INNER JOIN teaching_staff
-	--		ON staffs.Id = teaching_staff.staff_id
-	--		WHERE staffs.Id = @Id
+	--		SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.DateOfJoin, TeachingStaff.subject
+	--		FROM Staffs
+	--		INNER JOIN TeachingStaff
+	--		ON Staffs.Id = TeachingStaff.staff_id
+	--		WHERE Staffs.Id = @Id
 	--	END
 	--IF(@Type = 'Administrative')
 	--	BEGIN
-	--		SELECT staffs.name, staffs.code, staffs.type, staffs.phone_number, staffs.date_of_join, administrative_staff.role
-	--		FROM staffs
-	--		INNER JOIN administrative_staff
-	--		ON staffs.Id = administrative_staff.staff_id
-	--		WHERE staffs.Id = @Id
+	--		SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.DateOfJoin, AdministrativeStaff.role
+	--		FROM Staffs
+	--		INNER JOIN AdministrativeStaff
+	--		ON Staffs.Id = AdministrativeStaff.staff_id
+	--		WHERE Staffs.Id = @Id
 	--	END
 	--IF(@Type = 'Support')
 	--		BEGIN
-	--			SELECT staffs.name, staffs.code, staffs.type, staffs.phone_number, staffs.date_of_join, support_staff.department
-	--			FROM staffs
-	--			INNER JOIN support_staff
-	--			ON staffs.Id = support_staff.staff_id
-	--			WHERE staffs.Id = @Id
+	--			SELECT Staffs.name, Staffs.code, Staffs.type, Staffs.phone_number, Staffs.DateOfJoin, SupportStaff.department
+	--			FROM Staffs
+	--			INNER JOIN SupportStaff
+	--			ON Staffs.Id = SupportStaff.staff_id
+	--			WHERE Staffs.Id = @Id
 	--		END
 END
