@@ -14,7 +14,7 @@ namespace StaffLibrary.DbManager
         private SqlConnection Conn = new SqlConnection(ConnString);
 
         // function for add staff
-        public bool ExecuteInsertStoredProcedure<T>(T obj) where T : Staff
+        public bool AddStaff<T>(T obj) where T : Staff
         {
             bool flag = true;
             int count = 0;
@@ -72,7 +72,7 @@ namespace StaffLibrary.DbManager
         }
 
         // function to view staff by category
-        public List<Staff> ExecuteViewStaffProcedure(StaffTypes type)
+        public List<Staff> FetchStaffByCategory(StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
@@ -100,7 +100,7 @@ namespace StaffLibrary.DbManager
         }
 
         // function to fetch the details of single staff with specified staff type
-        public List<Staff> ExecuteViewSingleStaffProcedure(string empCode, StaffTypes type)
+        public List<Staff> FetchSingleStaffByType(string empCode, StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
@@ -130,7 +130,7 @@ namespace StaffLibrary.DbManager
 
         //function to delete a staff record
 
-        public bool ExecuteDeleteStaffProcedure(string code)
+        public bool DeleteStaff(string code)
         {
             bool status;
             int count;
@@ -166,7 +166,7 @@ namespace StaffLibrary.DbManager
         }
 
         // function to update staff info
-        public void ExecuteUpdateStaffProcedure<T>(T obj) where T : Staff
+        public void UpdateStaff<T>(T obj) where T : Staff
         {
             using (SqlConnection con = new SqlConnection(ConnString))
             {
@@ -214,7 +214,7 @@ namespace StaffLibrary.DbManager
         }
 
         // function to fetch the details of single staff without specifying staff type
-        public List<Staff> ExecuteGetStaffInfoProcedure(string empCode)
+        public List<Staff> FetchStaffInfo(string empCode)
         {
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
@@ -241,7 +241,7 @@ namespace StaffLibrary.DbManager
             }
         }
 
-        public List<Staff> ExecuteGetSeniorStaffInfoProcedure(StaffTypes type)
+        public List<Staff> FetchSeniorStaff(StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))

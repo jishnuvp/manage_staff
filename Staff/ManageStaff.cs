@@ -149,7 +149,7 @@ namespace StaffConsole
 
                     TeachingStaff teachingStaff = new TeachingStaff(name, code, empType, subj, number, doj);
                     //StaffList.Add(teachingStaff);
-                    flag = dbManager.ExecuteInsertStoredProcedure<TeachingStaff>(teachingStaff);
+                    flag = dbManager.AddStaff<TeachingStaff>(teachingStaff);
                     if (flag)
                     {
                         Console.WriteLine("\nStaff added successfully");
@@ -178,7 +178,7 @@ namespace StaffConsole
                     } while (succeed == false);
                     AdministrativeStaff administrativeStaff = new AdministrativeStaff(name, code, empType, role, number, doj);
                     //StaffList.Add(administrativeStaff);
-                    dbManager.ExecuteInsertStoredProcedure<AdministrativeStaff>(administrativeStaff);
+                    dbManager.AddStaff<AdministrativeStaff>(administrativeStaff);
                     break;
 
                 case 3:
@@ -198,7 +198,7 @@ namespace StaffConsole
                     } while (succeed == false);
                     SupportStaff supportStaff = new SupportStaff(name, code, empType, department, number, doj);
                     //StaffList.Add(supportStaff);
-                    dbManager.ExecuteInsertStoredProcedure<SupportStaff>(supportStaff);
+                    dbManager.AddStaff<SupportStaff>(supportStaff);
                     break;
                 case 4:
                     // back to main menu
@@ -223,7 +223,7 @@ namespace StaffConsole
             switch (choice)
             {
                 case 1:
-                    filteredList = dataBaseManager.ExecuteViewStaffProcedure((StaffTypes)staffTypeChoice);
+                    filteredList = dataBaseManager.FetchStaffByCategory((StaffTypes)staffTypeChoice);
                     foreach (var staff in filteredList)
                     {
                         ViewStaffInfo(staff);
@@ -234,7 +234,7 @@ namespace StaffConsole
                     Console.WriteLine("\nEnter Emp code of the staff to view");
                     string code = Console.ReadLine();
                     code = code.ToUpper();
-                    filteredList = dataBaseManager.ExecuteViewSingleStaffProcedure(code, (StaffTypes)staffTypeChoice);
+                    filteredList = dataBaseManager.FetchSingleStaffByType(code, (StaffTypes)staffTypeChoice);
                     if (filteredList.Exists(x => x.EmpCode == code))
                     {
                         foreach (var staff in filteredList)
@@ -252,9 +252,9 @@ namespace StaffConsole
                     }
                     break;
                 case 3:
-                    //ViewSeniorStaff();
+                    //FetchSeniorStaff();
                     filteredList.Clear();
-                    filteredList = dataBaseManager.ExecuteGetSeniorStaffInfoProcedure((StaffTypes)staffTypeChoice);
+                    filteredList = dataBaseManager.FetchSeniorStaff((StaffTypes)staffTypeChoice);
                     foreach (var staff in filteredList)
                     {
                         ViewStaffInfo(staff);
@@ -306,7 +306,7 @@ namespace StaffConsole
 
             List<Staff> filteredList = new List<Staff>();
 
-            filteredList = dataBaseManager.ExecuteGetStaffInfoProcedure(code);
+            filteredList = dataBaseManager.FetchStaffInfo(code);
             if (filteredList.Exists(x => x.EmpCode == code))
             {
                 foreach (var staff in filteredList)
@@ -437,7 +437,7 @@ namespace StaffConsole
                                         Console.WriteLine(e.Message);
                                     }
                                 } while (succeed == false);
-                                dataBaseManager.ExecuteUpdateStaffProcedure<TeachingStaff>(teachingStaff);
+                                dataBaseManager.UpdateStaff<TeachingStaff>(teachingStaff);
                                 break;
                             case "Administrative":
                                 AdministrativeStaff administrativeStaff = (AdministrativeStaff)staff;
@@ -467,7 +467,7 @@ namespace StaffConsole
                                         Console.WriteLine(e.Message);
                                     }
                                 } while (succeed == false);
-                                dataBaseManager.ExecuteUpdateStaffProcedure<AdministrativeStaff>(administrativeStaff);
+                                dataBaseManager.UpdateStaff<AdministrativeStaff>(administrativeStaff);
                                 break;
                             case "Support":
                                 SupportStaff supportStaff = (SupportStaff)staff;
@@ -497,7 +497,7 @@ namespace StaffConsole
                                         Console.WriteLine(e.Message);
                                     }
                                 } while (succeed == false);
-                                dataBaseManager.ExecuteUpdateStaffProcedure<SupportStaff>(supportStaff);
+                                dataBaseManager.UpdateStaff<SupportStaff>(supportStaff);
                                 break;
                         }
 
@@ -519,7 +519,7 @@ namespace StaffConsole
             Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
             string code = Console.ReadLine();
             code = code.ToUpper();
-            var flag = dataBaseManager.ExecuteDeleteStaffProcedure(code);
+            var flag = dataBaseManager.DeleteStaff(code);
             if (flag)
             {
                 Console.WriteLine($"\nStaff with Emp Code {code} removed succesfully");
