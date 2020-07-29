@@ -18,7 +18,7 @@ namespace StaffLibrary.DbManager
         {
             bool flag = true;
             int count = 0;
-            
+
             using (SqlConnection con = new SqlConnection(ConnString))
             {
                 using (SqlCommand cmd = new SqlCommand("SPInsertStaff", con))
@@ -64,7 +64,7 @@ namespace StaffLibrary.DbManager
                     {
 
                     }
-                    if(count > 0)
+                    if (count > 0)
                         flag = false;
                     return flag;
                 }
@@ -74,48 +74,21 @@ namespace StaffLibrary.DbManager
         // function to view staff by category
         public List<Staff> ExecuteViewStaffProcedure(StaffTypes type)
         {
-            string name, code, number, subject, role, department;
-            StaffTypes emptType;
-            DateTime dateOfJoin;
-            DataTable dt = new DataTable();
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
             {
                 using (SqlCommand cmd = new SqlCommand("SPViewCategoryStaff", con))
-                { 
+                {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Type", type.ToString());
-                    try { 
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-                        foreach (DataRow dr in dt.Rows)
+                    try
+                    {
+                        con.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["Name"].ToString();
-                            code = dr["Code"].ToString();
-                            emptType = temp;
-                            number = dr["PhoneNumber"].ToString();
-                            dateOfJoin = (DateTime)dr["DateOfJoin"];
-
-                            if (StaffTypes.Teaching == temp)
-                            {
-                                subject = dr["Subject"].ToString();
-                                TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Administrative == temp)
-                            {
-                                role = dr["Role"].ToString();
-                                AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Support == temp)
-                            {
-                                department = dr["Department"].ToString();
-                                SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
+                            StaffList = PopulateStaff(reader);
                         }
+
                         return StaffList;
                     }
                     catch (SqlException sqlExc)
@@ -130,11 +103,6 @@ namespace StaffLibrary.DbManager
         public List<Staff> ExecuteViewSingleStaffProcedure(string empCode, StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
-            string name, code, number, subject, role, department;
-            StaffTypes emptType;
-            DateTime dateOfJoin;
-            //object obj;
-            DataTable dt = new DataTable();
             using (SqlConnection con = new SqlConnection(ConnString))
             {
                 using (SqlCommand cmd = new SqlCommand("SPViewSingleStaff", con))
@@ -144,36 +112,12 @@ namespace StaffLibrary.DbManager
                     cmd.Parameters.AddWithValue("@Type", type.ToString());
                     try
                     {
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-                        foreach (DataRow dr in dt.Rows)
+                        con.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["Name"].ToString();
-                            code = dr["Code"].ToString();
-                            emptType = temp;
-                            number = dr["PhoneNumber"].ToString();
-                            dateOfJoin = (DateTime)dr["DateOfJoin"];
-
-                            if (StaffTypes.Teaching == temp)
-                            {
-                                subject = dr["Subject"].ToString();
-                                TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Administrative == temp)
-                            {
-                                role = dr["Role"].ToString();
-                                AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Support == temp)
-                            {
-                                department = dr["Department"].ToString();
-                                SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
+                            StaffList = PopulateStaff(reader);
                         }
+
                         return StaffList;
                     }
                     catch (SqlException sqlExc)
@@ -203,7 +147,7 @@ namespace StaffLibrary.DbManager
                     {
                         cmd.ExecuteNonQuery();
                         count = (int)returnParameter.Value;
-                        if(count == 1)
+                        if (count == 1)
                         {
                             status = true;
                         }
@@ -273,11 +217,6 @@ namespace StaffLibrary.DbManager
         public List<Staff> ExecuteGetStaffInfoProcedure(string empCode)
         {
             List<Staff> StaffList = new List<Staff>();
-            string name, code, number, subject, role, department;
-            StaffTypes emptType;
-            DateTime dateOfJoin;
-            //object obj;
-            DataTable dt = new DataTable();
             using (SqlConnection con = new SqlConnection(ConnString))
             {
                 using (SqlCommand cmd = new SqlCommand("SPGetStaffInfo", con))
@@ -286,36 +225,12 @@ namespace StaffLibrary.DbManager
                     cmd.Parameters.AddWithValue("@Code", empCode);
                     try
                     {
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-                        foreach (DataRow dr in dt.Rows)
+                        con.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["Name"].ToString();
-                            code = dr["Code"].ToString();
-                            emptType = temp;
-                            number = dr["PhoneNumber"].ToString();
-                            dateOfJoin = (DateTime)dr["DateOfJoin"];
-
-                            if (StaffTypes.Teaching == temp)
-                            {
-                                subject = dr["Subject"].ToString();
-                                TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Administrative == temp)
-                            {
-                                role = dr["Role"].ToString();
-                                AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Support == temp)
-                            {
-                                department = dr["Department"].ToString();
-                                SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
+                            StaffList = PopulateStaff(reader);
                         }
+
                         return StaffList;
                     }
                     catch (SqlException sqlExc)
@@ -328,10 +243,6 @@ namespace StaffLibrary.DbManager
 
         public List<Staff> ExecuteGetSeniorStaffInfoProcedure(StaffTypes type)
         {
-            string name, code, number, subject, role, department;
-            StaffTypes emptType;
-            DateTime dateOfJoin;
-            DataTable dt = new DataTable();
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
             {
@@ -341,36 +252,12 @@ namespace StaffLibrary.DbManager
                     cmd.Parameters.AddWithValue("@Type", type.ToString());
                     try
                     {
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-                        foreach (DataRow dr in dt.Rows)
+                        con.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), dr["type"].ToString());
-                            name = dr["Name"].ToString();
-                            code = dr["Code"].ToString();
-                            emptType = temp;
-                            number = dr["PhoneNumber"].ToString();
-                            dateOfJoin = (DateTime)dr["DateOfJoin"];
-
-                            if (StaffTypes.Teaching == temp)
-                            {
-                                subject = dr["Subject"].ToString();
-                                TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Administrative == temp)
-                            {
-                                role = dr["Role"].ToString();
-                                AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
-                            else if (StaffTypes.Support == temp)
-                            {
-                                department = dr["Department"].ToString();
-                                SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
-                                StaffList.Add(obj);
-                            }
+                            StaffList = PopulateStaff(reader);
                         }
+
                         return StaffList;
                     }
                     catch (SqlException sqlExc)
@@ -381,5 +268,49 @@ namespace StaffLibrary.DbManager
             }
         }
 
+        public static List<Staff> PopulateStaff(SqlDataReader reader)
+        {
+            string name, code, number, subject, role, department;
+            StaffTypes emptType;
+            DateTime dateOfJoin;
+            DataTable dt = new DataTable();
+            List<Staff> StaffList = new List<Staff>();
+            while (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine(reader["Name"]);
+                    var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), reader["type"].ToString());
+                    name = reader["Name"].ToString();
+                    code = reader["Code"].ToString();
+                    emptType = temp;
+                    number = reader["PhoneNumber"].ToString();
+                    dateOfJoin = (DateTime)reader["DateOfJoin"];
+
+                    if (StaffTypes.Teaching == temp)
+                    {
+                        subject = reader["Subject"].ToString();
+                        TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
+                        StaffList.Add(obj);
+                    }
+                    else if (StaffTypes.Administrative == temp)
+                    {
+                        role = reader["Role"].ToString();
+                        AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
+                        StaffList.Add(obj);
+                    }
+                    else if (StaffTypes.Support == temp)
+                    {
+                        department = reader["Department"].ToString();
+                        SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
+                        StaffList.Add(obj);
+                    }
+
+                }
+                reader.NextResult();
+            }
+            return StaffList;
+
+        }
     }
 }
