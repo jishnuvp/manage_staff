@@ -75,6 +75,9 @@
     <Build Include="dbo\stored_procedure\SPGetStaffInfo.sql" />
     <Build Include="dbo\stored_procedure\SPGetAllSeniorStaffInfo.sql" />
     <Build Include="dbo\function\get_senior_junior.sql" />
+    <Build Include="dbo\user_defined_table\UDTStaffs.sql" />
+    <Build Include="dbo\stored_procedure\SPCheckStaffExistence.sql" />
+    <Build Include="dbo\stored_procedure\SPStaffInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\SupportStaff.sql" />

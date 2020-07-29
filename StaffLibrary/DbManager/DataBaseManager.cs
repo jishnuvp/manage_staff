@@ -241,6 +241,7 @@ namespace StaffLibrary.DbManager
             }
         }
 
+        // function to fetch senior staff info
         public List<Staff> FetchSeniorStaff(StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
@@ -268,6 +269,7 @@ namespace StaffLibrary.DbManager
             }
         }
 
+        // function to populate objects from the result
         public static List<Staff> PopulateStaff(SqlDataReader reader)
         {
             string name, code, number, subject, role, department;
@@ -311,6 +313,104 @@ namespace StaffLibrary.DbManager
             }
             return StaffList;
 
+        }
+
+        // function to check the empcode is exist or not
+        public bool CheckCodeExistence(String code)
+        {
+            bool flag = false;
+            int returnValue;
+
+            using (SqlConnection con = new SqlConnection(ConnString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SPCheckStaffExistence", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Code", code);
+                    SqlParameter returnParameter = cmd.Parameters.Add("@IsExist", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+                    con.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        returnValue = (int)returnParameter.Value;
+                        if (returnValue != 0) flag = true; 
+                        
+                        return flag;
+                    }
+                    catch (SqlException sqlExc)
+                    {
+                        return flag;
+                    }
+                }
+            }
+        }
+
+        // function to insert data into user defined table type
+        public void AddStaffToType(List<Staff> StaffList)
+        {
+            DataTable DT = new DataTable();
+
+            DT.Columns.Add(new DataColumn("Name", typeof(string)));
+            DT.Columns.Add(new DataColumn("Code", typeof(string)));
+            DT.Columns.Add(new DataColumn("Type", typeof(string)));
+            DT.Columns.Add(new DataColumn("PhoneNumber", typeof(string)));
+            DT.Columns.Add(new DataColumn("DateOfJoin", typeof(DateTime)));
+            DT.Columns.Add(new DataColumn("Subject", typeof(string)));
+            DT.Columns.Add(new DataColumn("Role", typeof(string)));
+            DT.Columns.Add(new DataColumn("Department", typeof(string)));
+
+            foreach (var staff in StaffList)
+            {
+                DataRow DR = DT.NewRow();
+
+                DR["Name"] = staff.Name;
+
+                DR["Code"] = staff.EmpCode;
+
+                DR["Type"] = staff.StaffType.ToString();
+
+                DR["PhoneNumber"] = staff.ContactNumber;
+
+                DR["DateOfJoin"] = staff.DateOfJoin;
+
+                if(StaffTypes.Teaching == staff.StaffType)
+                {
+                    TeachingStaff teachingStaff = (TeachingStaff)staff;
+                    DR["Subject"] = teachingStaff.Subject;
+                }
+                else if(StaffTypes.Administrative == staff.StaffType)
+                {
+                    AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
+                    DR["Role"] = adminStaff.Role;
+                }
+                else if(StaffTypes.Support == staff.StaffType)
+                {
+                    SupportStaff supportStaff = (SupportStaff)staff;
+                    DR["Department"] = supportStaff.Department;
+                }
+
+                DT.Rows.Add(DR);
+            }
+            InsertStaffs(DT); //calling datatable method here
+        }
+
+        // function to run bulk insertion
+        public void InsertStaffs(DataTable dt)
+        {
+            using (SqlConnection con = new SqlConnection(ConnString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SPStaffInsert", con))
+                {
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@typeSTaffs", dt); // passing Datatable
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

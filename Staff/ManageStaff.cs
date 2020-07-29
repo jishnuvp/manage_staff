@@ -11,12 +11,9 @@ namespace StaffConsole
 {
     public class ManageStaff
     {
-
-        //public static TextWriter writer = new StreamWriter(@"C:\Users\Win8.1 Pro 64bit\source\repos\Staff\Staff\Staff.xml");
-
         public static int staffTypeChoice, counter;
 
-        public static List<Staff> StaffList = new List<Staff>();
+        //public static List<Staff> StaffList = new List<Staff>();
 
         public static string code, name, number, subj, role, department;
         public static DateTime doj;
@@ -24,186 +21,185 @@ namespace StaffConsole
         // function for add staff
         public void AddStaff()
         {
+            List<Staff> StaffList = new List<Staff>();
             string subject = System.Configuration.ConfigurationManager.AppSettings["subjects"];
             string[] subjects = subject.Split(',');
-            bool succeed, flag = false;
+            bool succeed, flag = false, isCodeExist = false;
             int index = 1, choice;
+            string addMoreChoice;
 
             DataBaseManager dbManager = new DataBaseManager();
-
-            staffTypeChoice = GetStaffType();
-            var empType = (StaffTypes)staffTypeChoice;
-            if(staffTypeChoice == counter)
-            {
-                return;
-            }
-
-            Console.WriteLine($"\n\n----------------------- {empType} Staff -----------------------\n");
             do
             {
-                succeed = false;
-                try
+                staffTypeChoice = GetStaffType();
+                var empType = (StaffTypes)staffTypeChoice;
+                if (staffTypeChoice == counter)
                 {
-                    Console.WriteLine("\nEnter Name: ");
-                    name = Console.ReadLine();
-                    Validator.ValidateName(name);
-                    succeed = true;
+                    return;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            } while (succeed == false);
 
-            do
-            {
-                succeed = false;
-                Console.WriteLine("\nEnter Employee code :");
-                code = Console.ReadLine();
-                code = code.ToUpper();
-                if (StaffList.Exists(x => x.EmpCode == code))
+                Console.WriteLine($"\n\n----------------------- {empType} Staff -----------------------\n");
+                do
                 {
-                    Console.WriteLine("\nEmp code already exists");
                     succeed = false;
-                }
-                else
-                {
-                    succeed = true;
-                }
-            } while (succeed == false);
-
-
-            do
-            {
-                succeed = false;
-                try
-                {
-                    Console.WriteLine("\nEnter Contact Number");
-                    number = Console.ReadLine();
-                    Validator.ValidatePhoneNumber(number);
-                    succeed = true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            } while (succeed == false);
-
-            do
-            {
-                succeed = false;
-                try
-                {
-                    Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
-                    doj = DateTime.Parse(Console.ReadLine());
-                    Validator.ValidateDate(doj);
-                    succeed = true;
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            } while (succeed == false);
-
-
-            switch (staffTypeChoice)
-            {
-                case 1:
-                    do
+                    try
                     {
+                        Console.WriteLine("\nEnter Name: ");
+                        name = Console.ReadLine();
+                        Validator.ValidateName(name);
+                        succeed = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                } while (succeed == false);
+
+                do
+                {
+                    succeed = false;
+                    Console.WriteLine("\nEnter Employee code :");
+                    code = Console.ReadLine();
+                    code = code.ToUpper();
+                    isCodeExist = dbManager.CheckCodeExistence(code);
+                    if (isCodeExist || StaffList.Exists(x => x.EmpCode == code))
+                    {
+                        Console.WriteLine("\nEmp code already exists");
                         succeed = false;
-                        index = 1;
-                        try
-                        {
-                            Console.WriteLine("\nSelect your choice");
-                            foreach (string item in subjects)
-                            {
-                                Console.WriteLine($"{index}. {item}");
-                                index++;
-                            }
-                            if (!Int32.TryParse(Console.ReadLine(), out choice))
-                            {
-                                succeed = false;
-                                Console.WriteLine("Enter a valid choice");
-                            }
-                            else
-                            {
-                                if (choice <= subjects.Length && choice > 0)
-                                {
-                                    subj = subjects[choice - 1];
-                                    succeed = true;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Enter a valid choice");
-                                    succeed = false;
-                                }
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-
-                    TeachingStaff teachingStaff = new TeachingStaff(name, code, empType, subj, number, doj);
-                    //StaffList.Add(teachingStaff);
-                    flag = dbManager.AddStaff<TeachingStaff>(teachingStaff);
-                    if (flag)
-                    {
-                        Console.WriteLine("\nStaff added successfully");
                     }
                     else
                     {
-                        Console.WriteLine($"\nEmpCode {code} already added with another user. Try with another code");
-                        AddStaff();
+                        succeed = true;
                     }
-                    break;
+                } while (succeed == false);
 
-                case 2:
-                    do
-                    {
-                        succeed = false;
-                        try
-                        {
-                            Console.WriteLine("\nEnter Role");
-                            role = Console.ReadLine();
-                            succeed = true;
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-                    AdministrativeStaff administrativeStaff = new AdministrativeStaff(name, code, empType, role, number, doj);
-                    //StaffList.Add(administrativeStaff);
-                    dbManager.AddStaff<AdministrativeStaff>(administrativeStaff);
-                    break;
 
-                case 3:
-                    do
+                do
+                {
+                    succeed = false;
+                    try
                     {
-                        succeed = false;
-                        try
+                        Console.WriteLine("\nEnter Contact Number");
+                        number = Console.ReadLine();
+                        Validator.ValidatePhoneNumber(number);
+                        succeed = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                } while (succeed == false);
+
+                do
+                {
+                    succeed = false;
+                    try
+                    {
+                        Console.WriteLine("\nEnter Date of Join (dd-mm-yyyy)");
+                        doj = DateTime.Parse(Console.ReadLine());
+                        Validator.ValidateDate(doj);
+                        succeed = true;
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                } while (succeed == false);
+
+
+                switch (staffTypeChoice)
+                {
+                    case 1:
+                        do
                         {
-                            Console.WriteLine("\nEnter Department");
-                            department = Console.ReadLine();
-                            succeed = true;
-                        }
-                        catch (Exception e)
+                            succeed = false;
+                            index = 1;
+                            try
+                            {
+                                Console.WriteLine("\nSelect your choice");
+                                foreach (string item in subjects)
+                                {
+                                    Console.WriteLine($"{index}. {item}");
+                                    index++;
+                                }
+                                if (!Int32.TryParse(Console.ReadLine(), out choice))
+                                {
+                                    succeed = false;
+                                    Console.WriteLine("Enter a valid choice");
+                                }
+                                else
+                                {
+                                    if (choice <= subjects.Length && choice > 0)
+                                    {
+                                        subj = subjects[choice - 1];
+                                        succeed = true;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Enter a valid choice");
+                                        succeed = false;
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        } while (succeed == false);
+
+                        TeachingStaff teachingStaff = new TeachingStaff(name, code, empType, subj, number, doj);
+                        StaffList.Add(teachingStaff);
+                        //dbManager.AddStaff<TeachingStaff>(teachingStaff);
+                        break;
+
+                    case 2:
+                        do
                         {
-                            Console.WriteLine(e.Message);
-                        }
-                    } while (succeed == false);
-                    SupportStaff supportStaff = new SupportStaff(name, code, empType, department, number, doj);
-                    //StaffList.Add(supportStaff);
-                    dbManager.AddStaff<SupportStaff>(supportStaff);
-                    break;
-                case 4:
-                    // back to main menu
-                    break;
-            }
+                            succeed = false;
+                            try
+                            {
+                                Console.WriteLine("\nEnter Role");
+                                role = Console.ReadLine();
+                                succeed = true;
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        } while (succeed == false);
+                        AdministrativeStaff administrativeStaff = new AdministrativeStaff(name, code, empType, role, number, doj);
+                        StaffList.Add(administrativeStaff);
+                        //dbManager.AddStaff<AdministrativeStaff>(administrativeStaff);
+                        break;
+
+                    case 3:
+                        do
+                        {
+                            succeed = false;
+                            try
+                            {
+                                Console.WriteLine("\nEnter Department");
+                                department = Console.ReadLine();
+                                succeed = true;
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        } while (succeed == false);
+                        SupportStaff supportStaff = new SupportStaff(name, code, empType, department, number, doj);
+                        StaffList.Add(supportStaff);
+                        //dbManager.AddStaff<SupportStaff>(supportStaff);
+                        break;
+                    case 4:
+                        // back to main menu
+                        break;
+                }
+                Console.WriteLine("Do you want to add more ? (Y/N)");
+                addMoreChoice = Console.ReadLine();
+            } while (addMoreChoice == "y" || addMoreChoice == "Y");
+            dbManager.AddStaffToType(StaffList);
         }
 
         // function for view staff
