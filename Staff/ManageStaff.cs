@@ -13,8 +13,6 @@ namespace StaffConsole
     {
         public static int staffTypeChoice, counter;
 
-        //public static List<Staff> StaffList = new List<Staff>();
-
         public static string code, name, number, subj, role, department;
         public static DateTime doj;
 
