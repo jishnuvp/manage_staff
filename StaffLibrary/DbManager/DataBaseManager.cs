@@ -43,6 +43,8 @@ namespace StaffLibrary.DbManager
         }
 
         // function to fetch the details of single staff with specified staff type
+        
+        //change this function parameter empCode to staffId and remove the parameter StaffType
         public List<Staff> FetchSingleStaffByType(string empCode, StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
@@ -73,6 +75,7 @@ namespace StaffLibrary.DbManager
 
         //function to delete a staff record
 
+        //change the parameter to StaffID
         public bool DeleteStaff(string code)
         {
             bool status;
@@ -122,6 +125,7 @@ namespace StaffLibrary.DbManager
                     cmd.Parameters.AddWithValue("@PhoneNumber", obj.ContactNumber);
                     cmd.Parameters.AddWithValue("@DateOfJoin", obj.DateOfJoin);
 
+                    // instead of this if else conditions. Is there any other way to add parameters, which looks better ?
                     if (obj is TeachingStaff)
                     {
                         TeachingStaff staff = (TeachingStaff)Convert.ChangeType(obj, obj.GetType());
@@ -157,6 +161,8 @@ namespace StaffLibrary.DbManager
         }
 
         // function to fetch the details of single staff without specifying staff type
+        
+        //fetch details based on empID or staffID
         public List<Staff> FetchStaffInfo(string empCode)
         {
             List<Staff> StaffList = new List<Staff>();
