@@ -12,6 +12,7 @@ namespace StaffLibrary
     public class Staff
     {
         //properties
+        public int Id { get; set; }
         public StaffTypes StaffType { get; set; }
         public string EmpCode { get; set; }
         public string Name { get; set; }
@@ -22,8 +23,9 @@ namespace StaffLibrary
         {
 
         }
-        public Staff(string Name, string EmpCode, StaffTypes StaffType, string ContactNumber, DateTime DateOfJoin)
+        public Staff(string Name, string EmpCode, StaffTypes StaffType, string ContactNumber, DateTime DateOfJoin, int Id = 0)
         {
+            this.Id = Id;
             this.Name = Name;
             this.EmpCode = EmpCode;
             this.StaffType = StaffType;

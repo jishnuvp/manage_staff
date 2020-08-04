@@ -11,10 +11,10 @@ namespace StaffConsole
 {
     public class ManageStaff
     {
-        public static int staffTypeChoice, counter;
+        public  int staffTypeChoice, counter, id;
 
-        public static string code, name, number, subj, role, department;
-        public static DateTime doj;
+        public string code, name, number, subj, role, department;
+        public DateTime doj;
 
         // function for add staff
         public void AddStaff()
@@ -225,15 +225,16 @@ namespace StaffConsole
                     filteredList.Clear();
                     break;
                 case 2:
-                    Console.WriteLine("\nEnter Emp code of the staff to view");
-                    string code = Console.ReadLine();
-                    code = code.ToUpper();
-                    filteredList = dataBaseManager.FetchSingleStaffByType(code, (StaffTypes)staffTypeChoice);
-                    if (filteredList.Exists(x => x.EmpCode == code))
+                    //Console.WriteLine("\nEnter Staff Id of the staff to view");
+                    id = getStaffId();
+                    //string code = Console.ReadLine();
+                    //code = code.ToUpper();
+                    filteredList = dataBaseManager.FetchSingleStaffByType(id, (StaffTypes)staffTypeChoice);
+                    if (filteredList.Exists(x => x.Id == id))
                     {
                         foreach (var staff in filteredList)
                         {
-                            if (staff.EmpCode == code)
+                            if (staff.Id == id)
                             {
                                 ViewStaffInfo(staff);
                             }
@@ -261,21 +262,21 @@ namespace StaffConsole
 
         }
 
-        public static void ViewStaffInfo(Staff staff)
+        public void ViewStaffInfo(Staff staff)
         {
             switch (staffTypeChoice)
             {
                 case 1:
                     TeachingStaff teachingStaff = (TeachingStaff)staff;
-                    Console.WriteLine("\n\n{0}   Name: {1}, Type: {2},  Subject: {3},   Contact Number: {4},   Joining Date: {5}", teachingStaff.EmpCode, teachingStaff.Name, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin);
+                    Console.WriteLine("\n\nID: {0},  Name: {1},  Code: {2}, Type: {3},  Subject: {4},   Contact Number: {5},   Joining Date: {6}", teachingStaff.Id, teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin);
                     break;
                 case 2:
                     AdministrativeStaff administrativeStaff = (AdministrativeStaff)staff;
-                    Console.WriteLine("\n\n{0}   Name: {1}, Type: {2},  Role: {3},   Contact Number: {4},   Joining Date: {5}", administrativeStaff.EmpCode, administrativeStaff.Name, administrativeStaff.StaffType, administrativeStaff.Role, administrativeStaff.ContactNumber, administrativeStaff.DateOfJoin);
+                    Console.WriteLine("\n\nID: {0},   Name: {1},  Code:{2}, Type: {3},  Role: {4},   Contact Number: {5},   Joining Date: {6}", administrativeStaff.Id, administrativeStaff.Name, administrativeStaff.EmpCode, administrativeStaff.StaffType, administrativeStaff.Role, administrativeStaff.ContactNumber, administrativeStaff.DateOfJoin);
                     break;
                 case 3:
                     SupportStaff supportStaff = (SupportStaff)staff;
-                    Console.WriteLine("\n\n{0}   Name: {1}, Type: {2},  Department: {3},   Contact Number: {4},   Joining Date: {5}", supportStaff.EmpCode, supportStaff.Name, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin);
+                    Console.WriteLine("\n\nID: {0},   Name: {1},  Code:{2},  Type: {3},  Department: {4},   Contact Number: {5},   Joining Date: {6}", supportStaff.Id, supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin);
                     break;
                 default: return;
             }
@@ -294,18 +295,19 @@ namespace StaffConsole
             int index = 1, choice;
 
             Console.WriteLine($"\n\n----------------------- Update Staff -----------------------\n");
-            Console.WriteLine("\nEnter Emp code of the staff that you want to update");
-            string code = Console.ReadLine();
-            code = code.ToUpper();
+            //Console.WriteLine("\nEnter Emp code of the staff that you want to update");
+            //string code = Console.ReadLine();
+            //code = code.ToUpper();
+            id = getStaffId();
 
             List<Staff> filteredList = new List<Staff>();
 
-            filteredList = dataBaseManager.FetchStaffInfo(code);
-            if (filteredList.Exists(x => x.EmpCode == code))
+            filteredList = dataBaseManager.FetchStaffInfo(id);
+            if (filteredList.Exists(x => x.Id == id))
             {
                 foreach (var staff in filteredList)
                 {
-                    if (staff.EmpCode == code)
+                    if (staff.Id == id)
                     {
                         //ViewStaffInfo(staff);
                         do
@@ -510,13 +512,14 @@ namespace StaffConsole
         {
             DataBaseManager dataBaseManager = new DataBaseManager();
             Console.WriteLine($"\n\n----------------------- Delete {(StaffTypes)staffTypeChoice} Staff -----------------------\n");
-            Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
-            string code = Console.ReadLine();
-            code = code.ToUpper();
-            var flag = dataBaseManager.DeleteStaff(code);
+            //Console.WriteLine("\nEnter Emp code of the staff that you want to delete");
+            //string code = Console.ReadLine();
+            //code = code.ToUpper();
+            id = getStaffId();
+            var flag = dataBaseManager.DeleteStaff(id);
             if (flag)
             {
-                Console.WriteLine($"\nStaff with Emp Code {code} removed succesfully");
+                Console.WriteLine($"\nStaff with Emp Code {id} removed succesfully");
             }
             else
             {
@@ -540,7 +543,7 @@ namespace StaffConsole
         }
 
         // function to get the user choice
-        public static int GetStaffType()
+        public int GetStaffType()
         {
             counter = 1;
             Console.WriteLine("\n\n");
@@ -562,6 +565,16 @@ namespace StaffConsole
                 staffTypeChoice = GetStaffType();
             }
             return staffTypeChoice;
+        }
+        public int getStaffId()
+        {
+            Console.WriteLine("\nEnter Staff Id of the staff");
+            if (!Int32.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("\nEnter a valid number");
+                id = GetStaffType();
+            }
+            return id;
         }
 
     }

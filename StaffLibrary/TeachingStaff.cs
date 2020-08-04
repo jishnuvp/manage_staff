@@ -15,7 +15,7 @@ namespace StaffLibrary
         {
 
         }
-        public TeachingStaff(string Name, string EmpCode, StaffTypes StaffType, string Subject, string ContactNumber, DateTime DateOfJoin) : base(Name, EmpCode, StaffType, ContactNumber, DateOfJoin)
+        public TeachingStaff(string Name, string EmpCode, StaffTypes StaffType, string Subject, string ContactNumber, DateTime DateOfJoin, int Id = 0) : base(Name, EmpCode, StaffType, ContactNumber, DateOfJoin, Id)
         {
             this.Subject = Subject;
         }

@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[SPUpdateStaff]
+	@Id int,
 	@Name nvarchar(30),
 	@PhoneNumber varchar(15),
 	@DateOfJoin datetime,
@@ -9,9 +10,7 @@
 	@Department nvarchar(25) = null
 AS
 BEGIN
-	DECLARE @Id int
 		BEGIN
-			SET @Id = (SELECT Id FROM Staffs WHERE Code = @Code)
 			UPDATE Staffs 
 			SET Name = @Name, Type = @Type, PhoneNumber = @PhoneNumber, DateOfJoin = @DateOfJoin, UpdatedAt = GETDATE()
 			WHERE id = @Id

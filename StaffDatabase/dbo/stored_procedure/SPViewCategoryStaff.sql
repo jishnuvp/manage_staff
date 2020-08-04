@@ -24,7 +24,7 @@ BEGIN
 	--		INNER JOIN SupportStaff
 	--		ON Staffs.Id = SupportStaff.StaffId
 	--	END
-	SELECT p. Name, p.Code, p.Type, p.PhoneNumber, p.DateOfJoin, t.Subject, a.Role, s.Department  
+	SELECT	p.Id, p. Name, p.Code, p.Type, p.PhoneNumber, p.DateOfJoin, t.Subject, a.Role, s.Department  
 			FROM Staffs AS p  
 			LEFT JOIN TeachingStaff AS t  
 			ON p.Id = t.StaffId  

@@ -8,7 +8,7 @@ namespace StaffLibrary
         //properties
         public string Department { get; set; }
 
-        public SupportStaff(string Name, string EmpCode, StaffTypes StaffType, string Department, string ContactNumber, DateTime DateOfJoin) : base(Name, EmpCode, StaffType, ContactNumber, DateOfJoin)
+        public SupportStaff(string Name, string EmpCode, StaffTypes StaffType, string Department, string ContactNumber, DateTime DateOfJoin, int Id = 0) : base(Name, EmpCode, StaffType, ContactNumber, DateOfJoin, Id)
         {
             this.Department = Department;
         }

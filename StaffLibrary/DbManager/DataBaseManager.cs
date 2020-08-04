@@ -43,7 +43,7 @@ namespace StaffLibrary.DbManager
         }
 
         // function to fetch the details of single staff with specified staff type
-        public List<Staff> FetchSingleStaffByType(string empCode, StaffTypes type)
+        public List<Staff> FetchSingleStaffByType(int id, StaffTypes type)
         {
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
@@ -51,7 +51,7 @@ namespace StaffLibrary.DbManager
                 using (SqlCommand cmd = new SqlCommand("SPViewSingleStaff", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Code", empCode);
+                    cmd.Parameters.AddWithValue("@Id", id);
                     cmd.Parameters.AddWithValue("@Type", type.ToString());
                     try
                     {
@@ -73,7 +73,7 @@ namespace StaffLibrary.DbManager
 
         //function to delete a staff record
 
-        public bool DeleteStaff(string code)
+        public bool DeleteStaff(int id)
         {
             bool status;
             int count;
@@ -82,7 +82,7 @@ namespace StaffLibrary.DbManager
                 using (SqlCommand cmd = new SqlCommand("SPDeleteStaff", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Code", code);
+                    cmd.Parameters.AddWithValue("@Id", id);
                     SqlParameter returnParameter = cmd.Parameters.Add("Counter", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
                     con.Open();
@@ -116,6 +116,7 @@ namespace StaffLibrary.DbManager
                 using (SqlCommand cmd = new SqlCommand("SPUpdateStaff", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", obj.Id);
                     cmd.Parameters.AddWithValue("@Name", obj.Name);
                     cmd.Parameters.AddWithValue("@Code", obj.EmpCode);
                     cmd.Parameters.AddWithValue("@Type", obj.StaffType.ToString());
@@ -157,7 +158,7 @@ namespace StaffLibrary.DbManager
         }
 
         // function to fetch the details of single staff without specifying staff type
-        public List<Staff> FetchStaffInfo(string empCode)
+        public List<Staff> FetchStaffInfo(int id)
         {
             List<Staff> StaffList = new List<Staff>();
             using (SqlConnection con = new SqlConnection(ConnString))
@@ -165,7 +166,7 @@ namespace StaffLibrary.DbManager
                 using (SqlCommand cmd = new SqlCommand("SPGetStaffInfo", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Code", empCode);
+                    cmd.Parameters.AddWithValue("@Id", id);
                     try
                     {
                         con.Open();
@@ -215,6 +216,7 @@ namespace StaffLibrary.DbManager
         // function to populate objects from the result
         public static List<Staff> PopulateStaff(SqlDataReader reader)
         {
+            int id;
             string name, code, number, subject, role, department;
             StaffTypes emptType;
             DateTime dateOfJoin;
@@ -224,10 +226,10 @@ namespace StaffLibrary.DbManager
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader["Name"]);
                     var temp = (StaffTypes)Enum.Parse(typeof(StaffTypes), reader["type"].ToString());
                     name = reader["Name"].ToString();
                     code = reader["Code"].ToString();
+                    id = (int)reader["Id"];
                     emptType = temp;
                     number = reader["PhoneNumber"].ToString();
                     dateOfJoin = (DateTime)reader["DateOfJoin"];
@@ -235,19 +237,19 @@ namespace StaffLibrary.DbManager
                     if (StaffTypes.Teaching == temp)
                     {
                         subject = reader["Subject"].ToString();
-                        TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin);
+                        TeachingStaff obj = new TeachingStaff(name, code, emptType, subject, number, dateOfJoin, id);
                         StaffList.Add(obj);
                     }
                     else if (StaffTypes.Administrative == temp)
                     {
                         role = reader["Role"].ToString();
-                        AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin);
+                        AdministrativeStaff obj = new AdministrativeStaff(name, code, emptType, role, number, dateOfJoin, id);
                         StaffList.Add(obj);
                     }
                     else if (StaffTypes.Support == temp)
                     {
                         department = reader["Department"].ToString();
-                        SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin);
+                        SupportStaff obj = new SupportStaff(name, code, emptType, department, number, dateOfJoin, id);
                         StaffList.Add(obj);
                     }
 
