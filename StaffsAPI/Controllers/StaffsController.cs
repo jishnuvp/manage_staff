@@ -10,7 +10,8 @@ using StaffLibrary.DbManager;
 
 namespace StaffsAPI.Controllers
 {
-    
+
+    [Route("api/[controller]")]
     [ApiController]
     public class StaffsController : ControllerBase
     {
