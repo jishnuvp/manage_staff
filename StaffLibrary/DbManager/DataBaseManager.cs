@@ -10,8 +10,9 @@ namespace StaffLibrary.DbManager
 {
     public class DataBaseManager
     {
-        private static string ConnString = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
-        private SqlConnection Conn = new SqlConnection(ConnString);
+        //private static string ConnString = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
+        //private SqlConnection Conn = new SqlConnection(ConnString);
+        private static string ConnString = "Data Source=USER;Initial Catalog=Staff;Persist Security Info=True;User ID=sa;Password=root;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;TrustServerCertificate=False";
 
 
         // function to view staff by category

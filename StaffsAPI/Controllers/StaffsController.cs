@@ -10,15 +10,13 @@ using StaffLibrary.DbManager;
 
 namespace StaffsAPI.Controllers
 {
-
-    [Route("api/[controller]")]
+    [Route("staff")]
     [ApiController]
     public class StaffsController : ControllerBase
     {
         // GET: api/<StaffsController>
-        [HttpGet]
-        [Route("api/staffs/{type}")]
-        public IEnumerable<Staff> GetAllStaffByType(StaffTypes type)
+        [HttpGet("type/{type}")]
+        public List<Staff> GetAllStaffByType(StaffTypes type)
         {
             try
             {
@@ -33,26 +31,8 @@ namespace StaffsAPI.Controllers
         }
 
         // GET api/Staffs//5
-        [HttpGet]
-        [Route("api/staffs/{type}/{id}")]
-        public IEnumerable<Staff> GetStaffByType(int id, StaffTypes type)
-        {
-            try
-            {
-                DataBaseManager dataBaseManager = new DataBaseManager();
-                List<Staff> StaffList = dataBaseManager.FetchSingleStaffByType(id,type);
-                return StaffList;
-            }
-            catch (Exception exc)
-            {
-                throw exc;
-            }
-        }
-
-        // GET api/Staffs//5
-        [HttpGet]
-        [Route("api/staffs/{id}")]
-        public IEnumerable<Staff> GetStaff(int id)
+        [HttpGet("{id}")]
+        public List<Staff> GetStaff(int id)
         {
             try
             {
@@ -92,5 +72,12 @@ namespace StaffsAPI.Controllers
                 throw exc;
             }
         }
+
+        [HttpGet]
+        public string GetAllStaff()
+        {
+            return "test";
+        }
+
     }
 }
