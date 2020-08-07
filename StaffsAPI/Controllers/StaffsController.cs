@@ -107,6 +107,11 @@ namespace StaffsAPI.Controllers
         [HttpPost("Teaching")]
         public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
+            if(string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber)
+                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            {
+                return StatusCode(500);
+            }
             try
             {
                 DataBaseManager dataBaseManager = new DataBaseManager();
@@ -125,6 +130,11 @@ namespace StaffsAPI.Controllers
         [HttpPost("Administrative")]
         public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
         {
+            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Role)
+                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            {
+                return StatusCode(500);
+            }
             try
             {
                 DataBaseManager dataBaseManager = new DataBaseManager();
@@ -143,6 +153,11 @@ namespace StaffsAPI.Controllers
         [HttpPost("Support")]
         public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
         {
+            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Department)
+                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            {
+                return StatusCode(500);
+            }
             try
             {
                 DataBaseManager dataBaseManager = new DataBaseManager();
