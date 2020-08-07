@@ -107,7 +107,7 @@ namespace StaffsAPI.Controllers
         [HttpPost("Teaching")]
         public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
-            if(string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber)
+            if(string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Subject)
                 && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
             {
                 return StatusCode(500);
@@ -173,9 +173,64 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Teaching/{id}")]
+        public IActionResult UpdateTeachingStaff(int id, [FromBody] TeachingStaff staff)
         {
+            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Subject)
+                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            {
+                return StatusCode(500);
+            }
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                dataBaseManager.UpdateStaff(staff);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut("Administrative/{id}")]
+        public IActionResult UpdateAdministrativeStaff(int id, [FromBody] AdministrativeStaff staff)
+        {
+            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Role)
+                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            {
+                return StatusCode(500);
+            }
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                dataBaseManager.UpdateStaff(staff);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut("Support/{id}")]
+        public IActionResult UpdateSupportStaff(int id, [FromBody] SupportStaff staff)
+        {
+            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Department)
+                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            {
+                return StatusCode(500);
+            }
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                dataBaseManager.UpdateStaff(staff);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(404);
+            }
         }
 
         [HttpDelete("{id}")]
