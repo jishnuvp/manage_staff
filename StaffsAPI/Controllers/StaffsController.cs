@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StaffLibrary;
@@ -16,40 +18,112 @@ namespace StaffsAPI.Controllers
     {
         // GET: api/<StaffsController>
         [HttpGet("type/{type}")]
-        public List<Staff> GetAllStaffByType(StaffTypes type)
+        public IActionResult GetAllStaffByType(StaffTypes type)
         {
-            try
+            var temp = Enum.IsDefined(typeof(StaffTypes), type);
+            if (Enum.IsDefined(typeof(StaffTypes), type))
             {
                 DataBaseManager dataBaseManager = new DataBaseManager();
                 List<Staff> StaffList = dataBaseManager.FetchStaffByCategory(type);
-                return StaffList;
+                if(type == StaffTypes.Teaching)
+                {
+                    List<TeachingStaff> staffs = new List<TeachingStaff>();
+                    foreach(var staff in StaffList)
+                    {
+                        TeachingStaff teachingStaff = (TeachingStaff)staff;
+                        TeachingStaff obj = new TeachingStaff(teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin, teachingStaff.Id);
+                        staffs.Add(obj);
+                    }
+                    return Ok(new { staffs });
+                }
+                if (type == StaffTypes.Administrative)
+                {
+                    List<AdministrativeStaff> staffs = new List<AdministrativeStaff>();
+                    foreach (var staff in StaffList)
+                    {
+                        AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
+                        AdministrativeStaff obj = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin, adminStaff.Id);
+                        staffs.Add(obj);
+                    }
+                    return Ok(new { staffs });
+                }
+                if (type == StaffTypes.Support)
+                {
+                    List<SupportStaff> staffs = new List<SupportStaff>();
+                    foreach (var staff in StaffList)
+                    {
+                        SupportStaff supportStaff = (SupportStaff)staff;
+                        SupportStaff obj = new SupportStaff(supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin, supportStaff.Id);
+                        staffs.Add(obj);
+                    }
+                    return Ok(new { staffs });
+                }
+                return null;
             }
-            catch (Exception exc)
+            else
             {
-                throw exc;
+                return NotFound();
             }
         }
 
-        // GET api/Staffs//5
         [HttpGet("{id}")]
-        public List<Staff> GetStaff(int id)
+        public IActionResult GetStaff(int id)
         {
-            try
-            {
-                DataBaseManager dataBaseManager = new DataBaseManager();
-                List<Staff> StaffList = dataBaseManager.FetchStaffInfo(id);
-                return StaffList;
+            DataBaseManager dataBaseManager = new DataBaseManager();
+            List<Staff> StaffList = dataBaseManager.FetchStaffInfo(id);
+            if(StaffList.Count > 0) { 
+                foreach(var staff in StaffList)
+                {
+                    var temp = staff.StaffType;
+                    var name = staff.Name;
+                    if(StaffTypes.Teaching == staff.StaffType)
+                    {
+                        TeachingStaff teachingStaff = (TeachingStaff)staff;
+                        TeachingStaff obj = new TeachingStaff(teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin, teachingStaff.Id);
+                        return Ok(new { obj });
+                    }
+                    if(StaffTypes.Administrative == staff.StaffType)
+                    {
+                        AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
+                        AdministrativeStaff obj = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin, adminStaff.Id);
+                        return Ok(new { obj });
+                    }
+                    if (StaffTypes.Support == staff.StaffType)
+                    {
+                        SupportStaff supportStaff = (SupportStaff)staff;
+                        SupportStaff obj = new SupportStaff(supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin, supportStaff.Id);
+                        return Ok(new { obj });
+                    }
+                }
+
+                return null;
             }
-            catch (Exception exc)
+            else
             {
-                throw exc;
+                return NotFound();
             }
         }
 
         // POST api/<StaffsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Staff staff)
         {
+            //try
+            //{
+            //    if (staff == null)
+            //    {
+            //        return BadRequest("Owner object is null");
+            //    }
+
+            //    if (!ModelState.IsValid)
+            //    {
+            //        return BadRequest("Invalid model object");
+            //    }
+
+            //    //additional code
+
+            //}
+    
         }
 
         // PUT api/<StaffsController>/5
@@ -81,3 +155,4 @@ namespace StaffsAPI.Controllers
 
     }
 }
+
