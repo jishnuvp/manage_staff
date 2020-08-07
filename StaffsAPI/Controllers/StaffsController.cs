@@ -105,25 +105,60 @@ namespace StaffsAPI.Controllers
         }
 
         // POST api/<StaffsController>
-        [HttpPost]
-        public void Post([FromBody] Staff staff)
+        [HttpPost("Teaching")]
+        public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
-            //try
-            //{
-            //    if (staff == null)
-            //    {
-            //        return BadRequest("Owner object is null");
-            //    }
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                List<Staff> StaffList = new List<Staff>();
+                StaffList.Add(staff);
+                dataBaseManager.AddStaffToType(StaffList);
+                return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
 
-            //    if (!ModelState.IsValid)
-            //    {
-            //        return BadRequest("Invalid model object");
-            //    }
+        }
 
-            //    //additional code
+        // POST api/<StaffsController>
+        [HttpPost("Administrative")]
+        public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
+        {
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                List<Staff> StaffList = new List<Staff>();
+                StaffList.Add(staff);
+                dataBaseManager.AddStaffToType(StaffList);
+                return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
 
-            //}
-    
+        }
+
+        // POST api/<StaffsController>
+        [HttpPost("Support")]
+        public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
+        {
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                List<Staff> StaffList = new List<Staff>();
+                StaffList.Add(staff);
+                dataBaseManager.AddStaffToType(StaffList);
+                return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+
         }
 
         // PUT api/<StaffsController>/5
