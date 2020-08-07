@@ -104,7 +104,6 @@ namespace StaffsAPI.Controllers
             }
         }
 
-        // POST api/<StaffsController>
         [HttpPost("Teaching")]
         public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
@@ -123,7 +122,6 @@ namespace StaffsAPI.Controllers
 
         }
 
-        // POST api/<StaffsController>
         [HttpPost("Administrative")]
         public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
         {
@@ -142,7 +140,6 @@ namespace StaffsAPI.Controllers
 
         }
 
-        // POST api/<StaffsController>
         [HttpPost("Support")]
         public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
         {
@@ -161,13 +158,11 @@ namespace StaffsAPI.Controllers
 
         }
 
-        // PUT api/<StaffsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<StaffsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
