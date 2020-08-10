@@ -9,7 +9,7 @@ namespace StaffLibrary
     public enum StaffTypes { Teaching = 1, Administrative = 2, Support = 3 };
 
     [JsonConverter(typeof(JsonSubtypes), "StaffType")]
-    public class Staff
+    public class Staff : IStaff
     {
         //properties
         public int Id { get; set; }

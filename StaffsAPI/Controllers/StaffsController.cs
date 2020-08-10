@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using StaffLibrary;
 using StaffLibrary.DbManager;
 
@@ -25,40 +26,7 @@ namespace StaffsAPI.Controllers
             {
                 DataBaseManager dataBaseManager = new DataBaseManager();
                 List<Staff> StaffList = dataBaseManager.FetchStaffByCategory(type);
-                if(type == StaffTypes.Teaching)
-                {
-                    List<TeachingStaff> staffs = new List<TeachingStaff>();
-                    foreach(var staff in StaffList)
-                    {
-                        TeachingStaff teachingStaff = (TeachingStaff)staff;
-                        TeachingStaff obj = new TeachingStaff(teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin, teachingStaff.Id);
-                        staffs.Add(obj);
-                    }
-                    return Ok(new { staffs });
-                }
-                if (type == StaffTypes.Administrative)
-                {
-                    List<AdministrativeStaff> staffs = new List<AdministrativeStaff>();
-                    foreach (var staff in StaffList)
-                    {
-                        AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
-                        AdministrativeStaff obj = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin, adminStaff.Id);
-                        staffs.Add(obj);
-                    }
-                    return Ok(new { staffs });
-                }
-                if (type == StaffTypes.Support)
-                {
-                    List<SupportStaff> staffs = new List<SupportStaff>();
-                    foreach (var staff in StaffList)
-                    {
-                        SupportStaff supportStaff = (SupportStaff)staff;
-                        SupportStaff obj = new SupportStaff(supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin, supportStaff.Id);
-                        staffs.Add(obj);
-                    }
-                    return Ok(new { staffs });
-                }
-                return null;
+                return Ok(new { StaffList });
             }
             else
             {
@@ -73,32 +41,15 @@ namespace StaffsAPI.Controllers
             List<Staff> StaffList = dataBaseManager.FetchStaffInfo(id);
             if(StaffList.Count > 0) { 
                 var staff = StaffList.First();
-                if (StaffTypes.Teaching == staff.StaffType)
-                {
-                    TeachingStaff teachingStaff = (TeachingStaff)staff;
-                    TeachingStaff obj = new TeachingStaff(teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin, teachingStaff.Id);
-                    return Ok(new { obj });
-                }
-                if (StaffTypes.Administrative == staff.StaffType)
-                {
-                    AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
-                    AdministrativeStaff obj = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin, adminStaff.Id);
-                    return Ok(new { obj });
-                }
-                if (StaffTypes.Support == staff.StaffType)
-                {
-                    SupportStaff supportStaff = (SupportStaff)staff;
-                    SupportStaff obj = new SupportStaff(supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin, supportStaff.Id);
-                    return Ok(new { obj });
-                }
-                return NotFound();
+                return Ok(new { staff });
             }
             else
             {
                 return NotFound();
             }
         }
-        [HttpPost]
+
+        [HttpPost("Teaching")]
         public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
@@ -121,7 +72,7 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Administrative")]
         public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
@@ -144,7 +95,7 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Support")]
         public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
@@ -167,7 +118,7 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Teaching/{id}")]
         public IActionResult UpdateTeachingStaff(int id, [FromBody] TeachingStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
@@ -187,7 +138,7 @@ namespace StaffsAPI.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Administrative/{id}")]
         public IActionResult UpdateAdministrativeStaff(int id, [FromBody] AdministrativeStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
@@ -207,7 +158,7 @@ namespace StaffsAPI.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Support/{id}")]
         public IActionResult UpdateSupportStaff(int id, [FromBody] SupportStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
