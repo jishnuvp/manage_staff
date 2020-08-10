@@ -51,7 +51,7 @@ namespace StaffsAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostTeachingStaff([FromBody] Object staff)
+        public IActionResult Post([FromBody] Object staff)
         {
            
             var jsonString = staff.ToString();
@@ -133,7 +133,7 @@ namespace StaffsAPI.Controllers
         //}
 
         [HttpPut("{id}")]
-        public IActionResult UpdateTeachingStaff(int id, [FromBody] Object staff)
+        public IActionResult Put(int id, [FromBody] Object staff)
         {
             var jsonString = staff.ToString();
             var temp = (int)JObject.Parse(jsonString)["staffType"];
