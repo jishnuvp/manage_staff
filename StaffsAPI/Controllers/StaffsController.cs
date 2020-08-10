@@ -72,31 +72,26 @@ namespace StaffsAPI.Controllers
             DataBaseManager dataBaseManager = new DataBaseManager();
             List<Staff> StaffList = dataBaseManager.FetchStaffInfo(id);
             if(StaffList.Count > 0) { 
-                foreach(var staff in StaffList)
+                var staff = StaffList.First();
+                if (StaffTypes.Teaching == staff.StaffType)
                 {
-                    var temp = staff.StaffType;
-                    var name = staff.Name;
-                    if(StaffTypes.Teaching == staff.StaffType)
-                    {
-                        TeachingStaff teachingStaff = (TeachingStaff)staff;
-                        TeachingStaff obj = new TeachingStaff(teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin, teachingStaff.Id);
-                        return Ok(new { obj });
-                    }
-                    if(StaffTypes.Administrative == staff.StaffType)
-                    {
-                        AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
-                        AdministrativeStaff obj = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin, adminStaff.Id);
-                        return Ok(new { obj });
-                    }
-                    if (StaffTypes.Support == staff.StaffType)
-                    {
-                        SupportStaff supportStaff = (SupportStaff)staff;
-                        SupportStaff obj = new SupportStaff(supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin, supportStaff.Id);
-                        return Ok(new { obj });
-                    }
+                    TeachingStaff teachingStaff = (TeachingStaff)staff;
+                    TeachingStaff obj = new TeachingStaff(teachingStaff.Name, teachingStaff.EmpCode, teachingStaff.StaffType, teachingStaff.Subject, teachingStaff.ContactNumber, teachingStaff.DateOfJoin, teachingStaff.Id);
+                    return Ok(new { obj });
                 }
-
-                return null;
+                if (StaffTypes.Administrative == staff.StaffType)
+                {
+                    AdministrativeStaff adminStaff = (AdministrativeStaff)staff;
+                    AdministrativeStaff obj = new AdministrativeStaff(adminStaff.Name, adminStaff.EmpCode, adminStaff.StaffType, adminStaff.Role, adminStaff.ContactNumber, adminStaff.DateOfJoin, adminStaff.Id);
+                    return Ok(new { obj });
+                }
+                if (StaffTypes.Support == staff.StaffType)
+                {
+                    SupportStaff supportStaff = (SupportStaff)staff;
+                    SupportStaff obj = new SupportStaff(supportStaff.Name, supportStaff.EmpCode, supportStaff.StaffType, supportStaff.Department, supportStaff.ContactNumber, supportStaff.DateOfJoin, supportStaff.Id);
+                    return Ok(new { obj });
+                }
+                return NotFound();
             }
             else
             {
@@ -109,7 +104,7 @@ namespace StaffsAPI.Controllers
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
                 || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
-                return StatusCode(500);
+                return ValidationProblem();
             }
             try
             {
@@ -132,7 +127,7 @@ namespace StaffsAPI.Controllers
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
                 || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
-                return StatusCode(500);
+                return ValidationProblem();
             }
             try
             {
@@ -155,7 +150,7 @@ namespace StaffsAPI.Controllers
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
                 || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
-                return StatusCode(500);
+                return ValidationProblem();
             }
             try
             {
@@ -178,7 +173,7 @@ namespace StaffsAPI.Controllers
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
                 || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
-                return StatusCode(500);
+                return ValidationProblem();
             }
             try
             {
@@ -198,7 +193,7 @@ namespace StaffsAPI.Controllers
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
                 || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
-                return StatusCode(500);
+                return ValidationProblem();
             }
             try
             {
@@ -218,7 +213,7 @@ namespace StaffsAPI.Controllers
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
                 || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
-                return StatusCode(500);
+                return ValidationProblem();
             }
             try
             {
