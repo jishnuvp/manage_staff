@@ -234,16 +234,21 @@ namespace StaffsAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            bool flag = true;
             try
             {
                 DataBaseManager dataBaseManager = new DataBaseManager();
-                dataBaseManager.DeleteStaff(id);
+                flag = dataBaseManager.DeleteStaff(id);
+                if (flag)
+                    return StatusCode(200);
+                else
+                    return StatusCode(404);
             }
             catch (Exception exc)
             {
-                throw exc;
+                return StatusCode(200);
             }
         }
 
