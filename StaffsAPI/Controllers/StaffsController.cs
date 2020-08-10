@@ -17,8 +17,8 @@ namespace StaffsAPI.Controllers
     public class StaffsController : ControllerBase
     {
         // GET: api/<StaffsController>
-        [HttpGet("type/{type}")]
-        public IActionResult GetAllStaffByType(StaffTypes type)
+        [HttpGet]
+        public IActionResult GetAllStaffByType([FromQuery]  StaffTypes type)
         {
             var temp = Enum.IsDefined(typeof(StaffTypes), type);
             if (Enum.IsDefined(typeof(StaffTypes), type))
@@ -103,8 +103,7 @@ namespace StaffsAPI.Controllers
                 return NotFound();
             }
         }
-
-        [HttpPost("Teaching")]
+        [HttpPost]
         public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
@@ -127,7 +126,7 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPost("Administrative")]
+        [HttpPost]
         public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
@@ -150,7 +149,7 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPost("Support")]
+        [HttpPost]
         public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
@@ -173,7 +172,7 @@ namespace StaffsAPI.Controllers
 
         }
 
-        [HttpPut("Teaching/{id}")]
+        [HttpPut("{id}")]
         public IActionResult UpdateTeachingStaff(int id, [FromBody] TeachingStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
@@ -193,7 +192,7 @@ namespace StaffsAPI.Controllers
             }
         }
 
-        [HttpPut("Administrative/{id}")]
+        [HttpPut("{id}")]
         public IActionResult UpdateAdministrativeStaff(int id, [FromBody] AdministrativeStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
@@ -213,7 +212,7 @@ namespace StaffsAPI.Controllers
             }
         }
 
-        [HttpPut("Support/{id}")]
+        [HttpPut("{id}")]
         public IActionResult UpdateSupportStaff(int id, [FromBody] SupportStaff staff)
         {
             if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
