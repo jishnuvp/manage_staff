@@ -107,8 +107,8 @@ namespace StaffsAPI.Controllers
         [HttpPost("Teaching")]
         public IActionResult PostTeachingStaff([FromBody] TeachingStaff staff)
         {
-            if(string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Subject)
-                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
+                || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
                 return StatusCode(500);
             }
@@ -130,8 +130,8 @@ namespace StaffsAPI.Controllers
         [HttpPost("Administrative")]
         public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
         {
-            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Role)
-                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
+                || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
                 return StatusCode(500);
             }
@@ -153,8 +153,8 @@ namespace StaffsAPI.Controllers
         [HttpPost("Support")]
         public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
         {
-            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Department)
-                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
+                || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
                 return StatusCode(500);
             }
@@ -176,8 +176,8 @@ namespace StaffsAPI.Controllers
         [HttpPut("Teaching/{id}")]
         public IActionResult UpdateTeachingStaff(int id, [FromBody] TeachingStaff staff)
         {
-            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Subject)
-                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
+                || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
                 return StatusCode(500);
             }
@@ -196,8 +196,8 @@ namespace StaffsAPI.Controllers
         [HttpPut("Administrative/{id}")]
         public IActionResult UpdateAdministrativeStaff(int id, [FromBody] AdministrativeStaff staff)
         {
-            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Role)
-                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
+                || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
                 return StatusCode(500);
             }
@@ -216,8 +216,8 @@ namespace StaffsAPI.Controllers
         [HttpPut("Support/{id}")]
         public IActionResult UpdateSupportStaff(int id, [FromBody] SupportStaff staff)
         {
-            if (string.IsNullOrEmpty(staff.Name) && string.IsNullOrEmpty(staff.EmpCode) && string.IsNullOrEmpty(staff.ContactNumber) && string.IsNullOrEmpty(staff.Department)
-                && staff.DateOfJoin != null && Enum.IsDefined(typeof(StaffTypes), staff.StaffType))
+            if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
+                || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
             {
                 return StatusCode(500);
             }
@@ -245,12 +245,6 @@ namespace StaffsAPI.Controllers
             {
                 throw exc;
             }
-        }
-
-        [HttpGet]
-        public string GetAllStaff()
-        {
-            return "test";
         }
 
     }
