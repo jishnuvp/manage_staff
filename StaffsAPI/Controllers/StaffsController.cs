@@ -18,7 +18,6 @@ namespace StaffsAPI.Controllers
     [ApiController]
     public class StaffsController : ControllerBase
     {
-        // GET: api/<StaffsController>
         [HttpGet]
         public IActionResult GetAllStaffByType([FromQuery]  StaffTypes type)
         {
@@ -86,52 +85,6 @@ namespace StaffsAPI.Controllers
 
         }
 
-        //[HttpPost("Administrative")]
-        //public IActionResult PostAdministrativeStaff([FromBody] AdministrativeStaff staff)
-        //{
-        //    if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
-        //        || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
-        //    {
-        //        return ValidationProblem();
-        //    }
-        //    try
-        //    {
-        //        DataBaseManager dataBaseManager = new DataBaseManager();
-        //        List<Staff> StaffList = new List<Staff>();
-        //        StaffList.Add(staff);
-        //        dataBaseManager.AddStaffToType(StaffList);
-        //        return StatusCode(201);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500);
-        //    }
-
-        //}
-
-        //[HttpPost("Support")]
-        //public IActionResult PostSupportStaff([FromBody] SupportStaff staff)
-        //{
-        //    if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
-        //        || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
-        //    {
-        //        return ValidationProblem();
-        //    }
-        //    try
-        //    {
-        //        DataBaseManager dataBaseManager = new DataBaseManager();
-        //        List<Staff> StaffList = new List<Staff>();
-        //        StaffList.Add(staff);
-        //        dataBaseManager.AddStaffToType(StaffList);
-        //        return StatusCode(201);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500);
-        //    }
-
-        //}
-
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Object staff)
         {
@@ -166,63 +119,7 @@ namespace StaffsAPI.Controllers
             {
                 return StatusCode(500);
             }
-
-            //if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Subject)
-            //    || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
-            //{
-            //    return ValidationProblem();
-            //}
-            //try
-            //{
-            //    DataBaseManager dataBaseManager = new DataBaseManager();
-            //    dataBaseManager.UpdateStaff(staff);
-            //    return StatusCode(200);
-            //}
-            //catch (Exception e)
-            //{
-            //    return StatusCode(500);
-            //}
         }
-
-        //[HttpPut("Administrative/{id}")]
-        //public IActionResult UpdateAdministrativeStaff(int id, [FromBody] AdministrativeStaff staff)
-        //{
-        //    if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Role)
-        //        || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
-        //    {
-        //        return ValidationProblem();
-        //    }
-        //    try
-        //    {
-        //        DataBaseManager dataBaseManager = new DataBaseManager();
-        //        dataBaseManager.UpdateStaff(staff);
-        //        return StatusCode(200);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500);
-        //    }
-        //}
-
-        //[HttpPut("Support/{id}")]
-        //public IActionResult UpdateSupportStaff(int id, [FromBody] SupportStaff staff)
-        //{
-        //    if (string.IsNullOrEmpty(staff.Name) || string.IsNullOrEmpty(staff.EmpCode) || string.IsNullOrEmpty(staff.ContactNumber) || string.IsNullOrEmpty(staff.Department)
-        //        || staff.DateOfJoin == null || (Enum.IsDefined(typeof(StaffTypes), staff.StaffType)) != true)
-        //    {
-        //        return ValidationProblem();
-        //    }
-        //    try
-        //    {
-        //        DataBaseManager dataBaseManager = new DataBaseManager();
-        //        dataBaseManager.UpdateStaff(staff);
-        //        return StatusCode(200);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(404);
-        //    }
-        //}
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
