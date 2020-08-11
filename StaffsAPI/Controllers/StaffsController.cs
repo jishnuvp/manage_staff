@@ -104,7 +104,7 @@ namespace StaffsAPI.Controllers
                 {
                     AdministrativeStaff obj = JsonConvert.DeserializeObject<AdministrativeStaff>(jsonString);
                     dataBaseManager.UpdateStaff(obj);
-                    return StatusCode(201);
+                    return StatusCode(200);
                 }
                 if (type == StaffTypes.Support)
                 {
