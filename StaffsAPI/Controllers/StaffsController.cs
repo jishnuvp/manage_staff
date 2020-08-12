@@ -34,7 +34,7 @@ namespace StaffsAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] 
         public IActionResult GetStaff(int id)
         {
             DataBaseManager dataBaseManager = new DataBaseManager();
