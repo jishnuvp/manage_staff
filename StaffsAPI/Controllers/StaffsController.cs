@@ -55,6 +55,7 @@ namespace StaffsAPI.Controllers
            
             var jsonString = staff.ToString();
             var temp = (int)JObject.Parse(jsonString)["staffType"];
+            bool isExist = false;
             StaffTypes type = (StaffTypes)temp;
 
             List<Staff> StaffList = new List<Staff>();
@@ -74,9 +75,15 @@ namespace StaffsAPI.Controllers
                 StaffList.Add(obj);
             }
             DataBaseManager dataBaseManager = new DataBaseManager();
-            try { 
-                dataBaseManager.AddStaffToType(StaffList);
-                return StatusCode(201);
+            try {
+                isExist = dataBaseManager.CheckCodeExistence(StaffList[0].EmpCode);
+                if (isExist)
+                    return StatusCode(400);
+                else
+                {
+                    dataBaseManager.AddStaffToType(StaffList);
+                    return StatusCode(201);
+                }
             }
             catch(Exception e)
             {
@@ -98,7 +105,7 @@ namespace StaffsAPI.Controllers
                 {
                     TeachingStaff obj = JsonConvert.DeserializeObject<TeachingStaff>(jsonString);
                     dataBaseManager.UpdateStaff(obj);
-                    return StatusCode(201);
+                    return StatusCode(200);
                 }
                 if (type == StaffTypes.Administrative)
                 {
@@ -110,7 +117,7 @@ namespace StaffsAPI.Controllers
                 {
                     SupportStaff obj = JsonConvert.DeserializeObject<SupportStaff>(jsonString);
                     dataBaseManager.UpdateStaff(obj);
-                    return StatusCode(201);
+                    return StatusCode(200);
                 }
 
                 return NotFound(); 
