@@ -25,6 +25,7 @@ function renderTable() {
 
             let container = document.querySelector('#staff-tb');
             container.innerHTML = html;
+            paginateTable();
         })
         .catch(function (error) {
             console.log(error);

@@ -30,7 +30,7 @@
         </select>
         <button type="button" class="staff-add-btn" onclick="renderAddPopup();">Add Staff</button>
         <div class="table-responsive">
-            <table class="table" id="staff-table">
+            <table class="table pagination" id="staff-table" data-pagecount="7">
                 <thead>
                     <tr>
                         <th class="sort-th" onclick="sortTable(0);">Name <span>&#8645;</span></th>
@@ -44,6 +44,7 @@
                 <tbody id="staff-tb">
                 </tbody>
             </table>
+            <div id="paginate"></div>
         </div>
         <div id="staff-modal" class="modal">
 
@@ -114,6 +115,7 @@
         <div id="validate-alert"></div>
     </div>
     <script src="home.js"></script>
+    <script src="pagination.js"></script>
 </body>
 
 </html>

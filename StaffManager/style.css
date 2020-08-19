@@ -209,6 +209,26 @@ body {
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
+  .pagination tr.inactive {
+    display: none;
+}
+.paginate-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+.paginate-wrapper .paginate-item{
+    padding: 3px 12px;
+    background: #212529;
+    color: #fff;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 1px solid #212529;
+}
+.paginate-wrapper .paginate-item.selected{
+    background-color: #fff;
+    color: #212529;
+}
   
   @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
