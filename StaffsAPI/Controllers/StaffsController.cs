@@ -143,11 +143,24 @@ namespace StaffsAPI.Controllers
             }
             catch (Exception exc)
             {
-                return StatusCode(200);
+                return StatusCode(500);
             }
         }
 
-
+        [HttpDelete]
+        public IActionResult DeleteMultiple([FromBody] int[] staffIds)
+        {
+            try
+            {
+                DataBaseManager dataBaseManager = new DataBaseManager();
+                dataBaseManager.DeleteMultipleStaffs(staffIds);
+                return StatusCode(200);
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
 

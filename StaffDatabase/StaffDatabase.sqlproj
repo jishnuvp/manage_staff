@@ -78,6 +78,8 @@
     <Build Include="dbo\user_defined_table\UDTStaffs.sql" />
     <Build Include="dbo\stored_procedure\SPCheckStaffExistence.sql" />
     <Build Include="dbo\stored_procedure\SPStaffInsert.sql" />
+    <Build Include="dbo\stored_procedure\SPDeleteMultipleStaff.sql" />
+    <Build Include="dbo\user_defined_table\UDTIntIdList.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\SupportStaff.sql" />

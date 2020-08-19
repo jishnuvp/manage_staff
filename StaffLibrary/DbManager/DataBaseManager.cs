@@ -359,5 +359,34 @@ namespace StaffLibrary.DbManager
                 }
             }
         }
+
+        public void DeleteMultipleStaffs(int[] staffIds)
+        {
+            DataTable DT = new DataTable();
+            DT.Columns.Add(new DataColumn("Id", typeof(int)));
+
+            foreach(int id in staffIds)
+            {
+                DataRow DR = DT.NewRow();
+
+                DR["Id"] = id;
+                DT.Rows.Add(DR);
+            }
+
+
+            using (SqlConnection con = new SqlConnection(ConnString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SPDeleteMultipleStaff", con))
+                {
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@IdList", DT); // passing Datatable
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
