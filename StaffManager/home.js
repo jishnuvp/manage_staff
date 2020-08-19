@@ -67,7 +67,7 @@ function validate(isAdd) {
     } else {
         type = document.querySelector('#staff-modal input[name="StaffType"]').value;
     }
-    if (code == '' || name == '' || number == '' || !(/^[a-z]([-']?[a-z]+)*( [a-z]([-']?[a-z]+)*)+$/.test(name)) || !(/^[0-9]+$/.test(number))) {
+    if (code == '' || name == '' || number == '' || !(/^[a-zA-Z][a-zA-Z_ ]*[a-zA-Z_]+$/.test(name)) || !(/^[0-9]+$/.test(number))) {
         return false;
     }
     if (type == 'Teaching' && subject == '' || type == 'Teaching' && !(/^[a-zA-Z]+$/.test(subject))) {
