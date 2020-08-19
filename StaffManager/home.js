@@ -9,6 +9,7 @@ function renderTable() {
             staffs.map(function (staff) {
                 let d = new Date(staff.DateOfJoin);
                 let htmlSegment = `<tr>
+                            <td><input type="checkbox" id="dlt-chk-${staff.Id}" name="DeleteIds" value="${staff.Id}"></td>
                             <td>${staff.Name}</td>
                             <td>${staff.EmpCode}</td>
                             <td>${staff.StaffType}</td>
@@ -26,6 +27,7 @@ function renderTable() {
             let container = document.querySelector('#staff-tb');
             container.innerHTML = html;
             paginateTable();
+            populatedeleteList();
         })
         .catch(function (error) {
             console.log(error);
@@ -350,5 +352,49 @@ function sortTable(n) {
                 switching = true;
             }
         }
+    }
+}
+
+var idsList = [];
+
+function populatedeleteList() {
+    var ele = document.querySelectorAll('input[name="DeleteIds"]');
+    ele.forEach(element => {
+        if (idsList.includes(element.value)) {
+            element.checked = true;
+        } else {
+            element.checked = false;
+        }
+        element.addEventListener('change', function () {
+            if (element.checked == true)
+                idsList.push(element.value)
+            else
+                idsList.pop(element.value);
+            if (idsList.length > 0)
+                document.querySelector('#dltAll-btn').style.display = 'inline-block';
+            else
+                document.querySelector('#dltAll-btn').style.display = 'none';
+        });
+    });
+
+}
+
+function deleteMultipleStaffs() {
+    let isSubmit = getConfirmation();
+    if (isSubmit) {
+        let fetchData = {
+            method: 'DELETE',
+            body: JSON.stringify(idsList),
+            headers: new Headers({ 'content-type': 'application/json' })
+        }
+        fetch(url, fetchData)
+            .then(function (response) {
+                if (response.status == 200 || response.status == 204) {
+                    document.querySelector('#staff-modal').style.display = "none";
+                    window.location.reload();
+                }
+                else
+                    showToasterMessage('Something went wrong. Please try again');
+            });
     }
 }

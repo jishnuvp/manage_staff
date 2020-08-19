@@ -28,11 +28,13 @@
             <option value="Administrative">Administrative</option>
             <option value="Support">Support</option>
         </select>
+        <button class="multy-dlt-btn" id="dltAll-btn" onclick="deleteMultipleStaffs();">Delete All</button>
         <button type="button" class="staff-add-btn" onclick="renderAddPopup();">Add Staff</button>
         <div class="table-responsive">
             <table class="table pagination" id="staff-table" data-pagecount="7">
                 <thead>
                     <tr>
+                        <th></th>
                         <th class="sort-th" onclick="sortTable(0);">Name <span>&#8645;</span></th>
                         <th>Emp Code</th>
                         <th>Type</th>
