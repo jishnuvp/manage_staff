@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff</title>
+</head>
+
+<body>
+    <header>
+
+        <div class="header-wrapper bx">
+            <div class="flex-container">
+                <div class="logo-wrapper">
+                    <p>LOGO</p>
+                </div>
+                <div class="head-wrapper">
+                    <h3 class="text-center">Staff Manager</h3>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mt">
+        <select class="type-selector" id="type-select" onchange="renderTable()">
+            <option value="Teaching" selected>Teaching</option>
+            <option value="Administrative">Administrative</option>
+            <option value="Support">Support</option>
+        </select>
+        <button type="button" class="staff-add-btn" onclick="renderAddPopup();">Add Staff</button>
+        <div class="table-responsive">
+            <table class="table" id="staff-table">
+                <thead>
+                    <tr>
+                        <th class="sort-th" onclick="sortTable(0);">Name <span>&#8645;</span></th>
+                        <th>Emp Code</th>
+                        <th>Type</th>
+                        <th>Phone Number</th>
+                        <th>Date Of Join</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="staff-tb">
+                </tbody>
+            </table>
+        </div>
+        <div id="staff-modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <h3 class="modal-title" id="add-title">Add Staff</h3>
+                <h3 class="modal-title" id="edit-title">Edit Staff</h3>
+                <span class="close" id="close">&times;</span>
+                <div class="modal-body">
+                    <form id="staff-form">
+                        <input type="hidden" name="Id" readonly required>
+                        <div class="form-row">
+                            <label>Employee Code</label>
+                            <input type="text" name="EmpCode" readonly required>
+                        </div>
+                        <div class="form-row">
+                            <label>Name</label>
+                            <input type="text" name="Name" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Staff Type</label>
+                            <input type="text" name="StaffType" id="staff-type-edit" readonly required>
+                            <div id="staff-type-add">
+                                <select name="StaffType" class="type-selector" onchange="showHideFields();">
+                                    <option value="Teaching" selected>Teaching</option>
+                                    <option value="Administrative">Administrative</option>
+                                    <option value="Support">Support</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-none teaching-fields">
+                            <div class="form-row">
+                                <label>Subject</label>
+                                <input type="text" name="Subject" required>
+                            </div>
+                        </div>
+                        <div class="d-none administrative-fields">
+                            <div class="form-row">
+                                <label>Role</label>
+                                <input type="text" name="Role" required>
+                            </div>
+                        </div>
+                        <div class="d-none support-fields">
+                            <div class="form-row">
+                                <label>Department</label>
+                                <input type="text" name="Department" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label>Contact Number</label>
+                            <input type="text" name="ContactNumber" required>
+                        </div>
+                        <div class="form-row" id="form-date">
+                            <label>Date Of Join</label>
+                            <input type="text" name="DateOfJoin" readonly required>
+                        </div>
+                        <div class="text-center">
+                            <button class="modal-sbmt-btn mx-auto" type="button" id="edit-sbmt-btn"
+                                onclick="editStaff(event);">Submit</button>
+                            <button class="modal-sbmt-btn mx-auto" type="button" id="add-sbmt-btn"
+                                onclick="addStaff(event);">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div id="validate-alert"></div>
+    </div>
+    <script src="home.js"></script>
+</body>
+
+</html>
