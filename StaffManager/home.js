@@ -28,6 +28,7 @@ function renderTable() {
             container.innerHTML = html;
             paginateTable();
             populatedeleteList();
+            populateIdsListOnSelectAll();
         })
         .catch(function (error) {
             console.log(error);
@@ -358,25 +359,46 @@ function sortTable(n) {
 var idsList = [];
 
 function populatedeleteList() {
+    document.querySelector('#slct-all-staff').checked = false;
     var ele = document.querySelectorAll('input[name="DeleteIds"]');
     ele.forEach(element => {
-        if (idsList.includes(element.value)) {
-            element.checked = true;
-        } else {
-            element.checked = false;
-        }
+        // if (idsList.includes(element.value)) {
+        //     element.checked = true;
+        // } else {
+        //     element.checked = false;
+        // }
         element.addEventListener('change', function () {
             if (element.checked == true)
                 idsList.push(element.value)
             else
                 idsList.pop(element.value);
-            if (idsList.length > 0)
-                document.querySelector('#dltAll-btn').style.display = 'inline-block';
-            else
-                document.querySelector('#dltAll-btn').style.display = 'none';
+            toggleDeleteAllBtn();
         });
     });
-
+    toggleDeleteAllBtn();
+}
+function toggleDeleteAllBtn() {
+    if (idsList.length > 0)
+        document.querySelector('#dltAll-btn').style.display = 'inline-block';
+    else
+        document.querySelector('#dltAll-btn').style.display = 'none';
+}
+function populateIdsListOnSelectAll() {
+    var selectAllCheck = document.querySelector('#slct-all-staff');
+    var ele = document.querySelectorAll('input[name="DeleteIds"]');
+    selectAllCheck.addEventListener('change', function () {
+        idsList.length = 0;
+        ele.forEach(element => {
+            if (selectAllCheck.checked == true) {
+                element.checked = true;
+                idsList.push(element.value);
+            }
+            else {
+                element.checked = false;
+            }
+            toggleDeleteAllBtn();
+        });
+    });
 }
 
 function deleteMultipleStaffs() {
