@@ -28,7 +28,7 @@ function renderTable() {
             container.innerHTML = html;
             paginateTable();
             populatedeleteList();
-            populateIdsListOnSelectAll();
+            populatedeleteListOnSelectAll();
         })
         .catch(function (error) {
             console.log(error);
@@ -383,7 +383,7 @@ function toggleDeleteAllBtn() {
     else
         document.querySelector('#dltAll-btn').style.display = 'none';
 }
-function populateIdsListOnSelectAll() {
+function populatedeleteListOnSelectAll() {
     var selectAllCheck = document.querySelector('#slct-all-staff');
     var ele = document.querySelectorAll('input[name="DeleteIds"]');
     selectAllCheck.addEventListener('change', function () {
