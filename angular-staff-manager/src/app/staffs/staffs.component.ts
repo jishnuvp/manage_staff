@@ -17,8 +17,8 @@ export class StaffsComponent implements OnInit {
 
   staffs: Staff;
 
-  getStaffs(): void {
-    this.staffService.getStaffs('Teaching')
+  getStaffs($type = 'Teaching'): void {
+    this.staffService.getStaffs($type)
       .subscribe(staffs => this.staffs = staffs.StaffList);
   }
 
