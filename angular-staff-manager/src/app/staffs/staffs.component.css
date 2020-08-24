@@ -1,0 +1,25 @@
+.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.table td, .table th {
+    text-align: left;
+    padding: 8px;
+}
+.table td, .table th {
+    border-top: 1px solid #ccc;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+.table .sort-th{
+    cursor: pointer;
+}
+.table .sort-th span{
+    font-size: 14px;
+    font-weight: 400;
+}

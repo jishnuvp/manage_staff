@@ -1,0 +1,33 @@
+<div class="table-responsive">
+    <table class="table pagination" id="staff-table" data-pagecount="7">
+        <thead>
+            <tr>
+                <th><input type="checkbox" name="SelectAllStaff" id="slct-all-staff"></th>
+                <th class="sort-th">Name <span>&#8645;</span></th>
+                <th>Emp Code</th>
+                <th>Type</th>
+                <th>Phone Number</th>
+                <th>Date Of Join</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let staff of staffs">
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>{{staff.Name}}</td>
+                <td>{{staff.EmpCode}}</td>
+                <td>{{staff.StaffType}}</td>
+                <td>{{staff.ContactNumber}}</td>
+                <td>{{staff.DateOfJoin}}</td>
+                <td><button class="mr-1" title="Edit">&#9997;</button>
+                    <button title="Delete">&#10006;</button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody id="staff-tb">
+        </tbody>
+    </table>
+    <div id="paginate"></div>
+</div>
