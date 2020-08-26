@@ -29,7 +29,7 @@
                     <td>{{staff.StaffType}}</td>
                     <td>{{staff.ContactNumber}}</td>
                     <td>{{staff.DateOfJoin | date : 'shortDate'}}</td>
-                    <td><button class="mr-1" title="Edit">&#9997;</button>
+                    <td><button class="mr-1" title="Edit" (click)="renderEditPopup(staff)">&#9997;</button>
                         <button title="Delete">&#10006;</button>
                     </td>
                 </tr>
@@ -43,30 +43,34 @@
     <div id="staff-modal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <ng-container *ngIf="userAction == 'add'">
+            <ng-container *ngIf="isAdd == true">
                 <h3 class="modal-title" id="add-title">Add Staff</h3>
             </ng-container>
-            <ng-container *ngIf="userAction == 'edit'">
+            <ng-container *ngIf="isEdit == true">
                 <h3 class="modal-title" id="edit-title">Edit Staff</h3>
             </ng-container>
             <span class="close" id="close">&times;</span>
             <div class="modal-body">
                 <form id="staff-form">
-                    <input type="hidden" name="Id" readonly required>
+                    <input type="hidden" name="Id" [ngModel]="(selectedStaff)?.Id"
+                        (ngModelChange)="selectedStaff.Id = $event">
                     <div class="form-row">
                         <label>Employee Code</label>
-                        <input type="text" name="EmpCode" [attr.userAction]="'edit' ? 'readonly' : ''" required>
+                        <input type="text" name="EmpCode" [ngModel]="(selectedStaff)?.EmpCode"
+                            (ngModelChange)="selectedStaff.EmpCode = $event" [readonly]="isReadOnly" required>
                     </div>
                     <div class="form-row">
                         <label>Name</label>
-                        <input type="text" name="Name" required>
+                        <input type="text" name="Name" [ngModel]="(selectedStaff)?.Name"
+                            (ngModelChange)="selectedStaff.Name = $event" required>
                     </div>
                     <div class="form-row">
                         <label>Staff Type</label>
-                        <ng-container *ngIf="userAction == 'edit'">
-                            <input type="text" name="StaffType" id="staff-type-edit" readonly required>
+                        <ng-container *ngIf="isEdit == true">
+                            <input type="text" name="StaffType" [ngModel]="(selectedStaff)?.StaffType"
+                                id="staff-type-edit" readonly required>
                         </ng-container>
-                        <ng-container *ngIf="userAction == 'add'">
+                        <ng-container *ngIf="isAdd == true">
                             <div id="staff-type-add">
                                 <select name="StaffType" class="type-selector" [(ngModel)]="selectedType">
                                     <option value="Teaching" selected>Teaching</option>
@@ -80,7 +84,8 @@
                         <div class=" teaching-fields">
                             <div class="form-row">
                                 <label>Subject</label>
-                                <input type="text" name="Subject" required>
+                                <input type="text" name="Subject" [ngModel]="(selectedStaff)?.Subject"
+                                    (ngModelChange)="selectedStaff.Subject = $event" required>
                             </div>
                         </div>
                     </ng-container>
@@ -88,7 +93,8 @@
                         <div class="administrative-fields">
                             <div class="form-row">
                                 <label>Role</label>
-                                <input type="text" name="Role" required>
+                                <input type="text" name="Role" [ngModel]="(selectedStaff)?.Role"
+                                    (ngModelChange)="selectedStaff.Role = $event" required>
                             </div>
                         </div>
                     </ng-container>
@@ -96,24 +102,29 @@
                         <div class="support-fields">
                             <div class="form-row">
                                 <label>Department</label>
-                                <input type="text" name="Department" required>
+                                <input type="text" name="Department" [ngModel]="(selectedStaff)?.Department"
+                                    (ngModelChange)="selectedStaff.Department = $event" required>
                             </div>
                         </div>
                     </ng-container>
                     <div class="form-row">
                         <label>Contact Number</label>
-                        <input type="text" name="ContactNumber" required>
+                        <input type="text" name="ContactNumber" [ngModel]="(selectedStaff)?.ContactNumber"
+                            (ngModelChange)="selectedStaff.ContactNumber = $event" required>
                     </div>
-                    <div class="form-row" id="form-date">
-                        <label>Date Of Join</label>
-                        <input type="text" name="DateOfJoin" [attr.userAction]="'edit' ? 'readonly' : ''" required>
-                    </div>
+                    <ng-container *ngIf="isEdit == true">
+                        <div class="form-row" id="form-date">
+                            <label>Date Of Join</label>
+                            <input type="text" name="DateOfJoin"
+                                [ngModel]="(selectedStaff)?.DateOfJoin | date : 'shortDate'" readonly required>
+                        </div>
+                    </ng-container>
                     <div class="text-center">
-                        <ng-container *ngIf="userAction == 'edit'">
+                        <ng-container *ngIf="isEdit == true">
                             <button class="modal-sbmt-btn mx-auto" type="button" id="edit-sbmt-btn"
-                                onclick="editStaff(event);">Submit</button>
+                                (click)="updateStaff();">Submit</button>
                         </ng-container>
-                        <ng-container *ngIf="userAction == 'add'">
+                        <ng-container *ngIf="isAdd == true">
                             <button class="modal-sbmt-btn mx-auto" type="button" id="add-sbmt-btn"
                                 onclick="addStaff(event);">Submit</button>
                         </ng-container>

@@ -16,13 +16,52 @@ export class StaffsComponent implements OnInit {
   }
 
   staffs: Staff;
+  selectedStaff: Staff;
   selectedType: string;
-  userAction: string;
+  isAdd: boolean;
+  isEdit: boolean;
+  isReadOnly: boolean;
 
   getStaffs($type = 'Teaching'): void {
     this.staffService.getStaffs($type)
       .subscribe(staffs => this.staffs = staffs.StaffList);
   }
+
+  updateStaff(): void {
+    this.selectedStaff.StaffType = 1;
+
+    this.staffService.updateStaff(this.selectedStaff)
+      .subscribe();
+  }
+
+  renderEditPopup(staff: Staff): void {
+    this.isAdd = false;
+    this.isEdit = true;
+    this.isReadOnly = true;
+
+    // this.staffService.getStaff(selectedStaff.Id)
+    //   .subscribe(selectedStaff => this.selectedStaff = selectedStaff.staff);
+
+    this.selectedStaff = staff;
+
+
+    this.selectedType = staff.StaffType;
+
+    this.modelActions();
+
+  }
+  renderAddPopup(): void {
+    this.isAdd = true;
+    this.isReadOnly = false;
+    this.isEdit = false;
+    this.selectedStaff = null;
+    this.selectedType = 'Teaching';
+    this.modelActions();
+  }
+
+
+
+
 
   modelActions(): void {
     let modal: HTMLElement = document.querySelector("#staff-modal");
@@ -36,10 +75,6 @@ export class StaffsComponent implements OnInit {
         modal.style.display = "none";
       }
     }
-
-    document.querySelector('#staff-modal .teaching-fields').classList.add('d-none');  //for hiding all custom fields
-    document.querySelector('#staff-modal .administrative-fields').classList.add('d-none');
-    document.querySelector('#staff-modal .support-fields').classList.add('d-none');
   }
 
   validate(isAdd): boolean {
@@ -58,7 +93,7 @@ export class StaffsComponent implements OnInit {
     if (code == '' || name == '' || name.length > 25 || number == '' || number.length > 15 || !(/^[a-zA-Z][a-zA-Z_ ]*[a-zA-Z_]+$/.test(name)) || !(/^[0-9]+$/.test(number))) {
       return false;
     }
-    if (type == 'Teaching' && subject == '' || type == 'Teaching' && !(/^[a-zA-Z]+$/.test(subject)) || type == 'Teaching' && subject.length > 15) {
+    if (type == '' || type == 'Teaching' && subject == '' || type == 'Teaching' && !(/^[a-zA-Z]+$/.test(subject)) || type == 'Teaching' && subject.length > 15) {
       return false;
     } else if (type == 'Administrative' && role == '' || type == 'Administrative' && !(/^[a-zA-Z]+$/.test(role)) || type == 'Administrative' && role.length > 15) {
       return false;
@@ -68,9 +103,23 @@ export class StaffsComponent implements OnInit {
     return true;
   }
 
-  renderAddPopup() {
-    this.userAction = 'add';
-    this.modelActions();
+
+
+
+
+  addStaff(): void {
+    let flag = this.validate(this.isAdd);
+    if (flag) {
+      let data;
+      let code = (<HTMLInputElement>document.querySelector('#staff-modal input[name="EmpCode"]')).value;
+      let name = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Name"]')).value;
+      let type = (<HTMLInputElement>document.querySelector('#staff-modal select[name="StaffType"]')).value;
+      let number = (<HTMLInputElement>document.querySelector('#staff-modal input[name="ContactNumber"]')).value;
+      let date = new Date().toISOString();
+
+    }
+
   }
+
 
 }
