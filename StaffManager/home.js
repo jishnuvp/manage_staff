@@ -100,22 +100,23 @@ function editStaff(e) {
             EmpCode: code,
             Name: name,
             ContactNumber: number,
-            DateOfJoin: date
+            DateOfJoin: date,
+            StaffType: type
         }
 
         if (type == 'Teaching') {
             let subject = document.querySelector('#staff-modal input[name="Subject"]').value;
             data.Subject = subject;
-            data.StaffType = 1;
+            //data.StaffType = 1;
         }
         else if (type == 'Administrative') {
             let role = document.querySelector('#staff-modal input[name="Role"]').value;
             data.Role = role;
-            data.StaffType = 2;
+            //data.StaffType = 2;
         } else if (type == 'Support') {
             let department = document.querySelector('#staff-modal input[name="Department"]').value;
             data.Department = department;
-            data.StaffType = 3;
+            //data.StaffType = 3;
         }
         let fetchData = {
             method: 'PUT',
@@ -251,21 +252,22 @@ function addStaff(e) {
             EmpCode: code.toUpperCase(),
             Name: name,
             ContactNumber: number,
-            DateOfJoin: date
+            DateOfJoin: date,
+            StaffType: type
         }
         if (type == 'Teaching') {
             let subject = document.querySelector('#staff-modal input[name="Subject"]').value;
-            data.StaffType = 1;
+            //data.StaffType = 1;
             data.Subject = subject;
         }
         else if (type == 'Administrative') {
             let role = document.querySelector('#staff-modal input[name="Role"]').value;
-            data.Role = role;
+            //data.Role = role;
             data.StaffType = 2;
         } else if (type == 'Support') {
             let department = document.querySelector('#staff-modal input[name="Department"]').value;
             data.Department = department;
-            data.StaffType = 3;
+            //data.StaffType = 3;
         }
         let fetchData = {
             method: 'POST',

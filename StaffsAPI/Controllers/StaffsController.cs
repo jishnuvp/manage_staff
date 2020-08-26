@@ -52,11 +52,13 @@ namespace StaffsAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Object staff)
         {
-           
-            var jsonString = staff.ToString();
-            var temp = (int)JObject.Parse(jsonString)["StaffType"];
             bool isExist = false;
-            StaffTypes type = (StaffTypes)temp;
+
+            var jsonString = staff.ToString();
+            //var temp = (int)JObject.Parse(jsonString)["StaffType"];
+            //StaffTypes type = (StaffTypes)temp;
+            string temp = (string)JObject.Parse(jsonString)["StaffType"];
+            StaffTypes type = (StaffTypes)Enum.Parse(typeof(StaffTypes), temp, true);
 
             List<Staff> StaffList = new List<Staff>();
             if (type == StaffTypes.Teaching)
@@ -96,8 +98,10 @@ namespace StaffsAPI.Controllers
         public IActionResult Put(int id, [FromBody] Object staff)
         {
             var jsonString = staff.ToString();
-            var temp = (int)JObject.Parse(jsonString)["StaffType"];
-            StaffTypes type = (StaffTypes)temp;
+            //var temp = (int)JObject.Parse(jsonString)["StaffType"];
+            //StaffTypes type = (StaffTypes)temp;
+            string temp = (string)JObject.Parse(jsonString)["StaffType"];
+            StaffTypes type = (StaffTypes)Enum.Parse(typeof(StaffTypes), temp, true);
             DataBaseManager dataBaseManager = new DataBaseManager();
             try
             {
