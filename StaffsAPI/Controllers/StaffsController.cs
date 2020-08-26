@@ -54,7 +54,7 @@ namespace StaffsAPI.Controllers
         {
            
             var jsonString = staff.ToString();
-            var temp = (int)JObject.Parse(jsonString)["staffType"];
+            var temp = (int)JObject.Parse(jsonString)["StaffType"];
             bool isExist = false;
             StaffTypes type = (StaffTypes)temp;
 
@@ -96,7 +96,7 @@ namespace StaffsAPI.Controllers
         public IActionResult Put(int id, [FromBody] Object staff)
         {
             var jsonString = staff.ToString();
-            var temp = (int)JObject.Parse(jsonString)["staffType"];
+            var temp = (int)JObject.Parse(jsonString)["StaffType"];
             StaffTypes type = (StaffTypes)temp;
             DataBaseManager dataBaseManager = new DataBaseManager();
             try
