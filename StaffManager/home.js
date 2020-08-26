@@ -96,26 +96,26 @@ function editStaff(e) {
         let number = document.querySelector('#staff-modal input[name="ContactNumber"]').value;
         let date = document.querySelector('#staff-modal input[name="DateOfJoin"]').value;
         data = {
-            id: id,
-            empCode: code,
-            name: name,
-            contactNumber: number,
-            dateOfJoin: date
+            Id: id,
+            EmpCode: code,
+            Name: name,
+            ContactNumber: number,
+            DateOfJoin: date
         }
 
         if (type == 'Teaching') {
             let subject = document.querySelector('#staff-modal input[name="Subject"]').value;
-            data.subject = subject;
-            data.staffType = 1;
+            data.Subject = subject;
+            data.StaffType = 1;
         }
         else if (type == 'Administrative') {
             let role = document.querySelector('#staff-modal input[name="Role"]').value;
-            data.role = role;
-            data.staffType = 2;
+            data.Role = role;
+            data.StaffType = 2;
         } else if (type == 'Support') {
             let department = document.querySelector('#staff-modal input[name="Department"]').value;
-            data.department = department;
-            data.staffType = 3;
+            data.Department = department;
+            data.StaffType = 3;
         }
         let fetchData = {
             method: 'PUT',
@@ -248,24 +248,24 @@ function addStaff(e) {
         let date = new Date().toISOString();
 
         data = {
-            empCode: code.toUpperCase(),
-            name: name,
-            contactNumber: number,
-            dateOfJoin: date
+            EmpCode: code.toUpperCase(),
+            Name: name,
+            ContactNumber: number,
+            DateOfJoin: date
         }
         if (type == 'Teaching') {
             let subject = document.querySelector('#staff-modal input[name="Subject"]').value;
-            data.staffType = 1;
-            data.subject = subject;
+            data.StaffType = 1;
+            data.Subject = subject;
         }
         else if (type == 'Administrative') {
             let role = document.querySelector('#staff-modal input[name="Role"]').value;
-            data.role = role;
-            data.staffType = 2;
+            data.Role = role;
+            data.StaffType = 2;
         } else if (type == 'Support') {
             let department = document.querySelector('#staff-modal input[name="Department"]').value;
-            data.department = department;
-            data.staffType = 3;
+            data.Department = department;
+            data.StaffType = 3;
         }
         let fetchData = {
             method: 'POST',
