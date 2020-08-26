@@ -33,6 +33,9 @@ export class StaffsComponent implements OnInit {
     if (flag) {
       this.staffService.updateStaff(this.selectedStaff)
         .subscribe();
+      let modal: HTMLElement = document.querySelector("#staff-modal");
+      modal.style.display = "none";
+      this.showToasterMessage('Staff updated succesfully', '#00800099');
     } else {
       this.showToasterMessage('Please submit valid data only', '#ea2121');
     }

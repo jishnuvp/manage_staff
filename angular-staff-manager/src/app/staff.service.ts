@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 
-import { Staff, StaffTypes } from './staff';
+import { Staff } from './staff';
 
 @Injectable({
   providedIn: 'root'
@@ -25,14 +25,14 @@ export class StaffService {
   ) { }
 
   private log(message: string) {
-    this.messageService.add(`HeroService : ${message}`);
+    this.messageService.add(`StaffService : ${message}`);
   }
 
   getStaffs(type: string): Observable<Staff> {
     return this.http.get<Staff>(this.url + `?type=${type}`)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Staff>('getHeroes'))
+        tap(_ => this.log('fetched staff')),
+        catchError(this.handleError<Staff>('getStaffs'))
       );
   }
 
