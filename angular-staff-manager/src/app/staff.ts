@@ -1,7 +1,7 @@
 export interface Staff {
     Id: number,
     Name: string,
-    StaffType: any,
+    StaffType: string,
     EmpCode: string,
     ContactNumber: string,
     DateOfJoin: Date,
