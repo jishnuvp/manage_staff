@@ -28,10 +28,14 @@ export class StaffsComponent implements OnInit {
   }
 
   updateStaff(): void {
-    this.selectedStaff.StaffType = 1;
-
-    this.staffService.updateStaff(this.selectedStaff)
-      .subscribe();
+    let flag: boolean;
+    flag = this.validate(this.isAdd);
+    if (flag) {
+      this.staffService.updateStaff(this.selectedStaff)
+        .subscribe();
+    } else {
+      this.showToasterMessage('Please submit valid data only', '#ea2121');
+    }
   }
 
   renderEditPopup(staff: Staff): void {
@@ -81,15 +85,21 @@ export class StaffsComponent implements OnInit {
     let code = (<HTMLInputElement>document.querySelector('#staff-modal input[name="EmpCode"]')).value;
     let name = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Name"]')).value;
     let number = (<HTMLInputElement>document.querySelector('#staff-modal input[name="ContactNumber"]')).value;
-    let subject = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Subject"]')).value;
-    let role = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Role"]')).value;
-    let department = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Department"]')).value;
-    var type;
+    var type, subject, role, department;
     if (isAdd) {
       type = (<HTMLInputElement>document.querySelector('#staff-modal select[name="StaffType"]')).value;
     } else {
       type = (<HTMLInputElement>document.querySelector('#staff-modal input[name="StaffType"]')).value;
     }
+    if (type == 'Teaching')
+      subject = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Subject"]')).value;
+    if (type == 'Administrative')
+      role = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Role"]')).value;
+    if (type == 'Support')
+      department = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Department"]')).value;
+
+
+
     if (code == '' || name == '' || name.length > 25 || number == '' || number.length > 15 || !(/^[a-zA-Z][a-zA-Z_ ]*[a-zA-Z_]+$/.test(name)) || !(/^[0-9]+$/.test(number))) {
       return false;
     }
@@ -121,5 +131,12 @@ export class StaffsComponent implements OnInit {
 
   }
 
+  showToasterMessage(error, bgColor): void {
+    let x: HTMLElement = document.querySelector("#validate-alert");
+    x.setAttribute("style", `background-color:${bgColor};`);
+    x.innerHTML = error;
+    x.className = "show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+  }
 
 }

@@ -47,6 +47,11 @@ export class StaffService {
 
   /** PUT: update the staff on the server */
   updateStaff(staff: Staff): Observable<any> {
+    switch (staff.StaffType) {
+      case 'Teaching': staff.StaffType = 1; break;
+      case 'Administrative': staff.StaffType = 2; break;
+      case 'Support': staff.StaffType = 3; break;
+    }
     return this.http.put(this.url + `${staff.Id}`, JSON.stringify(staff), this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${staff.Id}`)),
       catchError(this.handleError<any>('updateStaff'))
