@@ -32,10 +32,16 @@ export class StaffsComponent implements OnInit {
     flag = this.validate();
     if (flag) {
       this.staffService.updateStaff(this.selectedStaff)
-        .subscribe();
-      let modal: HTMLElement = document.querySelector("#staff-modal");
-      modal.style.display = "none";
-      this.showToasterMessage('Staff updated succesfully', '#00800099');
+        .subscribe(
+          (response) => {
+            if (response.status == 200) {
+              let modal: HTMLElement = document.querySelector("#staff-modal");
+              modal.style.display = "none";
+              this.showToasterMessage('Staff updated succesfully', '#00800099');
+            } else {
+              this.showToasterMessage('Something went wrong', '#ea2121');
+            }
+          });
     } else {
       this.showToasterMessage('Please submit valid data only', '#ea2121');
     }
@@ -46,10 +52,18 @@ export class StaffsComponent implements OnInit {
     flag = this.validate();
     if (flag) {
       this.staffService.addStaff(this.selectedStaff)
-        .subscribe();
-      let modal: HTMLElement = document.querySelector("#staff-modal");
-      modal.style.display = "none";
-      this.showToasterMessage('Staff updated succesfully', '#00800099');
+        .subscribe(
+          (response) => {
+            if (response.status == 201) {
+              let modal: HTMLElement = document.querySelector("#staff-modal");
+              modal.style.display = "none";
+              this.showToasterMessage('Staff updated succesfully', '#00800099');
+
+            } else {
+              this.showToasterMessage('EmpCode already exists, Try with another EmpCode.', '#ea2121');
+            }
+          }
+        );
     } else {
       this.showToasterMessage('Please submit valid data only', '#ea2121');
     }

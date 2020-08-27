@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
@@ -16,8 +16,10 @@ export class StaffService {
   private url = 'https://localhost:44305/staff/';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    observe: 'response' as 'body'
   };
+
 
   constructor(
     private http: HttpClient,
@@ -28,6 +30,7 @@ export class StaffService {
     this.messageService.add(`StaffService : ${message}`);
   }
 
+  /** GET: get all staffs by type from the server */
   getStaffs(type: string): Observable<Staff> {
     return this.http.get<Staff>(this.url + `?type=${type}`)
       .pipe(
@@ -36,6 +39,7 @@ export class StaffService {
       );
   }
 
+  /** GET: get staff by ID from the server */
   getStaff(id: number): Observable<Staff> {
     return this.http.get<Staff>(this.url + `${id}`)
       .pipe(
@@ -44,10 +48,11 @@ export class StaffService {
       );
   }
 
-  addStaff(staff: Staff): Observable<Staff> {
+  /** POST: add the staff on the server */
+  addStaff(staff: Staff): Observable<any> {
     staff.DateOfJoin = new Date();
 
-    return this.http.post<Staff>(this.url, JSON.stringify(staff), this.httpOptions)
+    return this.http.post(this.url, JSON.stringify(staff), this.httpOptions)
       .pipe(
         catchError(this.handleError('addStaff', staff))
       );
@@ -56,25 +61,11 @@ export class StaffService {
 
   /** PUT: update the staff on the server */
   updateStaff(staff: Staff): Observable<any> {
-    return this.http.put<any>(this.url + `${staff.Id}`, JSON.stringify(staff), this.httpOptions)
+    return this.http.put<Staff>(this.url + `${staff.Id}`, JSON.stringify(staff), this.httpOptions)
       .pipe(
-        // map(res => {
-        //   debugger;
-        //   console.log(res.status);
-        //   return res;
-        // }),
         catchError(this.handleError<Staff>('updateStaff'))
       );
   }
-
-  // addHero(staff: Staff): Observable<Staff> {
-  //   return this.http.post<Staff>(this.url, staff, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('addHero', staff))
-  //     );
-  // }
-
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
