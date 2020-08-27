@@ -52,27 +52,27 @@
             <span class="close" id="close">&times;</span>
             <div class="modal-body">
                 <form id="staff-form">
-                    <input type="hidden" name="Id" [ngModel]="(selectedStaff)?.Id"
+                    <input type="hidden" *ngIf="isEdit == true" name="Id" [ngModel]="selectedStaff?.Id"
                         (ngModelChange)="selectedStaff.Id = $event">
                     <div class="form-row">
                         <label>Employee Code</label>
-                        <input type="text" name="EmpCode" [ngModel]="(selectedStaff)?.EmpCode"
+                        <input type="text" name="EmpCode" [ngModel]="selectedStaff?.EmpCode"
                             (ngModelChange)="selectedStaff.EmpCode = $event" [readonly]="isReadOnly" required>
                     </div>
                     <div class="form-row">
                         <label>Name</label>
-                        <input type="text" name="Name" [ngModel]="(selectedStaff)?.Name"
+                        <input type="text" name="Name" [ngModel]="selectedStaff?.Name"
                             (ngModelChange)="selectedStaff.Name = $event" required>
                     </div>
                     <div class="form-row">
                         <label>Staff Type</label>
                         <ng-container *ngIf="isEdit == true">
-                            <input type="text" name="StaffType" [ngModel]="(selectedStaff)?.StaffType"
+                            <input type="text" name="StaffType" [ngModel]="selectedStaff?.StaffType"
                                 id="staff-type-edit" readonly required>
                         </ng-container>
                         <ng-container *ngIf="isAdd == true">
                             <div id="staff-type-add">
-                                <select name="StaffType" class="type-selector" [(ngModel)]="selectedType">
+                                <select name="StaffType" class="type-selector" [(ngModel)]="selectedStaff.StaffType">
                                     <option value="Teaching" selected>Teaching</option>
                                     <option value="Administrative">Administrative</option>
                                     <option value="Support">Support</option>
@@ -80,36 +80,36 @@
                             </div>
                         </ng-container>
                     </div>
-                    <ng-container *ngIf="selectedType == 'Teaching'">
+                    <ng-container *ngIf="selectedStaff?.StaffType == 'Teaching'">
                         <div class=" teaching-fields">
                             <div class="form-row">
                                 <label>Subject</label>
-                                <input type="text" name="Subject" [ngModel]="(selectedStaff)?.Subject"
+                                <input type="text" name="Subject" [ngModel]="selectedStaff?.Subject"
                                     (ngModelChange)="selectedStaff.Subject = $event" required>
                             </div>
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="selectedType == 'Administrative'">
+                    <ng-container *ngIf="selectedStaff?.StaffType == 'Administrative'">
                         <div class="administrative-fields">
                             <div class="form-row">
                                 <label>Role</label>
-                                <input type="text" name="Role" [ngModel]="(selectedStaff)?.Role"
+                                <input type="text" name="Role" [ngModel]="selectedStaff?.Role"
                                     (ngModelChange)="selectedStaff.Role = $event" required>
                             </div>
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="selectedType == 'Support'">
+                    <ng-container *ngIf="selectedStaff?.StaffType == 'Support'">
                         <div class="support-fields">
                             <div class="form-row">
                                 <label>Department</label>
-                                <input type="text" name="Department" [ngModel]="(selectedStaff)?.Department"
+                                <input type="text" name="Department" [ngModel]="selectedStaff?.Department"
                                     (ngModelChange)="selectedStaff.Department = $event" required>
                             </div>
                         </div>
                     </ng-container>
                     <div class="form-row">
                         <label>Contact Number</label>
-                        <input type="text" name="ContactNumber" [ngModel]="(selectedStaff)?.ContactNumber"
+                        <input type="text" name="ContactNumber" [ngModel]="selectedStaff?.ContactNumber"
                             (ngModelChange)="selectedStaff.ContactNumber = $event" required>
                     </div>
                     <ng-container *ngIf="isEdit == true">
@@ -126,7 +126,7 @@
                         </ng-container>
                         <ng-container *ngIf="isAdd == true">
                             <button class="modal-sbmt-btn mx-auto" type="submit" id="add-sbmt-btn"
-                                onclick="addStaff(event);">Submit</button>
+                                (click)="addStaff();">Submit</button>
                         </ng-container>
                     </div>
                 </form>

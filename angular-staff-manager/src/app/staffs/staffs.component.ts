@@ -41,27 +41,37 @@ export class StaffsComponent implements OnInit {
     }
   }
 
+  addStaff(): void {
+    let flag: boolean;
+    flag = this.validate(this.isAdd);
+    if (flag) {
+      this.staffService.addStaff(this.selectedStaff)
+        .subscribe();
+      let modal: HTMLElement = document.querySelector("#staff-modal");
+      modal.style.display = "none";
+      this.showToasterMessage('Staff updated succesfully', '#00800099');
+    } else {
+      this.showToasterMessage('Please submit valid data only', '#ea2121');
+    }
+  }
+
   renderEditPopup(staff: Staff): void {
     this.isAdd = false;
     this.isEdit = true;
     this.isReadOnly = true;
-
-    // this.staffService.getStaff(selectedStaff.Id)
-    //   .subscribe(selectedStaff => this.selectedStaff = selectedStaff.staff);
-
     this.selectedStaff = staff;
-
-
     this.selectedType = staff.StaffType;
-
     this.modelActions();
-
   }
+
   renderAddPopup(): void {
     this.isAdd = true;
     this.isReadOnly = false;
     this.isEdit = false;
-    this.selectedStaff = null;
+    //Object.keys(this.selectedStaff).forEach(k => delete this.selectedStaff[k]);
+    //for (var member in this.selectedStaff) delete this.selectedStaff[member];
+    let staff = new Staff();
+    this.selectedStaff = staff;
     this.selectedType = 'Teaching';
     this.modelActions();
   }
@@ -119,20 +129,6 @@ export class StaffsComponent implements OnInit {
 
 
 
-
-  addStaff(): void {
-    let flag = this.validate(this.isAdd);
-    if (flag) {
-      let data;
-      let code = (<HTMLInputElement>document.querySelector('#staff-modal input[name="EmpCode"]')).value;
-      let name = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Name"]')).value;
-      let type = (<HTMLInputElement>document.querySelector('#staff-modal select[name="StaffType"]')).value;
-      let number = (<HTMLInputElement>document.querySelector('#staff-modal input[name="ContactNumber"]')).value;
-      let date = new Date().toISOString();
-
-    }
-
-  }
 
   showToasterMessage(error, bgColor): void {
     let x: HTMLElement = document.querySelector("#validate-alert");

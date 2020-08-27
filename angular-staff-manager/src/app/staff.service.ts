@@ -39,18 +39,32 @@ export class StaffService {
   getStaff(id: number): Observable<Staff> {
     return this.http.get<Staff>(this.url + `${id}`)
       .pipe(
-        tap(_ => this.log(`fetched hero id=${id}`)),
+        tap(_ => this.log(`fetched staff id=${id}`)),
         catchError(this.handleError<Staff>(`getStaff id=${id}`))
+      );
+  }
+
+  addStaff(staff: Staff): Observable<Staff> {
+    staff.DateOfJoin = new Date();
+
+    return this.http.post<Staff>(this.url, JSON.stringify(staff), this.httpOptions)
+      .pipe(
+        catchError(this.handleError('addStaff', staff))
       );
   }
 
 
   /** PUT: update the staff on the server */
   updateStaff(staff: Staff): Observable<any> {
-    return this.http.put(this.url + `${staff.Id}`, JSON.stringify(staff), this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${staff.Id}`)),
-      catchError(this.handleError<any>('updateStaff'))
-    );
+    return this.http.put<any>(this.url + `${staff.Id}`, JSON.stringify(staff), this.httpOptions)
+      .pipe(
+        // map(res => {
+        //   debugger;
+        //   console.log(res.status);
+        //   return res;
+        // }),
+        catchError(this.handleError<Staff>('updateStaff'))
+      );
   }
 
   // addHero(staff: Staff): Observable<Staff> {
