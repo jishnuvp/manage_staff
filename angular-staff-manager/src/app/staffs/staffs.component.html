@@ -4,13 +4,15 @@
         <option value="Administrative">Administrative</option>
         <option value="Support">Support</option>
     </select>
-    <button class="multy-dlt-btn" id="dltAll-btn" onclick="deleteMultipleStaffs();">Delete All</button>
+    <button class="dlt-all-btn" (click)="deleteStaff()" [class.show]="(deleteList.length>0)">Delete
+        All</button>
     <button type="button" class="staff-add-btn" (click)="renderAddPopup()">Add Staff</button>
     <div class="table-responsive mt-2">
         <table class="table pagination" id="staff-table" data-pagecount="7">
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="SelectAllStaff" id="slct-all-staff"></th>
+                    <th><input type="checkbox" [checked]="isCheckAll" (change)="generateDeleteListOnSelectAll($event)">
+                    </th>
                     <th class="sort-th">Name <span>&#8645;</span></th>
                     <th>Emp Code</th>
                     <th>Type</th>
@@ -22,7 +24,7 @@
             <tbody>
                 <tr *ngFor="let staff of staffs">
                     <td>
-                        <input type="checkbox">
+                        <input type="checkbox" [checked]="isCheckAll" (change)="generateDeleteList(staff.Id, $event)">
                     </td>
                     <td>{{staff.Name}}</td>
                     <td>{{staff.EmpCode}}</td>

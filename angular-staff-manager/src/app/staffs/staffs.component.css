@@ -99,3 +99,19 @@
       border:none;
       text-align: center;
   }
+
+  .dlt-all-btn{
+      visibility: hidden;
+      color: #fff;
+      background-color: #f90505a1;
+      border: none;
+      padding: 5px 10px;
+      box-shadow: none;
+      outline: none;
+      margin-left: 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+  }
+  .dlt-all-btn.show{
+      visibility: visible;
+  }

@@ -67,6 +67,21 @@ export class StaffService {
       );
   }
 
+  /** DELETE: delete staff on the server */
+  deleteStaff(deleteList: any): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(deleteList),
+      observe: 'response' as 'body'
+    };
+    return this.http.delete<Staff>(this.url, options)
+      .pipe(
+        catchError(this.handleError<Staff>('deleteStaff'))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

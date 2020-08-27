@@ -15,16 +15,19 @@ export class StaffsComponent implements OnInit {
     this.getStaffs();
   }
 
-  staffs: Staff;
+  staffs: Staff[];
   selectedStaff: Staff;
   selectedType: string = 'Teaching';
   isAdd: boolean;
   isEdit: boolean;
   isReadOnly: boolean;
+  deleteList: number[] = [];
+  isCheckAll: boolean;
 
   getStaffs(): void {
+    this.isCheckAll = false;
     this.staffService.getStaffs(this.selectedType)
-      .subscribe(staffs => this.staffs = staffs.StaffList);
+      .subscribe(data => this.staffs = data.StaffList);
   }
 
   updateStaff(): void {
@@ -67,6 +70,22 @@ export class StaffsComponent implements OnInit {
     } else {
       this.showToasterMessage('Please submit valid data only', '#ea2121');
     }
+  }
+
+  deleteStaff(): void {
+    this.staffService.deleteStaff(this.deleteList)
+      .subscribe(
+        (response) => {
+          if (response.status == 200) {
+            this.showToasterMessage('Deleted successfully', '#00800099');
+            this.deleteList.length = 0;
+            this.isCheckAll = false;
+            this.getStaffs();
+          } else {
+            this.showToasterMessage('Something went wrong', '#ea2121');
+          }
+        }
+      );
   }
 
   renderEditPopup(staff: Staff): void {
@@ -121,7 +140,26 @@ export class StaffsComponent implements OnInit {
     return true;
   }
 
-
+  generateDeleteList(id, event): void {
+    if (event.target.checked) {
+      this.deleteList.push(id);
+    } else {
+      this.deleteList = this.deleteList.filter(function (ele) {
+        return ele != id;
+      });
+    }
+  }
+  generateDeleteListOnSelectAll(event): void {
+    this.deleteList.length = 0;
+    if (event.target.checked) {
+      this.isCheckAll = true;
+      for (let i = 0; i < this.staffs.length; i++) {
+        this.deleteList.push(this.staffs[i].Id);
+      }
+    } else {
+      this.isCheckAll = false;
+    }
+  }
 
 
 
