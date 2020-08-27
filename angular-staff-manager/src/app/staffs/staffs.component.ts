@@ -17,19 +17,19 @@ export class StaffsComponent implements OnInit {
 
   staffs: Staff;
   selectedStaff: Staff;
-  selectedType: string;
+  selectedType: string = 'Teaching';
   isAdd: boolean;
   isEdit: boolean;
   isReadOnly: boolean;
 
-  getStaffs($type = 'Teaching'): void {
-    this.staffService.getStaffs($type)
+  getStaffs(): void {
+    this.staffService.getStaffs(this.selectedType)
       .subscribe(staffs => this.staffs = staffs.StaffList);
   }
 
   updateStaff(): void {
     let flag: boolean;
-    flag = this.validate(this.isAdd);
+    flag = this.validate();
     if (flag) {
       this.staffService.updateStaff(this.selectedStaff)
         .subscribe();
@@ -43,7 +43,7 @@ export class StaffsComponent implements OnInit {
 
   addStaff(): void {
     let flag: boolean;
-    flag = this.validate(this.isAdd);
+    flag = this.validate();
     if (flag) {
       this.staffService.addStaff(this.selectedStaff)
         .subscribe();
@@ -68,11 +68,9 @@ export class StaffsComponent implements OnInit {
     this.isAdd = true;
     this.isReadOnly = false;
     this.isEdit = false;
-    //Object.keys(this.selectedStaff).forEach(k => delete this.selectedStaff[k]);
-    //for (var member in this.selectedStaff) delete this.selectedStaff[member];
     let staff = new Staff();
     this.selectedStaff = staff;
-    this.selectedType = 'Teaching';
+    this.selectedStaff.StaffType = this.selectedType;
     this.modelActions();
   }
 
@@ -94,33 +92,16 @@ export class StaffsComponent implements OnInit {
     }
   }
 
-  validate(isAdd): boolean {
-    let code = (<HTMLInputElement>document.querySelector('#staff-modal input[name="EmpCode"]')).value;
-    let name = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Name"]')).value;
-    let number = (<HTMLInputElement>document.querySelector('#staff-modal input[name="ContactNumber"]')).value;
-    var type, subject, role, department;
-    if (isAdd) {
-      type = (<HTMLInputElement>document.querySelector('#staff-modal select[name="StaffType"]')).value;
-    } else {
-      type = (<HTMLInputElement>document.querySelector('#staff-modal input[name="StaffType"]')).value;
-    }
-    if (type == 'Teaching')
-      subject = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Subject"]')).value;
-    if (type == 'Administrative')
-      role = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Role"]')).value;
-    if (type == 'Support')
-      department = (<HTMLInputElement>document.querySelector('#staff-modal input[name="Department"]')).value;
+  validate(): boolean {
 
-
-
-    if (code == '' || name == '' || name.length > 25 || number == '' || number.length > 15 || !(/^[a-zA-Z][a-zA-Z_ ]*[a-zA-Z_]+$/.test(name)) || !(/^[0-9]+$/.test(number))) {
+    if (this.selectedStaff.EmpCode == '' || this.selectedStaff.Name == '' || this.selectedStaff.Name.length > 25 || this.selectedStaff.ContactNumber == '' || this.selectedStaff.ContactNumber.length > 15 || !(/^[a-zA-Z][a-zA-Z_ ]*[a-zA-Z_]+$/.test(this.selectedStaff.Name)) || !(/^[0-9]+$/.test(this.selectedStaff.ContactNumber))) {
       return false;
     }
-    if (type == '' || type == 'Teaching' && subject == '' || type == 'Teaching' && !(/^[a-zA-Z]+$/.test(subject)) || type == 'Teaching' && subject.length > 15) {
+    if (this.selectedStaff.StaffType == '' || this.selectedStaff.StaffType == 'Teaching' && this.selectedStaff.Subject == '' || this.selectedStaff.StaffType == 'Teaching' && !(/^[a-zA-Z]+$/.test(this.selectedStaff.Subject)) || this.selectedStaff.StaffType == 'Teaching' && this.selectedStaff.Subject.length > 15) {
       return false;
-    } else if (type == 'Administrative' && role == '' || type == 'Administrative' && !(/^[a-zA-Z]+$/.test(role)) || type == 'Administrative' && role.length > 15) {
+    } else if (this.selectedStaff.StaffType == 'Administrative' && this.selectedStaff.Role == '' || this.selectedStaff.StaffType == 'Administrative' && !(/^[a-zA-Z]+$/.test(this.selectedStaff.Role)) || this.selectedStaff.StaffType == 'Administrative' && this.selectedStaff.Role.length > 15) {
       return false;
-    } else if (type == 'Support' && department == '' || type == 'Support' && !(/^[a-zA-Z]+$/.test(department)) || type == 'Support' && department.length > 15) {
+    } else if (this.selectedStaff.StaffType == 'Support' && this.selectedStaff.Department == '' || this.selectedStaff.StaffType == 'Support' && !(/^[a-zA-Z]+$/.test(this.selectedStaff.Department)) || this.selectedStaff.StaffType == 'Support' && this.selectedStaff.Department.length > 15) {
       return false;
     }
     return true;
