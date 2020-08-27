@@ -1,5 +1,5 @@
 <div class="mt">
-    <select class="type-selector" id="type-select" (change)="getStaffs($event.target.value)">
+    <select class="type-selector" id="type-select" [(ngModel)]="selectedType" (change)="getStaffs()">
         <option value="Teaching" selected>Teaching</option>
         <option value="Administrative">Administrative</option>
         <option value="Support">Support</option>
@@ -56,12 +56,12 @@
                         (ngModelChange)="selectedStaff.Id = $event">
                     <div class="form-row">
                         <label>Employee Code</label>
-                        <input type="text" name="EmpCode" [ngModel]="selectedStaff?.EmpCode"
+                        <input type="text" name="EmpCode" [ngModel]="selectedStaff?.EmpCode | uppercase "
                             (ngModelChange)="selectedStaff.EmpCode = $event" [readonly]="isReadOnly" required>
                     </div>
                     <div class="form-row">
                         <label>Name</label>
-                        <input type="text" name="Name" [ngModel]="selectedStaff?.Name"
+                        <input type="text" name="Name" [ngModel]="selectedStaff?.Name | titlecase "
                             (ngModelChange)="selectedStaff.Name = $event" required>
                     </div>
                     <div class="form-row">
@@ -73,7 +73,7 @@
                         <ng-container *ngIf="isAdd == true">
                             <div id="staff-type-add">
                                 <select name="StaffType" class="type-selector" [(ngModel)]="selectedStaff.StaffType">
-                                    <option value="Teaching" selected>Teaching</option>
+                                    <option value="Teaching">Teaching</option>
                                     <option value="Administrative">Administrative</option>
                                     <option value="Support">Support</option>
                                 </select>
@@ -84,7 +84,7 @@
                         <div class=" teaching-fields">
                             <div class="form-row">
                                 <label>Subject</label>
-                                <input type="text" name="Subject" [ngModel]="selectedStaff?.Subject"
+                                <input type="text" name="Subject" [ngModel]="selectedStaff?.Subject | titlecase "
                                     (ngModelChange)="selectedStaff.Subject = $event" required>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                         <div class="administrative-fields">
                             <div class="form-row">
                                 <label>Role</label>
-                                <input type="text" name="Role" [ngModel]="selectedStaff?.Role"
+                                <input type="text" name="Role" [ngModel]="selectedStaff?.Role | titlecase "
                                     (ngModelChange)="selectedStaff.Role = $event" required>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                         <div class="support-fields">
                             <div class="form-row">
                                 <label>Department</label>
-                                <input type="text" name="Department" [ngModel]="selectedStaff?.Department"
+                                <input type="text" name="Department" [ngModel]="selectedStaff?.Department | titlecase "
                                     (ngModelChange)="selectedStaff.Department = $event" required>
                             </div>
                         </div>
