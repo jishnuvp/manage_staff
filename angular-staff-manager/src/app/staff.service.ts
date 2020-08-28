@@ -68,7 +68,7 @@ export class StaffService {
   }
 
   /** DELETE: delete staff on the server */
-  deleteStaff(deleteList: any): Observable<any> {
+  deleteStaffs(deleteList: any): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -79,6 +79,16 @@ export class StaffService {
     return this.http.delete<Staff>(this.url, options)
       .pipe(
         catchError(this.handleError<Staff>('deleteStaff'))
+      );
+  }
+
+  deleteStaffById(id: number): Observable<any> {
+    const options = {
+      observe: 'response' as 'body'
+    };
+    return this.http.delete<any>(this.url + `${id}`, options)
+      .pipe(
+        catchError(this.handleError<any>('deleteStaff'))
       );
   }
 

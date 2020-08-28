@@ -73,8 +73,24 @@ export class StaffsComponent implements OnInit {
     }
   }
 
-  deleteStaff(): void {
-    this.staffService.deleteStaff(this.deleteList)
+  deleteStaffs(): void {
+    this.staffService.deleteStaffs(this.deleteList)
+      .subscribe(
+        (response) => {
+          if (response.status == 200) {
+            this.showToasterMessage('Deleted successfully', '#00800099');
+            this.deleteList.length = 0;
+            this.isCheckAll = false;
+            this.getStaffs();
+          } else {
+            this.showToasterMessage('Something went wrong', '#ea2121');
+          }
+        }
+      );
+  }
+
+  deleteStaff(id): void {
+    this.staffService.deleteStaffById(id)
       .subscribe(
         (response) => {
           if (response.status == 200) {

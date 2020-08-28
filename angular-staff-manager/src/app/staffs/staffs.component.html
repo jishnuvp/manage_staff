@@ -4,7 +4,7 @@
         <option value="Administrative">Administrative</option>
         <option value="Support">Support</option>
     </select>
-    <button class="dlt-all-btn" (click)="deleteStaff()" [class.show]="(deleteList.length>0)">Delete
+    <button class="dlt-all-btn" (click)="deleteStaffs()" [class.show]="(deleteList.length>0)">Delete
         All</button>
     <button type="button" class="staff-add-btn" (click)="renderAddPopup()">Add Staff</button>
     <div class="table-responsive mt-2">
@@ -32,7 +32,7 @@
                     <td>{{staff.ContactNumber}}</td>
                     <td>{{staff.DateOfJoin | date : 'shortDate'}}</td>
                     <td><button class="mr-1" title="Edit" (click)="renderEditPopup(staff)">&#9997;</button>
-                        <button title="Delete">&#10006;</button>
+                        <button (click)="deleteStaff(staff.Id)" title="Delete">&#10006;</button>
                     </td>
                 </tr>
             </tbody>
