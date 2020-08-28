@@ -31,11 +31,11 @@ export class StaffService {
   }
 
   /** GET: get all staffs by type from the server */
-  getStaffs(type: string): Observable<Staff> {
-    return this.http.get<Staff>(this.url + `?type=${type}`)
+  getStaffs(type: string): Observable<any> {
+    return this.http.get<any>(this.url + `?type=${type}`)
       .pipe(
         tap(_ => this.log('fetched staff')),
-        catchError(this.handleError<Staff>('getStaffs'))
+        catchError(this.handleError<any>('getStaffs'))
       );
   }
 

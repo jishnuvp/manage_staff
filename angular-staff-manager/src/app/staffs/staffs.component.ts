@@ -27,7 +27,7 @@ export class StaffsComponent implements OnInit {
   getStaffs(): void {
     this.isCheckAll = false;
     this.staffService.getStaffs(this.selectedType)
-      .subscribe(data => this.staffs = data.StaffList);
+      .subscribe(data => this.staffs = data?.StaffList);
   }
 
   updateStaff(): void {
