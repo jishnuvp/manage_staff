@@ -59,6 +59,7 @@ export class StaffsComponent implements OnInit {
           (response) => {
             if (response.status == 201) {
               let modal: HTMLElement = document.querySelector("#staff-modal");
+              this.getStaffs();
               modal.style.display = "none";
               this.showToasterMessage('Staff updated succesfully', '#00800099');
 
