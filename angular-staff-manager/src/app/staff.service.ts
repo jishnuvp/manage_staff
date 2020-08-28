@@ -26,15 +26,15 @@ export class StaffService {
     private messageService: MessageService
   ) { }
 
-  private log(message: string) {
-    this.messageService.add(`StaffService : ${message}`);
-  }
+  // private log(message: string) {
+  //   this.messageService.showToasterMessage(`StaffService : ${message}`, );
+  // }
 
   /** GET: get all staffs by type from the server */
   getStaffs(type: string): Observable<any> {
     return this.http.get<any>(this.url + `?type=${type}`)
       .pipe(
-        tap(_ => this.log('fetched staff')),
+        //tap(_ => this.log('fetched staff')),
         catchError(this.handleError<any>('getStaffs'))
       );
   }
@@ -43,7 +43,7 @@ export class StaffService {
   getStaff(id: number): Observable<Staff> {
     return this.http.get<Staff>(this.url + `${id}`)
       .pipe(
-        tap(_ => this.log(`fetched staff id=${id}`)),
+        //tap(_ => this.log(`fetched staff id=${id}`)),
         catchError(this.handleError<Staff>(`getStaff id=${id}`))
       );
   }

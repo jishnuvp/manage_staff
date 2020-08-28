@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class MessageService {
 
-  messages: string[] = [];
 
-  add(message: string) {
-    this.messages.push(message);
-  }
-  clear() {
-    this.messages = [];
+  showToasterMessage(error, bgColor): void {
+    let x: HTMLElement = document.querySelector("#validate-alert");
+    x.setAttribute("style", `background-color:${bgColor};`);
+    x.innerHTML = error;
+    x.className = "show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
   }
 }
