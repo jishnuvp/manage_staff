@@ -7,18 +7,22 @@ import { AppComponent } from './app.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { HeaderComponent } from './header/header.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StaffsComponent,
     HeaderComponent,
-    MessagesComponent
+    MessagesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
